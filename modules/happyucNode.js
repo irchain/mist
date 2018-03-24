@@ -12,7 +12,7 @@ const Sockets = require('./socketManager');
 const ClientBinaryManager = require('./clientBinaryManager');
 
 import logger from './utils/logger';
-const ethereumNodeLog = logger.create('EthereumNode');
+const ethereumNodeLog = logger.create('HappyucNode');
 
 const DEFAULT_NODE_TYPE = 'geth';
 const DEFAULT_NETWORK = 'main';
@@ -33,7 +33,7 @@ const STATES = {
 /**
  * Etheruem nodes manager.
  */
-class EthereumNode extends EventEmitter {
+class HappyucNode extends EventEmitter {
   constructor() {
     super();
 
@@ -74,12 +74,12 @@ class EthereumNode extends EventEmitter {
     return this._syncMode;
   }
 
-  get isEth() {
-    return this._type === 'eth';
+  get isHuc() {
+    return this._type === 'huc';
   }
 
-  get isGeth() {
-    return this._type === 'geth';
+  get isGhuc() {
+    return this._type === 'ghuc';
   }
 
   get isMainNetwork() {
@@ -587,6 +587,6 @@ class EthereumNode extends EventEmitter {
   }
 }
 
-EthereumNode.STARTING = 0;
+HappyucNode.STARTING = 0;
 
-module.exports = new EthereumNode();
+module.exports = new HappyucNode();

@@ -1,5 +1,5 @@
 global._ = require('./modules/utils/underscore');
-const { app, dialog, ipcMain, shell, protocol } = require('electron');
+const {app, dialog, ipcMain, shell, protocol} = require('electron');
 const timesync = require('os-timesync');
 const dbSync = require('./modules/dbSync.js');
 const i18n = require('./modules/i18n.js');
@@ -14,16 +14,13 @@ const log = logger.create('main');
 const Settings = require('./modules/settings');
 
 import configureReduxStore from './modules/core/store';
-import { quitApp } from './modules/core/ui/actions';
-import {
-  setLanguageOnMain,
-  toggleSwarm
-} from './modules/core/settings/actions';
-import { SwarmState } from './modules/core/settings/reducer';
+import {quitApp} from './modules/core/ui/actions';
+import {setLanguageOnMain, toggleSwarm,} from './modules/core/settings/actions';
+import {SwarmState} from './modules/core/settings/reducer';
 import swarmNode from './modules/swarmNode.js';
 
 Q.config({
-  cancellation: true
+  cancellation: true,
 });
 
 global.store = configureReduxStore();
@@ -35,7 +32,7 @@ const db = (global.db = require('./modules/db'));
 require('./modules/ipcCommunicator.js');
 const appMenu = require('./modules/menuItems');
 const ipcProviderBackend = require('./modules/ipc/ipcProviderBackend.js');
-const ethereumNode = require('./modules/ethereumNode.js');
+const huappyucNode = require('./modules/happyucNode.js');
 const nodeSync = require('./modules/nodeSync.js');
 
 // Define global vars; The preloader makes some globals available to the client.
@@ -96,19 +93,19 @@ app.on('before-quit', async event => {
     // sockets manager
     try {
       await Sockets.destroyAll();
-      store.dispatch({ type: '[MAIN]:SOCKETS:DESTROY' });
+      store.dispatch({type: '[MAIN]:SOCKETS:DESTROY'});
     } catch (e) {
       log.error('Error shutting down sockets');
     }
 
     // delay quit, so the sockets can close
     setTimeout(async () => {
-      await ethereumNode.stop();
-      store.dispatch({ type: '[MAIN]:ETH_NODE:STOP' });
+      await huappyucNode.stop();
+      store.dispatch({type: '[MAIN]:HUC_NODE:STOP'});
 
       killedSocketsAndNodes = true;
       await db.close();
-      store.dispatch({ type: '[MAIN]:DB:CLOSE' });
+      store.dispatch({type: '[MAIN]:DB:CLOSE'});
 
       store.dispatch(quitApp());
     }, 500);
@@ -133,14 +130,14 @@ WARNING: You are connecting to an Ethereum node via: ${Settings.rpcHttpPath}
 This is less secure than using local IPC - your passwords will be sent over the wire in plaintext.
 
 Only do this if you have secured your HTTP connection or you know what you are doing.
-`
+`,
     );
   }
 
   // initialise the db
   try {
     await global.db.init();
-    store.dispatch({ type: '[MAIN]:DB:INIT' });
+    store.dispatch({type: '[MAIN]:DB:INIT'});
     onReady();
   } catch (e) {
     log.error(e);
@@ -151,7 +148,7 @@ Only do this if you have secured your HTTP connection or you know what you are d
 protocol.registerStandardSchemes(['bzz']);
 store.dispatch({
   type: '[MAIN]:PROTOCOL:REGISTER',
-  payload: { protocol: 'bzz' }
+  payload: {protocol: 'bzz'},
 });
 
 async function onReady() {
@@ -187,22 +184,22 @@ function enableSwarmProtocol() {
     (request, callback) => {
       if (
         [SwarmState.Disabling, SwarmState.Disabled].includes(
-          store.getState().settings.swarmState
+          store.getState().settings.swarmState,
         )
       ) {
         const error = global.i18n.t('mist.errors.swarm.notEnabled');
         dialog.showErrorBox('Note', error);
-        callback({ error });
+        callback({error});
         store.dispatch({
           type: '[MAIN]:PROTOCOL:ERROR',
-          payload: { protocol: 'bzz', error }
+          payload: {protocol: 'bzz', error},
         });
         return;
       }
 
       const redirectPath = `${Settings.swarmURL}/${request.url.replace(
         'bzz:/',
-        'bzz://'
+        'bzz://',
       )}`;
 
       if (store.getState().settings.swarmState === SwarmState.Enabling) {
@@ -210,7 +207,7 @@ function enableSwarmProtocol() {
           callback({
             method: request.method,
             referrer: request.referrer,
-            url: redirectPath
+            url: redirectPath,
           });
         });
       } else {
@@ -218,27 +215,27 @@ function enableSwarmProtocol() {
         callback({
           method: request.method,
           referrer: request.referrer,
-          url: redirectPath
+          url: redirectPath,
         });
       }
 
       store.dispatch({
         type: '[MAIN]:PROTOCOL:REQUEST',
-        payload: { protocol: 'bzz' }
+        payload: {protocol: 'bzz'},
       });
     },
     error => {
       if (error) {
         log.error(error);
       }
-    }
+    },
   );
 }
 
 function createCoreWindows() {
   global.defaultWindow = windowStateKeeper({
     defaultWidth: 1024 + 208,
-    defaultHeight: 720
+    defaultHeight: 720,
   });
 
   // Create the browser window.
@@ -256,7 +253,7 @@ function checkTimeSync() {
   if (!Settings.skiptimesynccheck) {
     timesync.checkEnabled((err, enabled) => {
       if (err) {
-        log.error("Couldn't infer if computer automatically syncs time.", err);
+        log.error('Couldn\'t infer if computer automatically syncs time.', err);
         return;
       }
 
@@ -267,10 +264,11 @@ function checkTimeSync() {
             buttons: ['OK'],
             message: global.i18n.t('mist.errors.timeSync.title'),
             detail: `${global.i18n.t(
-              'mist.errors.timeSync.description'
-            )}\n\n${global.i18n.t(`mist.errors.timeSync.${process.platform}`)}`
+              'mist.errors.timeSync.description',
+            )}\n\n${global.i18n.t(`mist.errors.timeSync.${process.platform}`)}`,
           },
-          () => {}
+          () => {
+          },
         );
       }
     });
@@ -281,15 +279,15 @@ async function kickStart() {
   initializeKickStartListeners();
   checkForLegacyChain();
   await ClientBinaryManager.init();
-  await ethereumNode.init();
+  await huappyucNode.init();
 
   if (Settings.enableSwarmOnStart) {
     store.dispatch(toggleSwarm());
   }
 
-  if (!ethereumNode.isIpcConnected) {
+  if (!huappyucNode.isIpcConnected) {
     throw new Error(
-      "Either the node didn't start or IPC socket failed to connect."
+      'Either the node didn\'t start or IPC socket failed to connect.',
     );
   }
   log.info('Connected via IPC to node.');
@@ -314,12 +312,12 @@ function checkForLegacyChain() {
         type: 'warning',
         buttons: ['OK'],
         message: global.i18n.t('mist.errors.legacyChain.title'),
-        detail: global.i18n.t('mist.errors.legacyChain.description')
+        detail: global.i18n.t('mist.errors.legacyChain.description'),
       },
       () => {
         shell.openExternal('https://github.com/ethereum/mist/releases');
         store.dispatch(quitApp());
-      }
+      },
     );
 
     throw new Error('Cant start client due to legacy non-Fork setting.');
@@ -331,19 +329,19 @@ function initializeKickStartListeners() {
     Windows.broadcast('uiAction_clientBinaryStatus', status, data);
   });
 
-  ethereumNode.on('nodeConnectionTimeout', () => {
+  huappyucNode.on('nodeConnectionTimeout', () => {
     Windows.broadcast('uiAction_nodeStatus', 'connectionTimeout');
   });
 
-  ethereumNode.on('nodeLog', data => {
+  huappyucNode.on('nodeLog', data => {
     Windows.broadcast('uiAction_nodeLogText', data.replace(/^.*[0-9]]/, ''));
   });
 
-  ethereumNode.on('state', (state, stateAsText) => {
+  huappyucNode.on('state', (state, stateAsText) => {
     Windows.broadcast(
       'uiAction_nodeStatus',
       stateAsText,
-      ethereumNode.STATES.ERROR === state ? ethereumNode.lastError : null
+      huappyucNode.STATES.ERROR === state ? huappyucNode.lastError : null,
     );
   });
 }
@@ -405,7 +403,7 @@ function initializeTabs() {
       log.debug('Refresh menu with tabs');
       global.webviews = sortedTabs.data();
       appMenu(global.webviews);
-      store.dispatch({ type: '[MAIN]:MENU:REFRESH' });
+      store.dispatch({type: '[MAIN]:MENU:REFRESH'});
     }, 1000);
   };
 
