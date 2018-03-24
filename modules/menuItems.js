@@ -13,7 +13,7 @@ const Settings = require('./settings');
 const log = require('./utils/logger').create('menuItems');
 const swarmLog = require('./utils/logger').create('swarm');
 const updateChecker = require('./updateChecker');
-const ethereumNode = require('./ethereumNode.js');
+const ethereumNode = require('./happyucNode.js');
 const ClientBinaryManager = require('./clientBinaryManager');
 
 import {
@@ -259,7 +259,7 @@ let menuTempl = function(webviews) {
               let userPath = Settings.userHomePath;
 
               // eth
-              if (ethereumNode.isEth) {
+              if (ethereumNode.isHuc) {
                 if (process.platform === 'win32') {
                   userPath = `${Settings.appDataPath}\\Web3\\keys`;
                 } else {
@@ -496,7 +496,7 @@ let menuTempl = function(webviews) {
     if (gethClient) {
       nodeSubmenu.push({
         label: `Geth ${gethClient.version}`,
-        checked: ethereumNode.isOwnNode && ethereumNode.isGeth,
+        checked: ethereumNode.isOwnNode && ethereumNode.isGhuc,
         enabled: ethereumNode.isOwnNode,
         type: 'checkbox',
         click() {
@@ -508,7 +508,7 @@ let menuTempl = function(webviews) {
     if (ethClient) {
       nodeSubmenu.push({
         label: `Eth ${ethClient.version} (C++)`,
-        checked: ethereumNode.isOwnNode && ethereumNode.isEth,
+        checked: ethereumNode.isOwnNode && ethereumNode.isHuc,
         enabled: ethereumNode.isOwnNode,
         // enabled: false,
         type: 'checkbox',
@@ -574,7 +574,7 @@ let menuTempl = function(webviews) {
   // Light mode switch should appear when not in Solo Mode (dev network)
   if (
     ethereumNode.isOwnNode &&
-    ethereumNode.isGeth &&
+    ethereumNode.isGhuc &&
     !ethereumNode.isDevNetwork
   ) {
     devToolsMenu.push({

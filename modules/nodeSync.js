@@ -9,7 +9,7 @@ const _ = global._;
 const Q = require('bluebird');
 const EventEmitter = require('events').EventEmitter;
 const { ipcMain: ipc } = require('electron');
-const ethereumNode = require('./ethereumNode');
+const ethereumNode = require('./happyucNode');
 const log = require('./utils/logger').create('NodeSync');
 
 const SYNC_CHECK_INTERVAL_MS = 2000;

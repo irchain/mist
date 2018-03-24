@@ -13,7 +13,7 @@ const path = require('path');
 const log = require('../utils/logger').create('ipcProviderBackend');
 const Sockets = require('../socketManager');
 const Settings = require('../settings');
-const ethereumNode = require('../ethereumNode');
+const ethereumNode = require('../happyucNode');
 
 const ERRORS = {
   INVALID_PAYLOAD: {

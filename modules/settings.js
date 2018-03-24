@@ -220,6 +220,7 @@ class Settings {
     return enableOnStart;
   }
 
+  // noinspection JSAnnotator TODO
   set enableSwarmOnStart(bool) {
     this.saveConfig('swarm.enableOnStart', bool);
   }
