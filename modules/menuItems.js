@@ -277,7 +277,7 @@ let menuTempl = function(webviews) {
                   process.platform === 'linux' ||
                   process.platform === 'sunos'
                 ) {
-                  userPath += '/.ethereum/keystore';
+                  userPath += '/.happyuc/keystore';
                 }
 
                 if (process.platform === 'win32') {
@@ -690,19 +690,19 @@ let menuTempl = function(webviews) {
     {
       label: i18n.t('mist.applicationMenu.help.mistWiki'),
       click() {
-        shell.openExternal('https://github.com/ethereum/mist/wiki');
+        shell.openExternal('https://github.com/happyuc/mist/wiki');
       }
     },
     {
       label: i18n.t('mist.applicationMenu.help.gitter'),
       click() {
-        shell.openExternal('https://gitter.im/ethereum/mist');
+        shell.openExternal('https://gitter.im/happyuc/mist');
       }
     },
     {
       label: i18n.t('mist.applicationMenu.help.reportBug'),
       click() {
-        shell.openExternal('https://github.com/ethereum/mist/issues');
+        shell.openExternal('https://github.com/happyuc/mist/issues');
       }
     }
   );

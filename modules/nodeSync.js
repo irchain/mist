@@ -9,7 +9,7 @@ const _ = global._;
 const Q = require('bluebird');
 const EventEmitter = require('events').EventEmitter;
 const { ipcMain: ipc } = require('electron');
-const ethereumNode = require('./happyucNode');
+const happyucNode = require('./happyucNode');
 const log = require('./utils/logger').create('NodeSync');
 
 const SYNC_CHECK_INTERVAL_MS = 2000;
@@ -18,7 +18,7 @@ class NodeSync extends EventEmitter {
   constructor() {
     super();
 
-    ethereumNode.on('state', _.bind(this._onNodeStateChanged, this));
+    happyucNode.on('state', _.bind(this._onNodeStateChanged, this));
   }
 
   /**
@@ -32,8 +32,8 @@ class NodeSync extends EventEmitter {
     }
 
     this._syncPromise = Q.try(() => {
-      if (!ethereumNode.isIpcConnected) {
-        throw new Error('Cannot sync - Ethereum node not yet connected');
+      if (!happyucNode.isIpcConnected) {
+        throw new Error('Cannot sync - Happyuc node not yet connected');
       }
 
       return new Q((resolve, reject) => {
@@ -107,7 +107,7 @@ class NodeSync extends EventEmitter {
 
       log.trace('Check sync status');
 
-      ethereumNode
+      happyucNode
         .send('eth_syncing', [])
         .then(ret => {
           const result = ret.result;
@@ -135,7 +135,7 @@ class NodeSync extends EventEmitter {
             // got no result, let's check the block number
             log.debug('Check latest block number');
 
-            return ethereumNode
+            return happyucNode
               .send('eth_getBlockByNumber', ['latest', false])
               .then(ret2 => {
                 const blockResult = ret2.result;
@@ -179,13 +179,13 @@ class NodeSync extends EventEmitter {
   _onNodeStateChanged(state) {
     switch (state) { // eslint-disable-line default-case
       // stop syncing when node about to be stopped
-      case ethereumNode.STATES.STOPPING:
+      case happyucNode.STATES.STOPPING:
         log.info('Ethereum node stopping, so stop sync');
 
         this.stop();
         break;
       // auto-sync whenever node gets connected
-      case ethereumNode.STATES.CONNECTED:
+      case happyucNode.STATES.CONNECTED:
         log.info('Ethereum node connected, re-start sync');
 
         // stop syncing, then start again

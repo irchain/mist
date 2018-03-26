@@ -315,7 +315,7 @@ function checkForLegacyChain() {
         detail: global.i18n.t('mist.errors.legacyChain.description'),
       },
       () => {
-        shell.openExternal('https://github.com/ethereum/mist/releases');
+        shell.openExternal('https://github.com/happyuc/mist/releases');
         store.dispatch(quitApp());
       },
     );

@@ -17,8 +17,8 @@ gulp.task('update-nodes', cb => {
   const newJson = clientBinaries;
   const geth = newJson.clients.Geth;
 
-  // Query latest geth version
-  got('https://api.github.com/repos/ethereum/go-ethereum/releases/latest', {
+  // Query latest ghuc version
+  got('https://api.github.com/repos/dreamxyp/happyuc-go/releases/latest', {
     json: true
   })
     .then(response => {
@@ -34,7 +34,7 @@ gulp.task('update-nodes', cb => {
 
         // Query commit hash (first 8 characters)
         got(
-          `https://api.github.com/repos/ethereum/go-ethereum/commits/${tagName}`,
+          `https://api.github.com/repos/dreamxyp/happyuc-go/commits/${tagName}`,
           { json: true }
         )
           .then(response => {
@@ -45,7 +45,8 @@ gulp.task('update-nodes', cb => {
 
             // Query Azure assets for md5 hashes
             got(
-              'https://gethstore.blob.core.windows.net/builds?restype=container&comp=list',
+              // TODO happyuc store
+              '',
               { xml: true }
             )
               .then(response => {
@@ -117,7 +118,7 @@ gulp.task('update-nodes', cb => {
 
 gulp.task('download-signatures', cb => {
   got(
-    'https://www.4byte.directory/api/v1/signatures/?page_size=20000&ordering=created_at',
+    'l',
     {
       json: true
     }
@@ -135,7 +136,7 @@ gulp.task('download-signatures', cb => {
       });
 
       fs.writeFileSync(
-        'interface/client/lib/signatures.js',
+        './interface/client/lib/signatures.js',
         `window.SIGNATURES = ${JSON.stringify(signatures, null, 4)};`
       );
 

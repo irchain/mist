@@ -262,7 +262,7 @@ class HappyucNode extends EventEmitter {
   }
 
   /**
-   * Start an ethereum node.
+   * Start an happyuc node.
    * @param  {String} nodeType geth, eth, etc
    * @param  {String} network  network id
    * @return {Promise}

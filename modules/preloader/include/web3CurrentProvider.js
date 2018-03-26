@@ -1,5 +1,5 @@
 /**
-Sets the ethereum provider, as well as "web3" for backwards compatibility.
+Sets the happyuc provider, as well as "web3" for backwards compatibility.
 
 @module ethereumProvider
 */

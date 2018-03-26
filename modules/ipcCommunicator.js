@@ -160,7 +160,7 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
             process.platform === 'linux' ||
             process.platform === 'sunos'
           )
-            keystorePath += '/.ethereum/keystore';
+            keystorePath += '/.happyuc/keystore';
 
           if (process.platform === 'win32')
             keystorePath = `${Settings.appDataPath}\\Ethereum\\keystore`;
@@ -259,7 +259,7 @@ ipc.on('mistAPI_requestAccount', e => {
   } else {
     // Mist
     // if coming from wallet, skip connect, go straight to create
-    if (e.sender.history[0] === 'https://wallet.ethereum.org/') {
+    if (e.sender.history[0] === 'https://wallet.happyuc.org/') {
       createAccountPopup(e);
     } else {
       Windows.createPopup('connectAccount', { ownerId: e.sender.id });

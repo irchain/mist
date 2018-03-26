@@ -167,7 +167,7 @@ class Settings {
       process.platform === 'linux' ||
       process.platform === 'sunos'
     ) {
-      ipcPath += '/.ethereum/geth.ipc';
+      ipcPath += '/.happyuc/geth.ipc';
     } else if (process.platform === 'win32') {
       ipcPath = '\\\\.\\pipe\\geth.ipc';
     }

@@ -168,8 +168,8 @@
   };
 
   delete window.EventEmitter;
-  // TODO set real ethereum provider
-  // window.ethereum = new EthereumProvider();
+  // TODO set real happyuc provider
+  // window.happyuc = new EthereumProvider();
 
   // For backwards compatibility of web3.currentProvider;
   EthereumProvider.prototype.sendSync = function() {

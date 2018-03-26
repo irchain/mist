@@ -1,5 +1,5 @@
 /**
-The IPC provider backend filter and tunnel all incoming request to the ethereum node.
+The IPC provider backend filter and tunnel all incoming request to the happyuc node.
 
 @module ipcProviderBackend
 */
@@ -217,7 +217,7 @@ class IpcProviderBackend {
   /**
    * Handler for when Ethereum node state changes.
    *
-   * Auto-reconnect sockets when ethereum node state changes
+   * Auto-reconnect sockets when happyuc node state changes
    *
    * @param {String} state The new state.
    */

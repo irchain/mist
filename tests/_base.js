@@ -234,8 +234,8 @@ exports.mocha = (_module, options) => {
           { _id: 'wallet' },
           {
             $set: {
-              url: 'https://wallet.ethereum.org',
-              redirect: 'https://wallet.ethereum.org',
+              url: 'https://wallet.happyuc.org',
+              redirect: 'https://wallet.happyuc.org',
               position: 1,
               permissions: { admin: true }
             }
