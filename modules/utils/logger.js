@@ -13,29 +13,29 @@ exports.setup = function(options) {
 
   const config = {
     appenders: {
-      out: { type: 'console' },
+      out: {type: 'console'},
       all: {
         type: 'file',
-        filename: `${logFolder}/all.log`
+        filename: `${logFolder}/all.log`,
       },
       main: {
         type: 'file',
-        filename: `${logFolder}/category/main.log`
+        filename: `${logFolder}/category/main.log`,
       },
-      EthereumNode: {
+      HappyucNode: {
         type: 'file',
-        filename: `${logFolder}/category/ethereum_node.log`
+        filename: `${logFolder}/category/happyuc_node.log`,
       },
       swarm: {
         type: 'file',
-        filename: `${logFolder}/category/swarm.log`
-      }
+        filename: `${logFolder}/category/swarm.log`,
+      },
     },
     categories: {
-      default: { appenders: ['out', 'all', 'main'], level },
-      EthereumNode: { appenders: ['out', 'all', 'EthereumNode'], level },
-      swarm: { appenders: ['out', 'all', 'swarm'], level }
-    }
+      default: {appenders: ['out', 'all', 'main'], level},
+      HappyucNode: {appenders: ['out', 'all', 'HappyucNode'], level},
+      swarm: {appenders: ['out', 'all', 'swarm'], level},
+    },
   };
 
   log4js.configure(config);

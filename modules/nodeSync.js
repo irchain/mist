@@ -1,14 +1,14 @@
 /**
-The nodeSync module,
-checks the current node whether its synching or not and how much it kept up already.
+ The nodeSync module,
+ checks the current node whether its synching or not and how much it kept up already.
 
-@module nodeSync
-*/
+ @module nodeSync
+ */
 
 const _ = global._;
 const Q = require('bluebird');
 const EventEmitter = require('events').EventEmitter;
-const { ipcMain: ipc } = require('electron');
+const {ipcMain: ipc} = require('electron');
 const happyucNode = require('./happyucNode');
 const log = require('./utils/logger').create('NodeSync');
 
@@ -54,20 +54,17 @@ class NodeSync extends EventEmitter {
 
         this._sync();
       });
-    })
-      .then(() => {
-        this.emit('finished');
-      })
-      .catch(err => {
-        log.error('Sync error', err);
+    }).then(() => {
+      this.emit('finished');
+    }).catch(err => {
+      log.error('Sync error', err);
 
-        this.emit('error', err);
-      })
-      .finally(() => {
-        log.info('Sync loop ended');
+      this.emit('error', err);
+    }).finally(() => {
+      log.info('Sync loop ended');
 
-        this._clearState();
-      });
+      this._clearState();
+    });
 
     return this._syncPromise;
   }
@@ -107,72 +104,68 @@ class NodeSync extends EventEmitter {
 
       log.trace('Check sync status');
 
-      happyucNode
-        .send('eth_syncing', [])
-        .then(ret => {
-          const result = ret.result;
+      happyucNode.send('huc_syncing', []).then(ret => {
+        const result = ret.result;
 
-          // got a result, check for error
-          if (result) {
-            log.trace('Sync status', result);
+        // got a result, check for error
+        if (result) {
+          log.trace('Sync status', result);
 
-            // got an error?
-            if (result.error) {
-              if (result.error.code === -32601) {
-                log.warn('Sync method not implemented, skipping sync.');
+          // got an error?
+          if (result.error) {
+            if (result.error.code === -32601) {
+              log.warn('Sync method not implemented, skipping sync.');
 
-                return this._onSyncDone();
+              return this._onSyncDone();
+            }
+
+            throw new Error(`Unexpected error: ${result.error}`);
+          } else {
+            // no error, so call again in a bit
+            this.emit('nodeSyncing', result);
+
+            return this._sync();
+          }
+        } else {
+          // got no result, let's check the block number
+          log.debug('Check latest block number');
+
+          return happyucNode.send('huc_getBlockByNumber', ['latest', false]).
+            then(ret2 => {
+              const blockResult = ret2.result;
+              const now = Math.floor(new Date().getTime() / 1000);
+
+              if (!blockResult) {
+                return this._sync();
               }
 
-              throw new Error(`Unexpected error: ${result.error}`);
-            } else {
-              // no error, so call again in a bit
-              this.emit('nodeSyncing', result);
+              log.debug(
+                `Last block: ${Number(blockResult.number)}; timestamp: ${
+                  blockResult.timestamp
+                  }`,
+              );
 
-              return this._sync();
-            }
-          } else {
-            // got no result, let's check the block number
-            log.debug('Check latest block number');
+              const diff = now - +blockResult.timestamp;
 
-            return happyucNode
-              .send('eth_getBlockByNumber', ['latest', false])
-              .then(ret2 => {
-                const blockResult = ret2.result;
-                const now = Math.floor(new Date().getTime() / 1000);
+              // need sync if > 1 minute
+              if (diff > 60) {
+                this.emit('nodeSyncing', result);
 
-                if (!blockResult) {
-                  return this._sync();
-                }
+                log.trace('Keep syncing...');
 
-                log.debug(
-                  `Last block: ${Number(blockResult.number)}; timestamp: ${
-                    blockResult.timestamp
-                  }`
-                );
+                return this._sync();
+              }
 
-                const diff = now - +blockResult.timestamp;
+              log.info('No more sync necessary');
 
-                // need sync if > 1 minute
-                if (diff > 60) {
-                  this.emit('nodeSyncing', result);
+              return this._onSyncDone();
+            });
+        }
+      }).catch(err => {
+        log.error('Node crashed while syncing?', err);
 
-                  log.trace('Keep syncing...');
-
-                  return this._sync();
-                }
-
-                log.info('No more sync necessary');
-
-                return this._onSyncDone();
-              });
-          }
-        })
-        .catch(err => {
-          log.error('Node crashed while syncing?', err);
-
-          this._onSyncError(err);
-        });
+        this._onSyncError(err);
+      });
     }, SYNC_CHECK_INTERVAL_MS);
   }
 
@@ -180,13 +173,13 @@ class NodeSync extends EventEmitter {
     switch (state) { // eslint-disable-line default-case
       // stop syncing when node about to be stopped
       case happyucNode.STATES.STOPPING:
-        log.info('Ethereum node stopping, so stop sync');
+        log.info('Happyuc node stopping, so stop sync');
 
         this.stop();
         break;
       // auto-sync whenever node gets connected
       case happyucNode.STATES.CONNECTED:
-        log.info('Ethereum node connected, re-start sync');
+        log.info('Happyuc node connected, re-start sync');
 
         // stop syncing, then start again
         this.stop().then(() => {

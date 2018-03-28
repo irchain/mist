@@ -1,6 +1,6 @@
 /**
-@module preloader tests
-*/
+ @module preloader tests
+ */
 
 if (location.origin !== 'file://') {
   throw new Error('Wrong test file loaded');

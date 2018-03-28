@@ -1,7 +1,7 @@
 require('./include/common')('splashscreen');
-require('./include/web3CurrentProvider.js');
+require('./include/webuCurrentProvider.js');
 const mist = require('./include/mistAPI.js');
-const { ipcRenderer, remote, webFrame } = require('electron');
+const {ipcRenderer, remote, webFrame} = require('electron');
 
 require('./include/openExternal.js');
 require('./include/setBasePath')('interface');

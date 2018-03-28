@@ -4,9 +4,9 @@ const SocketBase = require('./base');
 
 const STATE = SocketBase.STATE;
 
-const Web3SocketBase = require('./web3Base');
+const WebuSocketBase = require('./webuBase');
 
-module.exports = class Web3IpcSocket extends Web3SocketBase {
+module.exports = class WebuIpcSocket extends WebuSocketBase {
   /**
    * Reset socket.
    */

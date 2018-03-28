@@ -1,15 +1,15 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 /**
-The sidebar template
+ The sidebar template
 
-@class [template] layout_sidebar
-@constructor
-*/
+ @class [template] layout_sidebar
+ @constructor
+ */
 
 Template['layout_sidebar'].onRendered(function() {
   var template = this,
@@ -33,10 +33,10 @@ Template['layout_sidebar'].onRendered(function() {
       $ul.find('> li').each(function(index, test) {
         var id = $(this).data('tab-id');
         if (id) {
-          Tabs.update(id, { $set: { position: index + 1 } });
+          Tabs.update(id, {$set: {position: index + 1}});
         }
       });
-    }
+    },
   });
 
   template.$('[data-tab-id]').on('mouseover', function() {});
@@ -44,41 +44,41 @@ Template['layout_sidebar'].onRendered(function() {
 
 Template['layout_sidebar'].helpers({
   /**
-    Return the tabs
+   Return the tabs
 
-    @method (tabs)
-    */
+   @method (tabs)
+   */
   tabs: function() {
-    return Tabs.find({}, { sort: { position: 1 } }).fetch();
+    return Tabs.find({}, {sort: {position: 1}}).fetch();
   },
   /**
-    Return the correct name
+   Return the correct name
 
-    @method (name)
-    */
+   @method (name)
+   */
   name: function() {
     return this._id === 'browser'
       ? TAPi18n.__('mist.sidebar.buttons.browser')
       : this.name;
   },
   /**
-    Return the correct dapp icon
+   Return the correct dapp icon
 
-    @method (icon)
-    */
+   @method (icon)
+   */
   icon: function() {
     return this._id === 'browser' ? 'icons/browse-icon@2x.png' : this.icon;
   },
   /**
-    Return the tabs sub menu as array
+   Return the tabs sub menu as array
 
-    @method (subMenu)
-    */
+   @method (subMenu)
+   */
   subMenu: function() {
     var template = Template.instance();
 
     if (this._id === 'browser') {
-      return LastVisitedPages.find({}, { sort: { timestamp: -1 }, limit: 25 });
+      return LastVisitedPages.find({}, {sort: {timestamp: -1}, limit: 25});
     } else if (this.menu) {
       var menu = _.toArray(this.menu);
 
@@ -97,62 +97,59 @@ Template['layout_sidebar'].helpers({
     }
   },
   /**
-    Returns connected accounts for dapp
+   Returns connected accounts for dapp
 
-    @method (dappAccounts)
-    */
+   @method (dappAccounts)
+   */
   dappAccounts: function(limit) {
     if (this.permissions) {
       if (limit) {
-        return EthAccounts.find(
-          { address: { $in: this.permissions.accounts || [] } },
-          { limit: limit }
+        return HucAccounts.find(
+          {address: {$in: this.permissions.accounts || []}},
+          {limit: limit},
         );
       }
-      return EthAccounts.find({
-        address: { $in: this.permissions.accounts || [] }
+      return HucAccounts.find({
+        address: {$in: this.permissions.accounts || []},
       });
     }
   },
   /**
-    Determines if the current tab is visible
+   Determines if the current tab is visible
 
-    @method (isSelected)
-    */
+   @method (isSelected)
+   */
   isSelected: function() {
     return LocalStore.get('selectedTab') === (this._id || 'browser')
       ? 'selected'
       : '';
   },
   /**
-    It defines which tabs will have a remove button on the interface
+   It defines which tabs will have a remove button on the interface
 
-    @method (tabShouldBeRemovable)
-    */
+   @method (tabShouldBeRemovable)
+   */
   tabShouldBeRemovable: function() {
     return !_.contains(['browser', 'wallet'], this._id);
-  }
+  },
 });
 
 Template['layout_sidebar'].events({
   /**
-    Select the current visible tab
+   Select the current visible tab
 
-    @event click button.main
-    */
+   @event click button.main
+   */
   'click nav button.main': function(e, template) {
     LocalStore.set('selectedTab', this._id || 'browser');
   },
   /**
-    Call the submenu dapp callback
+   Call the submenu dapp callback
 
-    @event click ul.sub-menu button
-    */
+   @event click ul.sub-menu button
+   */
   'click nav ul.sub-menu button': function(e, template) {
-    var tabId = $(e.currentTarget)
-      .parent()
-      .parents('li')
-      .data('tab-id');
+    var tabId = $(e.currentTarget).parent().parents('li').data('tab-id');
     var webview = $('webview[data-id="' + tabId + '"]')[0];
 
     // browser
@@ -160,7 +157,7 @@ Template['layout_sidebar'].events({
       webviewLoadStart.call(webview, tabId, {
         newURL: this.url,
         type: 'side-bar-click',
-        preventDefault: function() {}
+        preventDefault: function() {},
       });
 
       // dapp tab
@@ -170,12 +167,12 @@ Template['layout_sidebar'].events({
     }
   },
   /**
-    Remove the current selected tab
+   Remove the current selected tab
 
-    // TODO show popup before to confirm
+   // TODO show popup before to confirm
 
-    @event click button.remove-tab
-    */
+   @event click button.remove-tab
+   */
   'click button.remove-tab': function() {
     if (LocalStore.get('selectedTab') === this._id) {
       LocalStore.set('selectedTab', 'browser');
@@ -184,10 +181,10 @@ Template['layout_sidebar'].events({
     Tabs.remove(this._id);
   },
   /**
-    Show connect account popup
+   Show connect account popup
 
-    @event click .accounts button'
-    */
+   @event click .accounts button'
+   */
   'click .accounts button': function(e, template) {
     var initialTabCount = Tabs.find().fetch().length;
     LocalStore.set('selectedTab', this._id);
@@ -200,24 +197,24 @@ Template['layout_sidebar'].events({
         var tabId;
         if (tabCount > initialTabCount) {
           // browse tab was pinned
-          tabId = Tabs.findOne({}, { sort: { position: -1 }, limit: 1 });
+          tabId = Tabs.findOne({}, {sort: {position: -1}, limit: 1});
         } else {
           tabId = initialTabId;
         }
         Tabs.update(tabId, {
           $set: {
-            'permissions.accounts': addresses
-          }
+            'permissions.accounts': addresses,
+          },
         });
       });
     });
   },
 
   /**
-    Shows dapp submenu
+   Shows dapp submenu
 
-    @event mouseenter .sidebar-menu > li
-    */
+   @event mouseenter .sidebar-menu > li
+   */
   'mouseenter .sidebar-menu > li': function(e, template) {
     var $this = $(e.currentTarget);
     var tabTopOffset = $this.offset().top;
@@ -229,7 +226,7 @@ Template['layout_sidebar'].events({
     $submenuContainer.css('top', tabTopOffset + 'px');
     $submenu.css(
       'max-height',
-      windowHeight - tabTopOffset - submenuHeaderHeight - 30 + 'px'
+      windowHeight - tabTopOffset - submenuHeaderHeight - 30 + 'px',
     );
-  }
+  },
 });

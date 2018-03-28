@@ -5,7 +5,7 @@ const SocketBase = require('./base');
 
 const STATE = SocketBase.STATE;
 
-const Web3SocketBase = require('./web3Base');
+const WebuSocketBase = require('./webuBase');
 
 class HttpSocket extends EventEmitter {
   constructor(_parentSocket) {
@@ -22,21 +22,19 @@ class HttpSocket extends EventEmitter {
     const payload = JSON.stringify({
       jsonrpc: '2.0',
       id: 0,
-      method: 'eth_accounts',
-      params: []
+      method: 'huc_accounts',
+      params: [],
     });
 
-    this._call(payload)
-      .then(() => {
-        this._log.trace('Connection successful');
+    this._call(payload).then(() => {
+      this._log.trace('Connection successful');
 
-        this.emit('connect');
-      })
-      .catch(err => {
-        this._log.trace('Connection failed', err);
+      this.emit('connect');
+    }).catch(err => {
+      this._log.trace('Connection failed', err);
 
-        this.emit.bind(this, new Error('Unable to connect to HTTP RPC'));
-      });
+      this.emit.bind(this, new Error('Unable to connect to HTTP RPC'));
+    });
   }
 
   destroy() {
@@ -50,13 +48,11 @@ class HttpSocket extends EventEmitter {
   write(data) {
     this._log.trace('Write data', data);
 
-    this._call(data)
-      .then(body => {
-        this._log.trace('Got response', body);
+    this._call(data).then(body => {
+      this._log.trace('Got response', body);
 
-        this.emit('data', body);
-      })
-      .catch(this.emit.bind(this, 'error'));
+      this.emit('data', body);
+    }).catch(this.emit.bind(this, 'error'));
   }
 
   setEncoding(enc) {
@@ -66,21 +62,19 @@ class HttpSocket extends EventEmitter {
   }
 
   _call(dataStr) {
-    return got
-      .post(this._hostPort, {
-        encoding: this._encoding,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: dataStr
-      })
-      .then(res => {
-        return res.body;
-      });
+    return got.post(this._hostPort, {
+      encoding: this._encoding,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: dataStr,
+    }).then(res => {
+      return res.body;
+    });
   }
 }
 
-module.exports = class Web3HttpSocket extends Web3SocketBase {
+module.exports = class WebuHttpSocket extends WebuSocketBase {
   /**
    * Reset socket.
    */

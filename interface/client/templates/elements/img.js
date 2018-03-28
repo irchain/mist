@@ -1,22 +1,22 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 /**
-The img template
+ The img template
 
-@class [template] elements_img
-@constructor
-*/
+ @class [template] elements_img
+ @constructor
+ */
 
 Template['elements_img'].helpers({
   /**
-    This helper will preload the image, and then inject it later after its loaded
+   This helper will preload the image, and then inject it later after its loaded
 
-    @method (preload)
-    */
+   @method (preload)
+   */
   preload: function() {
     var template = Template.instance(),
       data = this,
@@ -29,5 +29,5 @@ Template['elements_img'].helpers({
       TemplateVar.set(template, 'src', data.src);
     };
     img.src = data.src;
-  }
+  },
 });

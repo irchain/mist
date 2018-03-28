@@ -1,7 +1,7 @@
 /**
-@module dbSync
-*/
-const { ipcMain, ipcRenderer } = require('electron');
+ @module dbSync
+ */
+const {ipcMain, ipcRenderer} = require('electron');
 
 /**
  * Sync IPC calls received from given window into given db table.
@@ -97,7 +97,7 @@ const syncDataFromBackend = function(coll) {
 
   return new Promise((resolve, reject) => {
     const dataJson = ipc.sendSync('dbSync-reloadSync', {
-      collName
+      collName,
     });
 
     try {
@@ -156,39 +156,37 @@ exports.frontendSyncInit = function(coll) {
     syncDoneResolver = resolve;
   });
 
-  syncDataFromBackend(coll)
-    .catch(err => {
-      console.error(err.toString());
-    })
-    .then(() => {
-      // start watching for changes
-      coll.find().observeChanges({
-        added(id, fields) {
-          ipc.send('dbSync-add', {
-            collName,
-            _id: id,
-            fields
-          });
-        },
-        changed(id, fields) {
-          ipc.send('dbSync-changed', {
-            collName,
-            _id: id,
-            fields
-          });
-        },
-        removed(id) {
-          ipc.send('dbSync-removed', {
-            collName,
-            _id: id
-          });
-        }
-      });
-
-      console.debug('Sync collection data to backend started: ', collName);
-
-      syncDoneResolver();
+  syncDataFromBackend(coll).catch(err => {
+    console.error(err.toString());
+  }).then(() => {
+    // start watching for changes
+    coll.find().observeChanges({
+      added(id, fields) {
+        ipc.send('dbSync-add', {
+          collName,
+          _id: id,
+          fields,
+        });
+      },
+      changed(id, fields) {
+        ipc.send('dbSync-changed', {
+          collName,
+          _id: id,
+          fields,
+        });
+      },
+      removed(id) {
+        ipc.send('dbSync-removed', {
+          collName,
+          _id: id,
+        });
+      },
     });
+
+    console.debug('Sync collection data to backend started: ', collName);
+
+    syncDoneResolver();
+  });
 
   return coll;
 };

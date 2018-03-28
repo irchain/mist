@@ -12,9 +12,9 @@ const Sockets = require('./socketManager');
 const ClientBinaryManager = require('./clientBinaryManager');
 
 import logger from './utils/logger';
-const ethereumNodeLog = logger.create('HappyucNode');
+const happyucNodeLog = logger.create('HappyucNode');
 
-const DEFAULT_NODE_TYPE = 'geth';
+const DEFAULT_NODE_TYPE = 'ghuc';
 const DEFAULT_NETWORK = 'main';
 const DEFAULT_SYNCMODE = 'light';
 
@@ -31,7 +31,7 @@ const STATES = {
 };
 
 /**
- * Etheruem nodes manager.
+ * Happyuc nodes manager.
  */
 class HappyucNode extends EventEmitter {
   constructor() {
@@ -152,13 +152,13 @@ class HappyucNode extends EventEmitter {
         this.emit('runningNodeFound');
       })
       .catch(() => {
-        ethereumNodeLog.warn(
+        happyucNodeLog.warn(
           "Failed to connect to node. Maybe it's not running so let's start our own..."
         );
 
-        ethereumNodeLog.info(`Node type: ${this.defaultNodeType}`);
-        ethereumNodeLog.info(`Network: ${this.defaultNetwork}`);
-        ethereumNodeLog.info(`SyncMode: ${this.defaultSyncMode}`);
+        happyucNodeLog.info(`Node type: ${this.defaultNodeType}`);
+        happyucNodeLog.info(`Network: ${this.defaultNetwork}`);
+        happyucNodeLog.info(`SyncMode: ${this.defaultSyncMode}`);
 
         // if not, start node yourself
         return this._start(
@@ -166,7 +166,7 @@ class HappyucNode extends EventEmitter {
           this.defaultNetwork,
           this.defaultSyncMode
         ).catch(err => {
-          ethereumNodeLog.error('Failed to start node', err);
+          happyucNodeLog.error('Failed to start node', err);
           throw err;
         });
       });
@@ -178,7 +178,7 @@ class HappyucNode extends EventEmitter {
         throw new Error('Cannot restart node since it was started externally');
       }
 
-      ethereumNodeLog.info('Restart node', newType, newNetwork);
+      happyucNodeLog.info('Restart node', newType, newNetwork);
 
       return this.stop()
         .then(() => Windows.loading.show())
@@ -191,7 +191,7 @@ class HappyucNode extends EventEmitter {
         )
         .then(() => Windows.loading.hide())
         .catch(err => {
-          ethereumNodeLog.error('Error restarting node', err);
+          happyucNodeLog.error('Error restarting node', err);
           throw err;
         });
     });
@@ -211,7 +211,7 @@ class HappyucNode extends EventEmitter {
 
         this.state = STATES.STOPPING;
 
-        ethereumNodeLog.info(
+        happyucNodeLog.info(
           `Stopping existing node: ${this._type} ${this._network}`
         );
 
@@ -242,14 +242,14 @@ class HappyucNode extends EventEmitter {
         this._stopPromise = null;
       });
     }
-    ethereumNodeLog.debug(
+    happyucNodeLog.debug(
       'Disconnection already in progress, returning Promise.'
     );
     return this._stopPromise;
   }
 
   /**
-   * Send Web3 command to socket.
+   * Send Webu command to socket.
    * @param  {String} method Method name
    * @param  {Array} [params] Method arguments
    * @return {Promise} resolves to result or error.
@@ -263,23 +263,23 @@ class HappyucNode extends EventEmitter {
 
   /**
    * Start an happyuc node.
-   * @param  {String} nodeType geth, eth, etc
+   * @param  {String} nodeType ghuc, huc, etc
    * @param  {String} network  network id
    * @return {Promise}
    */
   _start(nodeType, network, syncMode) {
-    ethereumNodeLog.info(`Start node: ${nodeType} ${network} ${syncMode}`);
+    happyucNodeLog.info(`Start node: ${nodeType} ${network} ${syncMode}`);
 
     const isTestNet = network === 'test';
 
     if (isTestNet) {
-      ethereumNodeLog.debug('Node will connect to the test network');
+      happyucNodeLog.debug('Node will connect to the test network');
     }
 
     return this.stop()
       .then(() => {
         return this.__startNode(nodeType, network, syncMode).catch(err => {
-          ethereumNodeLog.error('Failed to start node', err);
+          happyucNodeLog.error('Failed to start node', err);
 
           this._showNodeErrorDialog(nodeType, network);
 
@@ -287,7 +287,7 @@ class HappyucNode extends EventEmitter {
         });
       })
       .then(proc => {
-        ethereumNodeLog.info(
+        happyucNodeLog.info(
           `Started node successfully: ${nodeType} ${network} ${syncMode}`
         );
 
@@ -306,7 +306,7 @@ class HappyucNode extends EventEmitter {
             this.state = STATES.CONNECTED;
           })
           .catch(err => {
-            ethereumNodeLog.error('Failed to connect to node', err);
+            happyucNodeLog.error('Failed to connect to node', err);
 
             if (err.toString().indexOf('timeout') >= 0) {
               this.emit('nodeConnectionTimeout');
@@ -323,9 +323,9 @@ class HappyucNode extends EventEmitter {
         this.lastError = err.tag;
         this.state = STATES.ERROR;
 
-        // if unable to start eth node then write geth to defaults
-        if (nodeType === 'eth') {
-          Settings.saveUserData('node', 'geth');
+        // if unable to start huchuc node then write ghuchuc to defaults
+        if (nodeType === 'huchuc') {
+          Settings.saveUserData('node', 'ghuc');
         }
 
         throw err;
@@ -351,7 +351,7 @@ class HappyucNode extends EventEmitter {
       throw new Error(`Node "${nodeType}" binPath is not available.`);
     }
 
-    ethereumNodeLog.info(`Start node using ${binPath}`);
+    happyucNodeLog.info(`Start node using ${binPath}`);
 
     return new Q((resolve, reject) => {
       this.__startProcess(nodeType, network, binPath, syncMode).then(
@@ -366,19 +366,19 @@ class HappyucNode extends EventEmitter {
    */
   __startProcess(nodeType, network, binPath, _syncMode) {
     let syncMode = _syncMode;
-    if (nodeType === 'geth' && !syncMode) {
+    if (nodeType === 'ghuc' && !syncMode) {
       syncMode = DEFAULT_SYNCMODE;
     }
 
     return new Q((resolve, reject) => {
-      ethereumNodeLog.trace('Rotate log file');
+      happyucNodeLog.trace('Rotate log file');
 
       logRotate(
         path.join(Settings.userDataPath, 'logs', 'all.log'),
         { count: 5 },
         error => {
           if (error) {
-            ethereumNodeLog.error('Log rotation problems', error);
+            happyucNodeLog.error('Log rotation problems', error);
             return reject(error);
           }
         }
@@ -389,12 +389,12 @@ class HappyucNode extends EventEmitter {
           Settings.userDataPath,
           'logs',
           'category',
-          'ethereum_node.log'
+          'happyuc_node.log'
         ),
         { count: 5 },
         error => {
           if (error) {
-            ethereumNodeLog.error('Log rotation problems', error);
+            happyucNodeLog.error('Log rotation problems', error);
             return reject(error);
           }
         }
@@ -443,7 +443,7 @@ class HappyucNode extends EventEmitter {
         // Starts Main net
         default:
           args =
-            nodeType === 'geth'
+            nodeType === 'ghuc'
               ? [
                   '--syncmode',
                   syncMode,
@@ -456,12 +456,12 @@ class HappyucNode extends EventEmitter {
       const nodeOptions = Settings.nodeOptions;
 
       if (nodeOptions && nodeOptions.length) {
-        ethereumNodeLog.debug('Custom node options', nodeOptions);
+        happyucNodeLog.debug('Custom node options', nodeOptions);
 
         args = args.concat(nodeOptions);
       }
 
-      ethereumNodeLog.trace('Spawn', binPath, args);
+      happyucNodeLog.trace('Spawn', binPath, args);
 
       const proc = spawn(binPath, args);
 
@@ -469,7 +469,7 @@ class HappyucNode extends EventEmitter {
         if (this.state === STATES.STARTING) {
           this.state = STATES.ERROR;
 
-          ethereumNodeLog.info('Node startup error');
+          happyucNodeLog.info('Node startup error');
 
           // TODO: detect this properly
           // this.emit('nodeBinaryNotFound');
@@ -479,13 +479,13 @@ class HappyucNode extends EventEmitter {
       });
 
       proc.stdout.on('data', data => {
-        ethereumNodeLog.trace('Got stdout data', data.toString());
+        happyucNodeLog.trace('Got stdout data', data.toString());
         this.emit('data', data);
       });
 
       proc.stderr.on('data', data => {
-        ethereumNodeLog.trace('Got stderr data', data.toString());
-        ethereumNodeLog.info(data.toString()); // TODO: This should be ethereumNodeLog.error(), but not sure why regular stdout data is coming in through stderror
+        happyucNodeLog.trace('Got stderr data', data.toString());
+        happyucNodeLog.info(data.toString()); // TODO: This should be happyucNodeLog.error(), but not sure why regular stdout data is coming in through stderror
         this.emit('data', data);
       });
 
@@ -494,11 +494,11 @@ class HappyucNode extends EventEmitter {
         /*
                     We wait a short while before marking startup as successful
                     because we may want to parse the initial node output for
-                    errors, etc (see geth port-binding error above)
+                    errors, etc (see ghuc port-binding error above)
                 */
         setTimeout(() => {
           if (STATES.STARTING === this.state) {
-            ethereumNodeLog.info(
+            happyucNodeLog.info(
               `${NODE_START_WAIT_MS}ms elapsed, assuming node started up successfully`
             );
             resolve(proc);
@@ -538,24 +538,24 @@ class HappyucNode extends EventEmitter {
     const cleanData = data.toString().replace(/[\r\n]+/, '');
     const nodeType = (this.type || 'node').toUpperCase();
 
-    ethereumNodeLog.trace(`${nodeType}: ${cleanData}`);
+    happyucNodeLog.trace(`${nodeType}: ${cleanData}`);
 
     if (!/^-*$/.test(cleanData) && !_.isEmpty(cleanData)) {
       this.emit('nodeLog', cleanData);
     }
 
-    // check for geth startup errors
+    // check for ghuc startup errors
     if (STATES.STARTING === this.state) {
       const dataStr = data.toString().toLowerCase();
-      if (nodeType === 'geth') {
+      if (nodeType === 'ghuc') {
         if (dataStr.indexOf('fatal: error') >= 0) {
-          const error = new Error(`Geth error: ${dataStr}`);
+          const error = new Error(`Ghuc error: ${dataStr}`);
 
           if (dataStr.indexOf('bind') >= 0) {
             error.tag = UNABLE_TO_BIND_PORT_ERROR;
           }
 
-          ethereumNodeLog.error(error);
+          happyucNodeLog.error(error);
           return reject(error);
         }
       }
@@ -563,7 +563,7 @@ class HappyucNode extends EventEmitter {
   }
 
   _loadDefaults() {
-    ethereumNodeLog.trace('Load defaults');
+    happyucNodeLog.trace('Load defaults');
 
     this.defaultNodeType =
       Settings.nodeType || Settings.loadUserData('node') || DEFAULT_NODE_TYPE;
@@ -574,12 +574,12 @@ class HappyucNode extends EventEmitter {
       Settings.loadUserData('syncmode') ||
       DEFAULT_SYNCMODE;
 
-    ethereumNodeLog.info(
+    happyucNodeLog.info(
       Settings.syncmode,
       Settings.loadUserData('syncmode'),
       DEFAULT_SYNCMODE
     );
-    ethereumNodeLog.info(
+    happyucNodeLog.info(
       `Defaults loaded: ${this.defaultNodeType} ${this.defaultNetwork} ${
         this.defaultSyncMode
       }`

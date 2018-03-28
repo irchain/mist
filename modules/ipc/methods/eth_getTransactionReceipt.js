@@ -40,7 +40,7 @@ module.exports = class extends BaseProcessor {
 
       const fromAddress = transactionInfo.result.result.from;
       const nonce = parseInt(transactionInfo.result.result.nonce, 16);
-      const possibleContractAddress = `0x${eth
+      const possibleContractAddress = `0x${huc
         .generateAddress(fromAddress, nonce)
         .toString('hex')}`;
 

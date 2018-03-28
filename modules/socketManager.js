@@ -2,8 +2,8 @@ const _ = global._;
 const Q = require('bluebird');
 const log = require('./utils/logger').create('Sockets');
 
-const Web3IpcSocket = require('./sockets/web3Ipc');
-const Web3HttpSocket = require('./sockets/web3Http');
+const WebuIpcSocket = require('./sockets/webuIpc');
+const WebuHttpSocket = require('./sockets/webuHttp');
 
 /**
  * `Socket` manager.
@@ -23,10 +23,10 @@ class SocketManager {
 
     switch (type) {
       case 'ipc':
-        this._sockets[id] = new Web3IpcSocket(this, id);
+        this._sockets[id] = new WebuIpcSocket(this, id);
         break;
       case 'http':
-        this._sockets[id] = new Web3HttpSocket(this, id);
+        this._sockets[id] = new WebuHttpSocket(this, id);
         break;
       default:
         throw new Error(`Unrecognized socket type: ${type}`);
@@ -58,7 +58,7 @@ class SocketManager {
       _.map(this._sockets, (s, id) => {
         this.remove(id);
         return s.destroy();
-      })
+      }),
     );
   }
 

@@ -28,7 +28,7 @@ gulp.task('checksums', cb => {
 
   files.forEach(file => {
     const sum = shell.exec(`${command} "${file}" ${argument}`, {
-      cwd: releasePath
+      cwd: releasePath,
     });
 
     if (sum.code !== 0) {
@@ -53,17 +53,17 @@ gulp.task('upload-binaries', cb => {
 
   // query github releases
   got(
-    `https://api.github.com/repos/ldcc/mist/releases?access_token=${GITHUB_TOKEN}`,
-    { json: true }
+    `https://api.github.com/repos/happyuc-project/mist/releases?access_token=${GITHUB_TOKEN}`,
+    {json: true},
   )
-    // filter draft with current version's tag
+  // filter draft with current version's tag
     .then(res => {
       const draft =
         res.body[_.indexOf(_.pluck(res.body, 'tag_name'), `v${version}`)];
 
       if (draft === undefined)
         throw new Error(
-          `Couldn't find github release draft for v${version} release tag`
+          `Couldn't find github release draft for v${version} release tag`,
         );
 
       return draft;
@@ -84,65 +84,59 @@ gulp.task('upload-binaries', cb => {
           files.map(file => {
             return file.replace(/\s/g, '.');
           }),
-          _.pluck(draft.assets, 'name')
+          _.pluck(draft.assets, 'name'),
         );
         if (!_.isEmpty(existingAssets))
           throw new Error(
-            `Github release draft already contains assets (${existingAssets}); will not upload, please remove and trigger rebuild`
+            `Github release draft already contains assets (${existingAssets}); will not upload, please remove and trigger rebuild`,
           );
 
         return (
           githubUpload({
-            url: `https://uploads.github.com/repos/ldcc/mist/releases/${
+            url: `https://uploads.github.com/repos/happyuc-project/mist/releases/${
               draft.id
-            }/assets{?name}`,
+              }/assets{?name}`,
             token: [GITHUB_TOKEN],
-            assets: filePaths
+            assets: filePaths,
+          }).then(res => {
+            console.log(
+              `Successfully uploaded ${res} to v${version} release draft.`,
+            );
           })
-            .then(res => {
-              console.log(
-                `Successfully uploaded ${res} to v${version} release draft.`
-              );
-            })
-            // append checksums to draft text
+          // append checksums to draft text
             .then(() => {
               console.info(
                 'Appending checksums to release notes...',
-                checksums
+                checksums,
               );
               if (draft.body && checksums) {
-                const checksumRows = checksums
-                  .map(e => {
-                    const line = e.replace('\n', '').split('  ');
-                    return `<sub>${line[1]}</sub> | <sub>\`${line[0]}\`</sub>`;
-                  })
-                  .join('\n');
+                const checksumRows = checksums.map(e => {
+                  const line = e.replace('\n', '').split('  ');
+                  return `<sub>${line[1]}</sub> | <sub>\`${line[0]}\`</sub>`;
+                }).join('\n');
                 got.patch(
-                  `https://api.github.com/repos/ldcc/mist/releases/${
+                  `https://api.github.com/repos/happyuc-project/mist/releases/${
                     draft.id
-                  }?access_token=${GITHUB_TOKEN}`,
+                    }?access_token=${GITHUB_TOKEN}`,
                   {
                     body: JSON.stringify({
                       tag_name: `v${version}`,
                       // String manipulation to create a checksums table
                       body: `${
                         draft.body
-                      }\n\nFile | Checksum (SHA256)\n-- | -- \n${checksumRows}`
-                    })
-                  }
+                        }\n\nFile | Checksum (SHA256)\n-- | -- \n${checksumRows}`,
+                    }),
+                  },
                 );
               }
-            })
-            .catch(err => {
-              console.log(err);
-            })
+            }).catch(err => {
+            console.log(err);
+          })
         );
       }
-    })
-    .catch(err => {
-      console.log(err);
-    })
-    .then(() => {
-      cb();
-    });
+    }).catch(err => {
+    console.log(err);
+  }).then(() => {
+    cb();
+  });
 });

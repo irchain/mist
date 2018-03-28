@@ -32,7 +32,7 @@ protocol.registerHttpProtocol(
   }
 );
 
-// protocol.registerProtocol('eth', function(request) {
+// protocol.registerProtocol('huc', function(request) {
 //     var url = request.url.substr(7)
 //     return new protocol.RequestStringJob({data: 'Hello'});
 // });
@@ -42,4 +42,4 @@ protocol.registerHttpProtocol(
 //     return new protocol.RequestStringJob({data: 'Hello'});
 // });
 
-// protocol.registerStandardSchemes(['mist','eth', 'bzz']); //'eth', 'bzz'
+// protocol.registerStandardSchemes(['mist','huc', 'bzz']); //'huc', 'bzz'

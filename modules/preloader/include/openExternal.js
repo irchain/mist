@@ -1,10 +1,10 @@
 /**
-Opens windows and popups
+ Opens windows and popups
 
-@module openExternal
-*/
+ @module openExternal
+ */
 
-const { shell } = require('electron');
+const {shell} = require('electron');
 
 // open a[target="_blank"] in external browser
 document.addEventListener(
@@ -28,5 +28,5 @@ document.addEventListener(
       shell.openExternal(node.href);
     }
   },
-  false
+  false,
 );

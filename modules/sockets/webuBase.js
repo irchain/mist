@@ -6,7 +6,7 @@ const SocketBase = require('./base');
 const Socket = SocketBase.Socket;
 const STATE = SocketBase.STATE;
 
-module.exports = class Web3Socket extends Socket {
+module.exports = class WebuSocket extends Socket {
   constructor(socketMgr, id) {
     super(socketMgr, id);
 
@@ -49,7 +49,7 @@ module.exports = class Web3Socket extends Socket {
         options,
         /* Preserve the original id of the request so that we can
                 update the response with it */
-        origId: isBatch ? _.map(payload, p => p.id) : payload.id
+        origId: isBatch ? _.map(payload, p => p.id) : payload.id,
       };
 
       this.write(JSON.stringify(finalPayload));
@@ -57,7 +57,7 @@ module.exports = class Web3Socket extends Socket {
       return new Q((resolve, reject) => {
         _.extend(this._sendRequests[id], {
           resolve,
-          reject
+          reject,
         });
       });
     });
@@ -79,72 +79,70 @@ module.exports = class Web3Socket extends Socket {
       jsonrpc: '2.0',
       id: _.uuid(),
       method: payload.method,
-      params: payload.params || []
+      params: payload.params || [],
     };
   }
 
   /**
-   * Handle responses from Geth.
+   * Handle responses from Ghuc.
    */
   _handleSocketResponse() {
-    oboe(this)
-      .done(result => {
-        this._log.trace('JSON response', result);
+    oboe(this).done(result => {
+      this._log.trace('JSON response', result);
 
-        try {
-          const isBatch = _.isArray(result);
+      try {
+        const isBatch = _.isArray(result);
 
-          const firstItem = isBatch ? result[0] : result;
+        const firstItem = isBatch ? result[0] : result;
 
-          const req = firstItem.id ? this._sendRequests[firstItem.id] : null;
+        const req = firstItem.id ? this._sendRequests[firstItem.id] : null;
 
-          if (req) {
-            this._log.trace(
-              isBatch ? 'Batch response' : 'Response',
-              firstItem.id,
-              result
-            );
+        if (req) {
+          this._log.trace(
+            isBatch ? 'Batch response' : 'Response',
+            firstItem.id,
+            result,
+          );
 
-            // if we don't want full JSON result, send just the result
-            if (!_.get(req, 'options.fullResult')) {
-              if (isBatch) {
-                result = _.map(result, r => r.result);
-              } else {
-                result = result.result;
-              }
+          // if we don't want full JSON result, send just the result
+          if (!_.get(req, 'options.fullResult')) {
+            if (isBatch) {
+              result = _.map(result, r => r.result);
             } else {
-              // restore original ids
-              if (isBatch) {
-                req.origId.forEach((id, idx) => {
-                  if (result[idx]) {
-                    result[idx].id = id;
-                  }
-                });
-              } else {
-                result.id = req.origId;
-              }
+              result = result.result;
             }
-
-            req.resolve({
-              isBatch,
-              result
-            });
           } else {
-            // not a response to a request so pass it on as a notification
-            this.emit('data-notification', result);
+            // restore original ids
+            if (isBatch) {
+              req.origId.forEach((id, idx) => {
+                if (result[idx]) {
+                  result[idx].id = id;
+                }
+              });
+            } else {
+              result.id = req.origId;
+            }
           }
-        } catch (err) {
-          this._log.error('Error handling socket response', err);
+
+          req.resolve({
+            isBatch,
+            result,
+          });
+        } else {
+          // not a response to a request so pass it on as a notification
+          this.emit('data-notification', result);
         }
-      })
-      .fail(err => {
-        this._log.error('Socket response error', err);
+      } catch (err) {
+        this._log.error('Error handling socket response', err);
+      }
+    }).fail(err => {
+      this._log.error('Socket response error', err);
 
-        _.each(this._sendRequests, req => {
-          req.reject(err);
-        });
-
-        this._sendRequests = {};
+      _.each(this._sendRequests, req => {
+        req.reject(err);
       });
+
+      this._sendRequests = {};
+    });
   }
 };

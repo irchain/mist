@@ -1,17 +1,17 @@
 /**
-Gest the meta[name="happyuc-dapp-url-bar-style"] meta tag
+ Gest the meta[name="happyuc-dapp-url-bar-style"] meta tag
 
-@module getMetaTags
-*/
+ @module getMetaTags
+ */
 
-const { ipcRenderer } = require('electron');
+const {ipcRenderer} = require('electron');
 
 module.export = (function() {
   document.addEventListener('DOMContentLoaded', DOMContentLoaded, false);
 
   function DOMContentLoaded(event) {
     const appBar = document.querySelector(
-      'meta[name="happyuc-dapp-url-bar-style"]'
+      'meta[name="happyuc-dapp-url-bar-style"]',
     );
 
     if (appBar) {

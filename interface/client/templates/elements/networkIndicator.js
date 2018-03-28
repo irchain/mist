@@ -1,26 +1,26 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
-
-/**
-The networkIndicator template
-
-@class [template] elements_networkIndicator
-@constructor
-*/
+ @module Templates
+ */
 
 /**
-Check network type.
+ The networkIndicator template
 
-@method checkNetworkType
-*/
+ @class [template] elements_networkIndicator
+ @constructor
+ */
+
+/**
+ Check network type.
+
+ @method checkNetworkType
+ */
 var checkNetworkType = function(template) {
   console.trace('Check network type...');
 
   try {
-    web3.eth.getBlock(0, function(e, res) {
+    web3.huc.getBlock(0, function(e, res) {
       console.trace('Get block 0', e, res);
 
       if (e) {
@@ -29,12 +29,12 @@ var checkNetworkType = function(template) {
         TemplateVar.set(
           template,
           'network',
-          Helpers.detectNetwork(res.hash).type
+          Helpers.detectNetwork(res.hash).type,
         );
         TemplateVar.set(
           template,
           'networkName',
-          Helpers.detectNetwork(res.hash).name
+          Helpers.detectNetwork(res.hash).name,
         );
       }
     });

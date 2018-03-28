@@ -1,18 +1,18 @@
 /*
-    This file is part of web3.js.
+    This file is part of webu.js.
 
-    web3.js is free software: you can redistribute it and/or modify
+    webu.js is free software: you can redistribute it and/or modify
     it under the terms of the GNU Lesser General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    web3.js is distributed in the hope that it will be useful,
+    webu.js is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU Lesser General Public License for more details.
 
     You should have received a copy of the GNU Lesser General Public License
-    along with web3.js.  If not, see <http://www.gnu.org/licenses/>.
+    along with webu.js.  If not, see <http://www.gnu.org/licenses/>.
 */
 /** @file ipcprovider.js
  * @authors:
@@ -26,7 +26,7 @@ var _ = require('underscore');
 var errors = {
   InvalidConnection: function(host) {
     return new Error(
-      "CONNECTION ERROR: Couldn't connect to node " + host + '.'
+      'CONNECTION ERROR: Couldn\'t connect to node ' + host + '.',
     );
   },
   InvalidResponse: function(result) {
@@ -35,7 +35,7 @@ var errors = {
         ? result.error.message
         : 'Invalid JSON RPC response: ' + JSON.stringify(result);
     return new Error(message);
-  }
+  },
 };
 
 var IpcProvider = function(path, net) {
@@ -43,7 +43,7 @@ var IpcProvider = function(path, net) {
   this.responseCallbacks = {};
   this.path = path;
 
-  this.connection = net.connect({ path: this.path });
+  this.connection = net.connect({path: this.path});
 
   this.connection.on('error', function(e) {
     console.error('IPC Connection Error', e);
@@ -80,18 +80,17 @@ var IpcProvider = function(path, net) {
 };
 
 /**
-Will parse the response and make an array out of it.
+ Will parse the response and make an array out of it.
 
-@method _parseResponse
-@param {String} data
-*/
+ @method _parseResponse
+ @param {String} data
+ */
 IpcProvider.prototype._parseResponse = function(data) {
   var _this = this,
     returnValues = [];
 
   // DE-CHUNKER
-  var dechunkedData = data
-    .replace(/\}[\n\r]?\{/g, '}|--|{') // }{
+  var dechunkedData = data.replace(/\}[\n\r]?\{/g, '}|--|{') // }{
     .replace(/\}\][\n\r]?\[\{/g, '}]|--|[{') // }][{
     .replace(/\}[\n\r]?\[\{/g, '}|--|[{') // }[{
     .replace(/\}\][\n\r]?\{/g, '}]|--|{') // }]{
@@ -129,11 +128,11 @@ IpcProvider.prototype._parseResponse = function(data) {
 };
 
 /**
-Get the adds a callback to the responseCallbacks object,
-which will be called if a response matching the response Id will arrive.
+ Get the adds a callback to the responseCallbacks object,
+ which will be called if a response matching the response Id will arrive.
 
-@method _addResponseCallback
-*/
+ @method _addResponseCallback
+ */
 IpcProvider.prototype._addResponseCallback = function(payload, callback) {
   var id = payload.id || payload[0].id;
   var method = payload.method || payload[0].method;
@@ -143,10 +142,10 @@ IpcProvider.prototype._addResponseCallback = function(payload, callback) {
 };
 
 /**
-Timeout all requests when the end/error event is fired
+ Timeout all requests when the end/error event is fired
 
-@method _timeout
-*/
+ @method _timeout
+ */
 IpcProvider.prototype._timeout = function() {
   for (var key in this.responseCallbacks) {
     if (this.responseCallbacks.hasOwnProperty(key)) {
@@ -157,16 +156,16 @@ IpcProvider.prototype._timeout = function() {
 };
 
 /**
-Check if the current connection is still valid.
+ Check if the current connection is still valid.
 
-@method isConnected
-*/
+ @method isConnected
+ */
 IpcProvider.prototype.isConnected = function() {
   var _this = this;
 
   // try reconnect, when connection is gone
   if (!_this.connection.writable)
-    _this.connection.connect({ path: _this.path });
+    _this.connection.connect({path: _this.path});
 
   return !!this.connection.writable;
 };
@@ -176,7 +175,7 @@ IpcProvider.prototype.send = function(payload) {
     var result;
 
     // try reconnect, when connection is gone
-    if (!this.connection.writable) this.connection.connect({ path: this.path });
+    if (!this.connection.writable) this.connection.connect({path: this.path});
 
     var data = this.connection.writeSync(JSON.stringify(payload));
 
@@ -190,15 +189,15 @@ IpcProvider.prototype.send = function(payload) {
   } else {
     throw new Error(
       'You tried to send "' +
-        payload.method +
-        '" synchronously. Synchronous requests are not supported by the IPC provider.'
+      payload.method +
+      '" synchronously. Synchronous requests are not supported by the IPC provider.',
     );
   }
 };
 
 IpcProvider.prototype.sendAsync = function(payload, callback) {
   // try reconnect, when connection is gone
-  if (!this.connection.writable) this.connection.connect({ path: this.path });
+  if (!this.connection.writable) this.connection.connect({path: this.path});
 
   this.connection.write(JSON.stringify(payload));
   this._addResponseCallback(payload, callback);

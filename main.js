@@ -15,7 +15,7 @@ const Settings = require('./modules/settings');
 
 import configureReduxStore from './modules/core/store';
 import {quitApp} from './modules/core/ui/actions';
-import {setLanguageOnMain, toggleSwarm,} from './modules/core/settings/actions';
+import {setLanguageOnMain, toggleSwarm} from './modules/core/settings/actions';
 import {SwarmState} from './modules/core/settings/reducer';
 import swarmNode from './modules/swarmNode.js';
 

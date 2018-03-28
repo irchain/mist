@@ -8,7 +8,7 @@ const CONNECT_INTERVAL_MS = 1000;
 const CONNECT_TIMEOUT_MS = 3000;
 
 /**
- * Socket connecting to Ethereum Node.
+ * Socket connecting to Happyuc Node.
  */
 class Socket extends EventEmitter {
   constructor(socketMgr, id) {
@@ -42,9 +42,9 @@ class Socket extends EventEmitter {
 
     options = _.extend(
       {
-        timeout: CONNECT_TIMEOUT_MS
+        timeout: CONNECT_TIMEOUT_MS,
       },
-      options
+      options,
     );
 
     return this._resetSocket().then(() => {
@@ -54,7 +54,7 @@ class Socket extends EventEmitter {
       this._log.debug('Connecting...');
 
       this._log.debug(
-        `Will wait ${options.timeout}ms for connection to happen.`
+        `Will wait ${options.timeout}ms for connection to happen.`,
       );
 
       this._state = STATE.CONNECTING;
@@ -78,7 +78,7 @@ class Socket extends EventEmitter {
         this._socket.on('error', err => {
           if (STATE.CONNECTING === this._state) {
             this._log.warn(
-              `Connection failed, retrying after ${CONNECT_INTERVAL_MS}ms...`
+              `Connection failed, retrying after ${CONNECT_INTERVAL_MS}ms...`,
             );
 
             connectTimerId = setTimeout(() => {
@@ -209,5 +209,5 @@ const STATE = (exports.STATE = Socket.STATE = {
   DISCONNECTED: 4,
   ERROR: -1,
   DISCONNECTION_TIMEOUT: -2,
-  CONNECTION_TIMEOUT: -3
+  CONNECTION_TIMEOUT: -3,
 });

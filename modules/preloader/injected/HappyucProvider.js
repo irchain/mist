@@ -8,14 +8,14 @@
 
     window.postMessage(
       payload,
-      !location.origin || location.origin === 'null' ? '*' : location.origin
+      !location.origin || location.origin === 'null' ? '*' : location.origin,
     );
   };
 
   // on events are: "connect", "data", "error", "end", "timeout"
   // "data" will get notifications
 
-  function EthereumProvider() {
+  function HappyucProvider() {
     var _this = this;
     // Call constructor of superclass to initialize superclass-derived members.
     EventEmitter.call(this);
@@ -91,25 +91,25 @@
     });
   }
 
-  EthereumProvider.prototype = Object.create(EventEmitter.prototype);
-  EthereumProvider.prototype.constructor = EthereumProvider;
+  HappyucProvider.prototype = Object.create(EventEmitter.prototype);
+  HappyucProvider.prototype.constructor = HappyucProvider;
 
   /**
-     Get the adds a callback to the responseCallbacks object,
-     which will be called if a response matching the response Id will arrive.
+   Get the adds a callback to the responseCallbacks object,
+   which will be called if a response matching the response Id will arrive.
 
-     @method _addResponseCallback
-     */
-  EthereumProvider.prototype._addResponseCallback = function(
+   @method _addResponseCallback
+   */
+  HappyucProvider.prototype._addResponseCallback = function(
     payload,
-    callback
+    callback,
   ) {
     var id = payload.id || payload[0].id;
     var method = payload.method || payload[0].method;
 
     if (typeof callback !== 'function') {
       throw new Error(
-        'No callback given, sync calls are not possible anymore in Mist. Please use only async calls.'
+        'No callback given, sync calls are not possible anymore in Mist. Please use only async calls.',
       );
     }
 
@@ -118,11 +118,11 @@
   };
 
   /**
-     Will watch for connection drops and tries to reconnect.
+   Will watch for connection drops and tries to reconnect.
 
-     @method _reconnectCheck
-     */
-  EthereumProvider.prototype._reconnectCheck = function() {
+   @method _reconnectCheck
+   */
+  HappyucProvider.prototype._reconnectCheck = function() {
     var _this = this;
     var reconnectIntervalId;
 
@@ -138,54 +138,54 @@
   };
 
   /**
-     Will try to make a connection
+   Will try to make a connection
 
-     @method connect
-     */
-  EthereumProvider.prototype._connect = function(payload, callback) {
+   @method connect
+   */
+  HappyucProvider.prototype._connect = function(payload, callback) {
     postMessage({
-      type: 'create'
+      type: 'create',
     });
   };
 
   /**
-     Sends the request
+   Sends the request
 
-     @method send
-     @param {Object} payload    example: {id: 1, jsonrpc: '2.0', 'method': 'eth_someMethod', params: []}
-     @param {Function} callback the callback to call
-     */
+   @method send
+   @param {Object} payload    example: {id: 1, jsonrpc: '2.0', 'method': 'huc_someMethod', params: []}
+   @param {Function} callback the callback to call
+   */
   // TODO transform to: send(method, params, callback)
-  EthereumProvider.prototype.send = function send(payload, callback) {
+  HappyucProvider.prototype.send = function send(payload, callback) {
     this._addResponseCallback(payload, callback);
     postMessage(
       {
         type: 'write',
-        message: payload
+        message: payload,
       },
-      this.origin
+      this.origin,
     );
   };
 
   delete window.EventEmitter;
   // TODO set real happyuc provider
-  // window.happyuc = new EthereumProvider();
+  // window.happyuc = new HappyucProvider();
 
-  // For backwards compatibility of web3.currentProvider;
-  EthereumProvider.prototype.sendSync = function() {
+  // For backwards compatibility of webu.currentProvider;
+  HappyucProvider.prototype.sendSync = function() {
     return {
       jsonrpc: '2.0',
       error: {
         code: -32603,
-        message: 'Sync calls are not anymore supported in Mist :\\'
-      }
+        message: 'Sync calls are not anymore supported in Mist :\\',
+      },
     };
   };
-  EthereumProvider.prototype.sendAsync = EthereumProvider.prototype.send;
-  EthereumProvider.prototype.isConnected = function() {
+  HappyucProvider.prototype.sendAsync = HappyucProvider.prototype.send;
+  HappyucProvider.prototype.isConnected = function() {
     return true;
   };
-  window.web3 = {
-    currentProvider: new EthereumProvider()
+  window.webu = {
+    currentProvider: new HappyucProvider(),
   };
 })();

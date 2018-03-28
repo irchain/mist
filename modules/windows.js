@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain: ipc } = require('electron');
+const {app, BrowserWindow, ipcMain: ipc} = require('electron');
 const Settings = require('./settings');
 const log = require('./utils/logger').create('Windows');
 const EventEmitter = require('events').EventEmitter;
@@ -6,7 +6,7 @@ import {
   closeWindow,
   openWindow,
   resetGenericWindow,
-  reuseGenericWindow
+  reuseGenericWindow,
 } from './core/ui/actions';
 
 class GenericWindow extends EventEmitter {
@@ -112,7 +112,7 @@ class GenericWindow extends EventEmitter {
     }
     this.window.setSize(
       options.electronOptions.width,
-      options.electronOptions.height
+      options.electronOptions.height,
     );
     this.window.setAlwaysOnTop(true, 'floating', 1);
     this.send('uiAction_switchTemplate', type);
@@ -149,8 +149,8 @@ class Window extends EventEmitter {
         webaudio: true,
         webgl: false,
         webSecurity: false, // necessary to make routing work on file:// protocol for assets in windows and popups. Not webviews!
-        textAreasAreResizable: true
-      }
+        textAreasAreResizable: true,
+      },
     };
 
     electronOptions = _.deepExtend(electronOptions, opts.electronOptions);
@@ -317,7 +317,7 @@ class Windows {
       }
     });
 
-    store.dispatch({ type: '[MAIN]:WINDOWS:INIT_FINISH' });
+    store.dispatch({type: '[MAIN]:WINDOWS:INIT_FINISH'});
   }
 
   createGenericWindow() {
@@ -328,19 +328,19 @@ class Windows {
   create(type, opts, callback) {
     store.dispatch({
       type: '[MAIN]:WINDOW:CREATE_START',
-      payload: { type }
+      payload: {type},
     });
 
     const options = _.deepExtend(
       this.getDefaultOptionsForType(type),
-      opts || {}
+      opts || {},
     );
 
     const existing = this.getByType(type);
 
     if (existing && existing.ownerId === options.ownerId) {
       log.debug(
-        `Window ${type} with owner ${options.ownerId} already existing.`
+        `Window ${type} with owner ${options.ownerId} already existing.`,
       );
 
       return existing;
@@ -350,7 +350,7 @@ class Windows {
 
     log.info(
       `Create ${category} window: ${type}, owner: ${options.ownerId ||
-        'notset'}`
+      'notset'}`,
     );
 
     const wnd = (this._windows[type] = new Window(this, type, options));
@@ -362,7 +362,7 @@ class Windows {
 
     store.dispatch({
       type: '[MAIN]:WINDOW:CREATE_FINISH',
-      payload: { type }
+      payload: {type},
     });
 
     return wnd;
@@ -376,13 +376,13 @@ class Windows {
         preload: `${__dirname}/preloader/mistUI.js`,
         'overlay-fullscreen-video': true,
         'overlay-scrollbars': true,
-        experimentalFeatures: true
+        experimentalFeatures: true,
       },
       wallet: {
         preload: `${__dirname}/preloader/walletMain.js`,
         'overlay-fullscreen-video': true,
-        'overlay-scrollbars': true
-      }
+        'overlay-scrollbars': true,
+      },
     };
 
     switch (type) {
@@ -394,8 +394,8 @@ class Windows {
             height: Math.max(global.defaultWindow.height, 440),
             x: global.defaultWindow.x,
             y: global.defaultWindow.y,
-            webPreferences: mainWebPreferences[global.mode]
-          }
+            webPreferences: mainWebPreferences[global.mode],
+          },
         };
       case 'splash':
         return {
@@ -410,9 +410,9 @@ class Windows {
             useContentSize: true,
             frame: false,
             webPreferences: {
-              preload: `${__dirname}/preloader/splashScreen.js`
-            }
-          }
+              preload: `${__dirname}/preloader/splashScreen.js`,
+            },
+          },
         };
       case 'loading':
         return {
@@ -430,9 +430,9 @@ class Windows {
             titleBarStyle: '', // hidden-inset: more space
             skipTaskbar: true,
             webPreferences: {
-              preload: `${__dirname}/preloader/popupWindowsNoWeb3.js`
-            }
-          }
+              preload: `${__dirname}/preloader/popupWindowsNoWebu.js`,
+            },
+          },
         };
       case 'about':
         return {
@@ -440,8 +440,8 @@ class Windows {
           electronOptions: {
             width: 420,
             height: 230,
-            alwaysOnTop: true
-          }
+            alwaysOnTop: true,
+          },
         };
       case 'remix':
         return {
@@ -452,24 +452,24 @@ class Windows {
             center: true,
             frame: true,
             resizable: true,
-            titleBarStyle: 'default'
-          }
+            titleBarStyle: 'default',
+          },
         };
       case 'importAccount':
         return {
           electronOptions: {
             width: 600,
             height: 370,
-            alwaysOnTop: true
-          }
+            alwaysOnTop: true,
+          },
         };
       case 'requestAccount':
         return {
           electronOptions: {
             width: 420,
             height: 230,
-            alwaysOnTop: true
-          }
+            alwaysOnTop: true,
+          },
         };
       case 'connectAccount':
         return {
@@ -478,8 +478,8 @@ class Windows {
             height: 520,
             maximizable: false,
             minimizable: false,
-            alwaysOnTop: true
-          }
+            alwaysOnTop: true,
+          },
         };
       case 'sendTransactionConfirmation':
         return {
@@ -488,30 +488,30 @@ class Windows {
             height: 550,
             alwaysOnTop: true,
             enableLargerThanScreen: false,
-            resizable: true
-          }
+            resizable: true,
+          },
         };
       case 'updateAvailable':
         return {
-          useWeb3: false,
+          useWebu: false,
           electronOptions: {
             width: 580,
             height: 250,
             alwaysOnTop: true,
             resizable: false,
-            maximizable: false
-          }
+            maximizable: false,
+          },
         };
       case 'clientUpdateAvailable':
         return {
-          useWeb3: false,
+          useWebu: false,
           electronOptions: {
             width: 600,
             height: 340,
             alwaysOnTop: false,
             resizable: false,
-            maximizable: false
-          }
+            maximizable: false,
+          },
         };
       case 'generic':
         return {
@@ -528,8 +528,8 @@ class Windows {
             webaudio: true,
             webgl: false,
             webSecurity: false, // necessary to make routing work on file:// protocol for assets in windows and popups. Not webviews!
-            textAreasAreResizable: true
-          }
+            textAreasAreResizable: true,
+          },
         };
     }
   }
@@ -539,7 +539,7 @@ class Windows {
       url: `${global.interfacePopupsUrl}#${type}`,
       show: true,
       ownerId: null,
-      useWeb3: true,
+      useWebu: true,
       electronOptions: {
         title: '',
         width: 400,
@@ -550,15 +550,15 @@ class Windows {
         titleBarStyle: 'hidden', // hidden-inset: more space
         autoHideMenuBar: true, // TODO: test on windows
         webPreferences: {
-          textAreasAreResizable: false
-        }
-      }
+          textAreasAreResizable: false,
+        },
+      },
     };
 
     let opts = _.deepExtend(
       defaultPopupOpts,
       this.getDefaultOptionsForType(type),
-      options || {}
+      options || {},
     );
 
     // always show on top of main window
@@ -573,10 +573,10 @@ class Windows {
     // mark it as a pop-up window
     opts.isPopup = true;
 
-    if (opts.useWeb3) {
+    if (opts.useWebu) {
       opts.electronOptions.webPreferences.preload = `${__dirname}/preloader/popupWindows.js`;
     } else {
-      opts.electronOptions.webPreferences.preload = `${__dirname}/preloader/popupWindowsNoWeb3.js`;
+      opts.electronOptions.webPreferences.preload = `${__dirname}/preloader/popupWindowsNoWebu.js`;
     }
 
     // If generic window is available, recycle it (unless on blacklist)
@@ -584,7 +584,7 @@ class Windows {
     const genericWindowBlacklist = [
       'remix',
       'updateAvailable',
-      'connectAccount'
+      'connectAccount',
     ];
     if (
       !genericWindowBlacklist.includes(type) &&

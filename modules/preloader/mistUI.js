@@ -1,24 +1,24 @@
 /**
-@module preloader MistUI
-*/
+ @module preloader MistUI
+ */
 
 // Initialise the Redux store
 window.store = require('./rendererStore');
 
 require('./include/common')('mist');
-require('./include/web3CurrentProvider.js');
-const { ipcRenderer, remote, webFrame } = require('electron'); // eslint-disable-line import/newline-after-import
-const { Menu, MenuItem } = remote;
+require('./include/webuCurrentProvider.js');
+const {ipcRenderer, remote, webFrame} = require('electron'); // eslint-disable-line import/newline-after-import
+const {Menu, MenuItem} = remote;
 const dbSync = require('../dbSync.js');
 const i18n = require('../i18n.js');
 const mist = require('./include/mistAPI.js');
-const web3Admin = require('../web3Admin.js');
+const webuAdmin = require('../webuAdmin.js');
 
 require('./include/setBasePath')('interface');
 
 // add admin later
 setTimeout(() => {
-  web3Admin.extend(window.web3);
+  webuAdmin.extend(window.webu);
 }, 1000);
 
 window.mist = mist();
@@ -31,9 +31,9 @@ window.ipc = ipcRenderer;
 delete window.module;
 delete window.require;
 
-// prevent overwriting the Dapps Web3
-// delete global.Web3;
-// delete window.Web3;
+// prevent overwriting the Dapps Webu
+// delete global.Webu;
+// delete window.Webu;
 
 // set the langauge for the electron interface
 // ipcRenderer.send('setLanguage', navigator.language.substr(0,2));
@@ -42,13 +42,13 @@ delete window.require;
 ipcRenderer.on('uiAction_windowMessage', (e, type, id, error, value) => {
   if (type === 'requestAccount' || (type === 'connectAccount' && !error)) {
     Tabs.update(
-      { webviewId: id },
-      { $addToSet: { 'permissions.accounts': value } }
+      {webviewId: id},
+      {$addToSet: {'permissions.accounts': value}},
     );
   }
 
   // forward to the webview (TODO: remove and manage in the ipcCommunicator?)
-  const tab = Tabs.findOne({ webviewId: id });
+  const tab = Tabs.findOne({webviewId: id});
   if (tab) {
     webview = $(`webview[data-id=${tab._id}]`)[0];
     if (webview) {
@@ -77,7 +77,7 @@ ipcRenderer.on('uiAction_toggleWebviewDevTool', (e, id) => {
 });
 
 // randomize accounts and drop half
-// also certainly remove the web3.ethbase one
+// also certainly remove the webu.hucbase one
 const randomizeAccounts = (acc, coinbase) => {
   let accounts = _.shuffle(acc);
   accounts = _.rest(accounts, (accounts.length / 2).toFixed(0));
@@ -88,10 +88,10 @@ const randomizeAccounts = (acc, coinbase) => {
 // Run tests
 ipcRenderer.on('uiAction_runTests', (e, type) => {
   if (type === 'webview') {
-    web3.eth.getAccounts((error, accounts) => {
+    webu.huc.getAccounts((error, accounts) => {
       if (error) return;
 
-      web3.eth.getCoinbase((coinbaseError, coinbase) => {
+      webu.huc.getCoinbase((coinbaseError, coinbase) => {
         if (coinbaseError) return;
 
         Tabs.upsert('tests', {
@@ -99,8 +99,8 @@ ipcRenderer.on('uiAction_runTests', (e, type) => {
           name: 'Tests',
           url: '', // is hardcoded in webview.html to prevent hijacking
           permissions: {
-            accounts: randomizeAccounts(accounts, coinbase)
-          }
+            accounts: randomizeAccounts(accounts, coinbase),
+          },
         });
 
         Tracker.afterFlush(() => {
@@ -110,14 +110,14 @@ ipcRenderer.on('uiAction_runTests', (e, type) => {
         // update the permissions, when accounts change
         Tracker.autorun(() => {
           const accountList = _.pluck(
-            EthAccounts.find({}, { fields: { address: 1 } }).fetch(),
-            'address'
+            HucAccounts.find({}, {fields: {address: 1}}).fetch(),
+            'address',
           );
 
           Tabs.update('tests', {
             $set: {
-              'permissions.accounts': randomizeAccounts(accountList, coinbase)
-            }
+              'permissions.accounts': randomizeAccounts(accountList, coinbase),
+            },
           });
         });
       });
@@ -127,7 +127,7 @@ ipcRenderer.on('uiAction_runTests', (e, type) => {
 
 // CONTEXT MENU
 
-const currentMousePosition = { x: 0, y: 0 };
+const currentMousePosition = {x: 0, y: 0};
 const menu = new Menu();
 // menu.append(new MenuItem({ type: 'separator' }));
 menu.append(
@@ -139,8 +139,8 @@ menu.append(
       if (webview) {
         webview.reloadIgnoringCache();
       }
-    }
-  })
+    },
+  }),
 );
 menu.append(
   new MenuItem({
@@ -150,8 +150,8 @@ menu.append(
       if (webview) {
         webview.openDevTools();
       }
-    }
-  })
+    },
+  }),
 );
 menu.append(
   new MenuItem({
@@ -161,8 +161,8 @@ menu.append(
       if (webview) {
         webview.inspectElement(currentMousePosition.x, currentMousePosition.y);
       }
-    }
-  })
+    },
+  }),
 );
 
 window.addEventListener(
@@ -177,7 +177,7 @@ window.addEventListener(
       menu.popup(remote.getCurrentWindow());
     }
   },
-  false
+  false,
 );
 
 document.addEventListener(
@@ -191,5 +191,5 @@ document.addEventListener(
       }
     }
   },
-  false
+  false,
 );

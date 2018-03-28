@@ -3,16 +3,16 @@ const _ = require('underscore');
 const genomatic = require('genomatic');
 const Q = require('bluebird');
 const fs = require('fs');
-const Web3 = require('web3');
+const Webu = require('webu');
 const shell = require('shelljs');
 const path = require('path');
-const gethPrivate = require('geth-private');
+const gethPrivate = require('ghuc-private');
 const Application = require('spectron').Application;
 const chai = require('chai');
 const http = require('http');
 const ecstatic = require('ecstatic');
 const express = require('express');
-const ClientBinaryManager = require('ethereum-client-binaries').Manager;
+const ClientBinaryManager = require('happyuc-client-binaries').Manager;
 const logger = require('../modules/utils/logger');
 
 chai.should();
@@ -144,8 +144,8 @@ exports.mocha = (_module, options) => {
         throw new Error(`Cannot find binary: ${appPath}`);
       }
 
-      this.web3 = new Web3(
-        new Web3.providers.HttpProvider('http://localhost:58545')
+      this.web3 = new Webu(
+        new Webu.providers.HttpProvider('http://localhost:58545')
       );
       this.app = new Application({
         requireName: 'electronRequire',
@@ -348,10 +348,10 @@ const Utils = {
     fs.writeFileSync(path.join(__dirname, 'mist.png'), pageImage);
   },
   *getRealAccountBalances() {
-    let accounts = this.web3.eth.accounts;
+    let accounts = this.web3.huc.accounts;
 
     let balances = accounts.map(
-      acc => `${this.web3.fromWei(this.web3.eth.getBalance(acc), 'ether')}`
+      acc => `${this.web3.fromWei(this.web3.huc.getBalance(acc), 'ether')}`
     );
 
     accounts = accounts.map(a => a.toLowerCase());

@@ -1,4 +1,4 @@
-const { ipcRenderer } = require('electron');
+const {ipcRenderer} = require('electron');
 
 const extractLineNumberFromStack = function(stack) {
   // / <summary>
@@ -37,7 +37,7 @@ module.exports = function(windowId) {
           this.lineNumber
             ? `${this.fileName}:${this.lineNumber}:1`
             : extractLineNumberFromStack(new Error().stack)
-        }`;
+          }`;
 
         origMethod.apply(console, args.concat([suffix]));
 
@@ -46,12 +46,12 @@ module.exports = function(windowId) {
             'console_log',
             windowId,
             method === 'log' ? 'info' : method,
-            JSON.stringify(args)
+            JSON.stringify(args),
           );
         } catch (err) {
           console._warn(
             'Unable to stringify arguments to log to backend',
-            err.stack
+            err.stack,
           );
         }
       };

@@ -1,4 +1,4 @@
-const { app } = require('electron');
+const {app} = require('electron');
 const path = require('path');
 const fs = require('fs');
 const packageJson = require('../package.json');
@@ -8,7 +8,7 @@ const lodash = require('lodash');
 import {
   syncBuildConfig,
   syncFlags,
-  setSwarmEnableOnStart
+  setSwarmEnableOnStart,
 } from './core/settings/actions';
 import logger from './utils/logger';
 
@@ -26,8 +26,8 @@ class Settings {
   }
 
   init() {
-    const logLevel = { logLevel: argv.loglevel };
-    const logFolder = { logFolder: path.join(this.userDataPath, 'logs') };
+    const logLevel = {logLevel: argv.loglevel};
+    const logFolder = {logFolder: path.join(this.userDataPath, 'logs')};
     const loggerOptions = Object.assign(argv, logLevel, logFolder);
     logger.setup(loggerOptions);
 
@@ -42,19 +42,19 @@ class Settings {
     // Some Linux installations require this setting:
     if (argv.ignoreGpuBlacklist) {
       app.commandLine.appendSwitch('ignore-gpu-blacklist', 'true');
-      store.dispatch({ type: '[MAIN]:IGNORE_GPU_BLACKLIST:SET' });
+      store.dispatch({type: '[MAIN]:IGNORE_GPU_BLACKLIST:SET'});
     }
 
     if (this.inAutoTestMode) {
       settingsLog.info('AUTOMATED TESTING');
-      store.dispatch({ type: '[MAIN]:TEST_MODE:SET' });
+      store.dispatch({type: '[MAIN]:TEST_MODE:SET'});
     }
 
     settingsLog.info(`Running in production mode: ${this.inProductionMode}`);
 
     if (this.rpcMode === 'http') {
       settingsLog.warn(
-        'Connecting to a node via HTTP instead of ipcMain. This is less secure!!!!'.toUpperCase()
+        'Connecting to a node via HTTP instead of ipcMain. This is less secure!!!!'.toUpperCase(),
       );
     }
 
@@ -93,7 +93,7 @@ class Settings {
   }
 
   get appName() {
-    return this.uiMode === 'mist' ? 'Mist' : 'Ethereum Wallet';
+    return this.uiMode === 'mist' ? 'Mist' : 'Happyuc Wallet';
   }
 
   get appLicense() {
@@ -116,19 +116,19 @@ class Settings {
     return argv.swarmurl;
   }
 
-  get gethPath() {
-    return argv.gethpath;
+  get ghucPath() {
+    return argv.ghucpath;
   }
 
-  get ethPath() {
-    return argv.ethpath;
+  get hucPath() {
+    return argv.hucpath;
   }
 
   get rpcMode() {
     if (argv.rpc && argv.rpc.indexOf('http') === 0) return 'http';
     if (argv.rpc && argv.rpc.indexOf('ws:') === 0) {
       settingsLog.warn(
-        'Websockets are not yet supported by Mist, using default IPC connection'
+        'Websockets are not yet supported by Mist, using default IPC connection',
       );
       argv.rpc = null;
       return 'ipc';
@@ -138,12 +138,12 @@ class Settings {
   get rpcConnectConfig() {
     if (this.rpcMode === 'ipc') {
       return {
-        path: this.rpcIpcPath
+        path: this.rpcIpcPath,
       };
     }
 
     return {
-      hostPort: this.rpcHttpPath
+      hostPort: this.rpcHttpPath,
     };
   }
 
@@ -161,15 +161,15 @@ class Settings {
     ipcPath = this.userHomePath;
 
     if (process.platform === 'darwin') {
-      ipcPath += '/Library/Ethereum/geth.ipc';
+      ipcPath += '/Library/Happyuc/ghuc.ipc';
     } else if (
       process.platform === 'freebsd' ||
       process.platform === 'linux' ||
       process.platform === 'sunos'
     ) {
-      ipcPath += '/.happyuc/geth.ipc';
+      ipcPath += '/.happyuc/ghuc.ipc';
     } else if (process.platform === 'win32') {
-      ipcPath = '\\\\.\\pipe\\geth.ipc';
+      ipcPath = '\\\\.\\pipe\\ghuc.ipc';
     }
 
     settingsLog.debug(`IPC path: ${ipcPath}`);
@@ -232,11 +232,11 @@ class Settings {
   initConfig() {
     global.config.insert({
       ui: {
-        i18n: i18n.getBestMatchedLangCode(app.getLocale())
+        i18n: i18n.getBestMatchedLangCode(app.getLocale()),
       },
       swarm: {
-        enableOnStart: argv.swarm
-      }
+        enableOnStart: argv.swarm,
+      },
     });
   }
 
@@ -266,7 +266,7 @@ class Settings {
     }
 
     settingsLog.trace(
-      `Settings: loadConfig('${key}') = '${lodash.get(obj, key)}'`
+      `Settings: loadConfig('${key}') = '${lodash.get(obj, key)}'`,
     );
 
     return lodash.get(obj, key);
@@ -286,7 +286,7 @@ class Settings {
 
     // try to read it
     try {
-      const data = fs.readFileSync(fullPath, { encoding: 'utf8' });
+      const data = fs.readFileSync(fullPath, {encoding: 'utf8'});
       settingsLog.debug(`Reading "${data}" from ${fullPath}`);
       return data;
     } catch (err) {
@@ -303,7 +303,7 @@ class Settings {
 
     try {
       settingsLog.debug(`Saving "${data}" to ${fullPath}`);
-      fs.writeFileSync(fullPath, data, { encoding: 'utf8' });
+      fs.writeFileSync(fullPath, data, {encoding: 'utf8'});
     } catch (err) {
       settingsLog.warn(`Unable to write to ${fullPath}`, err);
     }
@@ -323,7 +323,7 @@ Command line argument parsing
 // Load config
 const defaultConfig = {
   mode: 'mist',
-  production: false
+  production: false,
 };
 
 try {
@@ -332,9 +332,9 @@ try {
   settingsLog.error(error);
 }
 
-const argv = require('yargs')
-  .usage('Usage: $0 [Mist options] [Node options]')
-  .option({
+const argv = require('yargs').
+  usage('Usage: $0 [Mist options] [Node options]').
+  option({
     mode: {
       alias: 'm',
       demand: false,
@@ -343,16 +343,16 @@ const argv = require('yargs')
       requiresArg: true,
       nargs: 1,
       type: 'string',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
     node: {
       demand: false,
       default: null,
-      describe: 'Node to use: geth, eth',
+      describe: 'Node to use: ghuc, huc',
       requiresArg: true,
       nargs: 1,
       type: 'string',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
     network: {
       demand: false,
@@ -361,7 +361,7 @@ const argv = require('yargs')
       requiresArg: true,
       nargs: 1,
       type: 'string',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
     rpc: {
       demand: false,
@@ -370,14 +370,14 @@ const argv = require('yargs')
       requiresArg: true,
       nargs: 1,
       type: 'string',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
     swarm: {
       describe: 'Enable Swarm on start.',
       requiresArg: false,
       nargs: 0,
       type: 'boolean',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
     swarmurl: {
       demand: false,
@@ -387,23 +387,23 @@ const argv = require('yargs')
       requiresArg: true,
       nargs: 1,
       type: 'string',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
-    gethpath: {
+    ghucpath: {
       demand: false,
-      describe: 'Path to Geth executable to use instead of default.',
+      describe: 'Path to Ghuc executable to use instead of default.',
       requiresArg: true,
       nargs: 1,
       type: 'string',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
-    ethpath: {
+    hucpath: {
       demand: false,
       describe: 'Path to Eth executable to use instead of default.',
       requiresArg: true,
       nargs: 1,
       type: 'string',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
     'ignore-gpu-blacklist': {
       demand: false,
@@ -411,7 +411,7 @@ const argv = require('yargs')
       requiresArg: false,
       nargs: 0,
       type: 'boolean',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
     'reset-tabs': {
       demand: false,
@@ -419,7 +419,7 @@ const argv = require('yargs')
       requiresArg: false,
       nargs: 0,
       type: 'boolean',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
     loglevel: {
       demand: false,
@@ -429,15 +429,15 @@ const argv = require('yargs')
       requiresArg: true,
       nargs: 1,
       type: 'string',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
     syncmode: {
       demand: false,
       requiresArg: true,
-      describe: 'Geth synchronization mode: [fast|light|full]',
+      describe: 'Ghuc synchronization mode: [fast|light|full]',
       nargs: 1,
       type: 'string',
-      group: 'Mist options:'
+      group: 'Mist options:',
     },
     version: {
       alias: 'v',
@@ -446,7 +446,7 @@ const argv = require('yargs')
       nargs: 0,
       describe: 'Display Mist version.',
       group: 'Mist options:',
-      type: 'boolean'
+      type: 'boolean',
     },
     skiptimesynccheck: {
       demand: false,
@@ -455,17 +455,17 @@ const argv = require('yargs')
       describe:
         'Disable checks for the presence of automatic time sync on your OS.',
       group: 'Mist options:',
-      type: 'boolean'
+      type: 'boolean',
     },
     '': {
       describe:
-        'To pass options to the underlying node (e.g. Geth) use the --node- prefix, e.g. --node-datadir',
-      group: 'Node options:'
-    }
-  })
-  .help('h')
-  .alias('h', 'help')
-  .parse(process.argv.slice(1));
+        'To pass options to the underlying node (e.g. Ghuc) use the --node- prefix, e.g. --node-datadir',
+      group: 'Node options:',
+    },
+  }).
+  help('h').
+  alias('h', 'help').
+  parse(process.argv.slice(1));
 
 argv.nodeOptions = [];
 

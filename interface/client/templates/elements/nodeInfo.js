@@ -1,34 +1,34 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 /**
-Update the peercount
+ Update the peercount
 
-@method getPeerCount
-*/
+ @method getPeerCount
+ */
 var getPeerCount = function(template) {
-  web3.net.getPeerCount(function(e, res) {
+  webu.net.getPeerCount(function(e, res) {
     if (!e) TemplateVar.set(template, 'peerCount', res);
   });
 };
 
 /**
-Update the mining hashrate
+ Update the mining hashrate
 
-@method getMining
-*/
+ @method getMining
+ */
 var getMining = function(template) {
-  web3.eth.getMining(function(e, res) {
+  webu.huc.getMining(function(e, res) {
     if (!e && res) {
-      web3.eth.getHashrate(function(e, res) {
+      webu.huc.getHashrate(function(e, res) {
         if (!e) {
           TemplateVar.set(
             template,
             'mining',
-            numeral(res / 1000).format('0,0.0')
+            numeral(res / 1000).format('0,0.0'),
           );
         }
       });
@@ -39,17 +39,17 @@ var getMining = function(template) {
 };
 
 /**
-The main template
+ The main template
 
-@class [template] elements_nodeInfo
-@constructor
-*/
+ @class [template] elements_nodeInfo
+ @constructor
+ */
 
 Template['elements_nodeInfo'].onCreated(function() {
   var template = this;
 
   // CHECK FOR NETWORK
-  web3.eth.getBlock(0, function(e, res) {
+  webu.huc.getBlock(0, function(e, res) {
     if (!e) {
       const network = Helpers.detectNetwork(res.hash);
       TemplateVar.set(template, 'network', network.type);
@@ -58,19 +58,19 @@ Template['elements_nodeInfo'].onCreated(function() {
   });
 
   // CHECK SYNCING
-  this.syncFilter = web3.eth.isSyncing(function(error, syncing) {
+  this.syncFilter = webu.huc.isSyncing(function(error, syncing) {
     if (!error) {
       if (syncing === true) {
         console.log('Node started syncing, stopping app operation');
-        web3.reset(true);
+        webu.reset(true);
       } else if (_.isObject(syncing)) {
         syncing.progress = Math.floor(
           (syncing.currentBlock - syncing.startingBlock) /
-            (syncing.highestBlock - syncing.startingBlock) *
-            100
+          (syncing.highestBlock - syncing.startingBlock) *
+          100,
         );
         syncing.blockDiff = numeral(
-          syncing.highestBlock - syncing.currentBlock
+          syncing.highestBlock - syncing.currentBlock,
         ).format('0,0');
 
         TemplateVar.set(template, 'syncing', syncing);
@@ -115,25 +115,25 @@ Template['elements_nodeInfo'].onDestroyed(function() {
 
 Template['elements_nodeInfo'].helpers({
   /**
-    Formats the last block number
+   Formats the last block number
 
-    @method (formattedBlockNumber)
-    @return {String}
-    */
+   @method (formattedBlockNumber)
+   @return {String}
+   */
   formattedBlockNumber: function() {
-    return numeral(EthBlocks.latest.number).format('0,0');
+    return numeral(HucBlocks.latest.number).format('0,0');
   },
   /**
-    Formats the time since the last block
+   Formats the time since the last block
 
-    @method (timeSinceBlock)
-    */
+   @method (timeSinceBlock)
+   */
   timeSinceBlock: function() {
-    var timeSince = moment(EthBlocks.latest.timestamp, 'X');
+    var timeSince = moment(HucBlocks.latest.timestamp, 'X');
     var now = moment();
     var diff = now.diff(timeSince, 'seconds');
 
-    if (!EthBlocks.latest.timestamp) {
+    if (!HucBlocks.latest.timestamp) {
       return '-';
     }
 
@@ -151,5 +151,5 @@ Template['elements_nodeInfo'].helpers({
 
     Helpers.rerun['1s'].tick();
     return diff + 's';
-  }
+  },
 });

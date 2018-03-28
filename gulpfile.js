@@ -28,8 +28,8 @@ const options = minimist(args, {
     wallet: false,
     walletSource: 'local',
     test: 'basic',
-    skipTasks: ''
-  }
+    skipTasks: '',
+  },
 });
 
 // echo version info and usage hints
@@ -45,7 +45,7 @@ const platformFlags = platforms.map(platform => {
 });
 if (_.isEmpty(_.intersection(args, platformFlags))) {
   console.log(
-    `To specify a platform (default: all) use:  ${platformFlags.join(' ')}`
+    `To specify a platform (default: all) use:  ${platformFlags.join(' ')}`,
   );
   _.each(platforms, platform => {
     options[platform] = true;
@@ -58,7 +58,7 @@ options.platforms = platforms;
 options.activePlatforms = _.keys(
   _.pick(_.pick(options, platforms), key => {
     return key;
-  })
+  }),
 );
 
 exports.options = options;
@@ -80,7 +80,7 @@ const tasks = [
   'copy-i18n',
   'build-dist',
   'release-dist',
-  'build-nsis'
+  'build-nsis',
 ].filter(task => !skipTasks.includes(task));
 
 gulp.task('default', gulp.series(tasks));
