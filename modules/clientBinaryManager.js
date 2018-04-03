@@ -15,7 +15,7 @@ const log = require('./utils/logger').create('ClientBinaryManager');
 // TODO add happyuc clientBinaries.json url
 const BINARY_URL = '';
 // TODO modify regex rule
-const ALLOWED_DOWNLOAD_URLS_REGEX = /^/;
+const ALLOWED_DOWNLOAD_URLS_REGEX = '';
 
 class Manager extends EventEmitter {
   constructor() {
@@ -66,7 +66,7 @@ class Manager extends EventEmitter {
         return res.body;
       }
     }).catch(err => {
-      log.warn('Error fetching client binaries config from repo', err);
+      // log.warn('Error fetching client binaries config from repo', err);
     }).then(latestConfig => {
       if (!latestConfig) return;
 
@@ -85,17 +85,14 @@ class Manager extends EventEmitter {
         );
       } catch (err) {
         log.warn(
-          `Error loading local config - assuming this is a first run: ${err}`,
-        );
+          `Error loading local config - assuming this is a first run: ${err}`);
 
         if (latestConfig) {
           localConfig = latestConfig;
-
           this._writeLocalConfig(localConfig);
         } else {
           throw new Error(
-            'Unable to load local or remote config, cannot proceed!',
-          );
+            'Unable to load local or remote config, cannot proceed!');
         }
       }
 
@@ -184,14 +181,15 @@ class Manager extends EventEmitter {
         log.info(
           'No config for the ClientBinaryManager could be loaded, using local clientBinaries.json.',
         );
+        require('../clientBinaries.json');
 
-        const localConfigPath = path.join(
-          Settings.userDataPath,
-          'clientBinaries.json',
-        );
-        localConfig = fs.existsSync(localConfigPath)
-          ? require(localConfigPath)
-          : require('../clientBinaries.json'); // eslint-disable-line no-param-reassign, global-require, import/no-dynamic-require, import/no-unresolved
+        // const localConfigPath = path.join(
+        //   Settings.userDataPath,
+        //   'clientBinaries.json',
+        // );
+        // localConfig = fs.existsSync(localConfigPath)
+        //   ? require(localConfigPath)
+        //   : require('../clientBinaries.json');
       }
 
       // scan for node
@@ -334,6 +332,6 @@ class Manager extends EventEmitter {
       version: '1.3.0',
     };
   }
-}
+};
 
 module.exports = new Manager();

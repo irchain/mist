@@ -94,7 +94,7 @@ Template['popupWindows_connectAccount'].helpers({
    @return {Number}
    */
   accountNumber: function() {
-    var accounts = _.pluck(HucAccounts.find().fetch(), 'address');
+    var accounts = _.pluck(jHucAccounts.find().fetch(), 'address');
 
     return _.intersection(accounts, TemplateVar.get('accounts')).length;
   },

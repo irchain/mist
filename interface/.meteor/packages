@@ -19,10 +19,10 @@ sacha:spin
 chuangbo:cookie
 agnito:simptip
 mrt:jquery-ui-sortable
-ethereum:web3
-ethereum:elements
-ethereum:accounts
-ethereum:blocks
+happyuc:webu
+happyuc:accounts
+happyuc:blocks
+happyuc:elements
 ethereum:dapp-styles
 meteor-base@1.0.4
 mobile-experience@1.0.4

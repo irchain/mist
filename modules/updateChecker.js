@@ -58,7 +58,7 @@ const check = (exports.check = () => {
 
     log.info('App is up-to-date.');
   }).catch(err => {
-    log.error('Error checking for update', err);
+    // log.error('Error checking for update', err);
   });
 });
 
