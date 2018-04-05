@@ -13,7 +13,7 @@ Please note that this repository is the Electron host for the Meteor based walle
 
 ## Help and troubleshooting
 
-In order to get help regarding Mist or Ethereum Wallet, please follow:
+In order to get help regarding Mist or Happyuc Wallet, please follow:
 
 1.  Please check the [Mist troubleshooting guide](https://github.com/happyuc-project/mist/wiki).
 1.  Go to the [Gitter Channel](https://gitter.im/happyuc-project/mist) to connect with the community for instant help.
@@ -174,7 +174,7 @@ To run a private network you will need to set the IPC path, network id and data
 folder:
 
 ```bash
-$ yarn dev:electron --rpc ~/Library/Ethereum/ghuc.happyuc-project--node-networkid 1234 --node-datadir ~/Library/Ethereum/privatenet
+$ yarn dev:electron --rpc ~/Library/Happyuc/ghuc.happyuc-project--node-networkid 1234 --node-datadir ~/Library/Happyuc/privatenet
 ```
 
 _NOTE: since `ipcpath` is also a Mist option you do not need to also include a
@@ -217,7 +217,7 @@ To generate the binaries for Mist run:
 $ gulp
 ```
 
-To generate the Ethereum Wallet (this will pack the one Ðapp from https://github.com/happyuc-project/meteor-dapp-wallet):
+To generate the Happyuc Wallet (this will pack the one Ðapp from https://github.com/happyuc-project/meteor-dapp-wallet):
 
 ```bash
 $ gulp --wallet

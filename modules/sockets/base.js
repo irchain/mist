@@ -1,8 +1,8 @@
 const _ = global._;
-const Q = require('bluebird');
-const EventEmitter = require('events').EventEmitter;
+const Q = require("bluebird");
+const EventEmitter = require("events").EventEmitter;
 
-const log = require('../utils/logger').create('Sockets');
+const log = require("../utils/logger").create("Sockets");
 
 const CONNECT_INTERVAL_MS = 1000;
 const CONNECT_TIMEOUT_MS = 3000;
@@ -40,46 +40,39 @@ class Socket extends EventEmitter {
   connect(connectConfig, options) {
     this._log.info(`Connect to ${JSON.stringify(connectConfig)}`);
 
-    options = _.extend(
-      {
-        timeout: CONNECT_TIMEOUT_MS,
-      },
-      options,
-    );
+    options = _.extend({
+      timeout: CONNECT_TIMEOUT_MS
+    }, options);
 
     return this._resetSocket().then(() => {
       let connectTimerId = null;
       let timeoutTimerId = null;
 
-      this._log.debug('Connecting...');
+      this._log.debug("Connecting...");
 
-      this._log.debug(
-        `Will wait ${options.timeout}ms for connection to happen.`,
-      );
+      this._log.debug(`Will wait ${options.timeout}ms for connection to happen.`);
 
       this._state = STATE.CONNECTING;
 
       return new Q((resolve, reject) => {
-        this._socket.once('connect', () => {
+        this._socket.once("connect", () => {
           if (STATE.CONNECTING === this._state) {
-            this._log.info('Connected!');
+            this._log.info("Connected!");
 
             this._state = STATE.CONNECTED;
 
             clearTimeout(connectTimerId);
             clearTimeout(timeoutTimerId);
 
-            this.emit('connect');
+            this.emit("connect");
 
             resolve();
           }
         });
 
-        this._socket.on('error', err => {
+        this._socket.on("error", err => {
           if (STATE.CONNECTING === this._state) {
-            this._log.warn(
-              `Connection failed, retrying after ${CONNECT_INTERVAL_MS}ms...`,
-            );
+            this._log.warn(`Connection failed, retrying after ${CONNECT_INTERVAL_MS}ms...`);
 
             connectTimerId = setTimeout(() => {
               this._socket.connect(connectConfig);
@@ -95,7 +88,7 @@ class Socket extends EventEmitter {
 
             clearTimeout(connectTimerId);
 
-            return reject(new Error('Unable to connect to socket: timeout'));
+            return reject(new Error("Unable to connect to socket: timeout"));
           }
         }, options.timeout);
 
@@ -124,7 +117,7 @@ class Socket extends EventEmitter {
   disconnect(options) {
     if (!this._disconnectPromise) {
       this._disconnectPromise = new Q((resolve, reject) => {
-        this._log.info('Disconnecting...');
+        this._log.info("Disconnecting...");
 
         this._state = STATE.DISCONNECTING;
 
@@ -132,19 +125,19 @@ class Socket extends EventEmitter {
         this._socket.removeAllListeners();
 
         const timer = setTimeout(() => {
-          log.warn('Disconnection timed out, closing socket anyway...');
+          log.warn("Disconnection timed out, closing socket anyway...");
 
           this._state = STATE.DISCONNECTION_TIMEOUT;
 
           resolve();
         }, 5000 /* wait 5 seconds for disconnection */);
 
-        this._socket.once('close', () => {
+        this._socket.once("close", () => {
           // if we manually killed it then all good
           if (STATE.DISCONNECTING === this._state) {
-            this._log.debug('Disconnected as expected');
+            this._log.debug("Disconnected as expected");
           } else {
-            this._log.warn('Unexpectedly disconnected');
+            this._log.warn("Unexpectedly disconnected");
           }
 
           this._state = STATE.DISCONNECTED;
@@ -178,10 +171,10 @@ class Socket extends EventEmitter {
    */
   write(data) {
     if (STATE.CONNECTED !== this._state) {
-      throw new Error('Socket not connected');
+      throw new Error("Socket not connected");
     }
 
-    this._log.trace('Write data', data);
+    this._log.trace("Write data", data);
 
     this._socket.write(data);
   }
@@ -195,19 +188,19 @@ class Socket extends EventEmitter {
    * To be implemented by subclasses.
    */
   _resetSocket() {
-    return Q.reject(new Error('Not yet implemented'));
+    return Q.reject(new Error("Not yet implemented"));
   }
 }
 
 exports.Socket = Socket;
 
 const STATE = (exports.STATE = Socket.STATE = {
-  CREATED: 0,
-  CONNECTING: 1,
-  CONNECTED: 2,
-  DISCONNECTING: 3,
-  DISCONNECTED: 4,
-  ERROR: -1,
+  CREATED              : 0,
+  CONNECTING           : 1,
+  CONNECTED            : 2,
+  DISCONNECTING        : 3,
+  DISCONNECTED         : 4,
+  ERROR                : -1,
   DISCONNECTION_TIMEOUT: -2,
-  CONNECTION_TIMEOUT: -3,
+  CONNECTION_TIMEOUT   : -3
 });

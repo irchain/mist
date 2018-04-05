@@ -259,7 +259,7 @@ ipc.on('mistAPI_requestAccount', e => {
   } else {
     // Mist
     // if coming from wallet, skip connect, go straight to create
-    if (e.sender.history[0] === 'https://wallet.happyuc.org/') {
+    if (e.sender.history[0] === 'https://localhost:3050/') {
       createAccountPopup(e);
     } else {
       Windows.createPopup('connectAccount', {ownerId: e.sender.id});
