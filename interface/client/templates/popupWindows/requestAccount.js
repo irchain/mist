@@ -1,15 +1,15 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 /**
-The request account popup window template
+ The request account popup window template
 
-@class [template] popupWindows_requestAccount
-@constructor
-*/
+ @class [template] popupWindows_requestAccount
+ @constructor
+ */
 
 Template['popupWindows_requestAccount'].onRendered(function() {
   this.$('input.password').focus();
@@ -19,7 +19,7 @@ Template['popupWindows_requestAccount'].onRendered(function() {
 Template['popupWindows_requestAccount'].helpers({
   passwordInputType: function() {
     return TemplateVar.get('showPassword') ? 'text' : 'password';
-  }
+  },
 });
 
 Template['popupWindows_requestAccount'].events({
@@ -47,20 +47,20 @@ Template['popupWindows_requestAccount'].events({
     if (pw !== pwRepeat) {
       GlobalNotification.warning({
         content: TAPi18n.__(
-          'mist.popupWindows.requestAccount.errors.passwordMismatch'
+          'mist.popupWindows.requestAccount.errors.passwordMismatch',
         ),
-        duration: 3
+        duration: 3,
       });
     } else if (pw && pw.length < 8) {
       GlobalNotification.warning({
         content: TAPi18n.__(
-          'mist.popupWindows.requestAccount.errors.passwordTooShort'
+          'mist.popupWindows.requestAccount.errors.passwordTooShort',
         ),
-        duration: 3
+        duration: 3,
       });
     } else if (pw && pw.length >= 8) {
       TemplateVar.set('creating', true);
-      web3.personal.newAccount(pwRepeat, function(e, res) {
+      webu.personal.newAccount(pwRepeat, function(e, res) {
         if (!e) {
           ipc.send('backendAction_windowMessageToOwner', null, res);
         } else {
@@ -80,5 +80,5 @@ Template['popupWindows_requestAccount'].events({
     template.find('input.password-repeat').value = '';
     template.find('input.password').value = '';
     pw = pwRepeat = null;
-  }
+  },
 });

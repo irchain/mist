@@ -1,14 +1,14 @@
 /**
-@module MistAPI Backend
-*/
+ @module MistAPI Backend
+ */
 
 var allowedBrowserBarStyles = ['transparent'];
 
 /**
-Filters a id the id to only contain a-z A-Z 0-9 _ -.
+ Filters a id the id to only contain a-z A-Z 0-9 _ -.
 
-@method filterId
-*/
+ @method filterId
+ */
 var filterId = function(str) {
   var newStr = '';
   var i;
@@ -23,10 +23,10 @@ var filterId = function(str) {
 var sound = document.createElement('audio');
 
 /**
-The backend side of the mist API.
+ The backend side of the mist API.
 
-@method mistAPIBackend
-*/
+ @method mistAPIBackend
+ */
 mistAPIBackend = function(event) {
   var template = this.template;
   var webview = this.webview;
@@ -36,7 +36,7 @@ mistAPIBackend = function(event) {
 
   if (event.channel === 'setWebviewId') {
     Tabs.update(template.data._id, {
-      $set: { webviewId: webview.getWebContents().id }
+      $set: {webviewId: webview.getWebContents().id},
     });
   }
 
@@ -45,7 +45,7 @@ mistAPIBackend = function(event) {
     var tests = Tabs.findOne('tests');
 
     if (tests) {
-      web3.eth.getCoinbase(function(e, coinbase) {
+      webu.huc.getCoinbase(function(e, coinbase) {
         webview.send('uiAction_sendTestData', tests.permissions, coinbase);
       });
     }
@@ -55,8 +55,8 @@ mistAPIBackend = function(event) {
   if (event.channel === 'favicon') {
     Tabs.update(template.data._id, {
       $set: {
-        icon: Blaze._escape(arg || '')
-      }
+        icon: Blaze._escape(arg || ''),
+      },
     });
   }
 
@@ -68,8 +68,8 @@ mistAPIBackend = function(event) {
       $set: {
         appBar: _.contains(allowedBrowserBarStyles, appBarClass)
           ? appBarClass
-          : null
-      }
+          : null,
+      },
     });
   }
   if (event.channel === 'mistAPI_sound') {
@@ -88,8 +88,8 @@ mistAPIBackend = function(event) {
   if (event.channel === 'mistAPI_setBadge') {
     Tabs.update(template.data._id, {
       $set: {
-        badge: arg
-      }
+        badge: arg,
+      },
     });
   }
 
@@ -103,14 +103,14 @@ mistAPIBackend = function(event) {
           eventArg.entry.id = filterId(eventArg.entry.id);
         }
 
-        query = { $set: {} };
+        query = {$set: {}};
 
         if (eventArg.entry.id) {
           query.$set['menu.' + eventArg.entry.id + '.id'] = eventArg.entry.id;
         }
 
-        query.$set['menu.' + eventArg.entry.id + '.selected'] = !!eventArg.entry
-          .selected;
+        query.$set['menu.' + eventArg.entry.id +
+        '.selected'] = !!eventArg.entry.selected;
 
         if (!_.isUndefined(eventArg.entry.position)) {
           query.$set['menu.' + eventArg.entry.id + '.position'] =
@@ -136,11 +136,11 @@ mistAPIBackend = function(event) {
             tab.menu[e].selected = e === eventArg.id;
           }
         }
-        Tabs.update(template.data._id, { $set: { menu: tab.menu } });
+        Tabs.update(template.data._id, {$set: {menu: tab.menu}});
       }
 
       if (eventArg.action === 'removeMenu') {
-        var removeQuery = { $unset: {} };
+        var removeQuery = {$unset: {}};
 
         removeQuery.$unset['menu.' + eventArg.id] = '';
 
@@ -148,7 +148,7 @@ mistAPIBackend = function(event) {
       }
 
       if (eventArg.action === 'clearMenu') {
-        Tabs.update(template.data._id, { $set: { menu: {} } });
+        Tabs.update(template.data._id, {$set: {menu: {}}});
       }
     });
   }

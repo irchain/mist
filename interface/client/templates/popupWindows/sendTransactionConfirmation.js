@@ -1,15 +1,15 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 var setWindowSize = function(template) {
   Tracker.afterFlush(function() {
     ipc.send(
       'backendAction_setWindowSize',
       580,
-      template.$('.popup-windows .inner-container').height() + 240
+      template.$('.popup-windows .inner-container').height() + 240,
     );
   });
 };
@@ -17,18 +17,18 @@ var setWindowSize = function(template) {
 var defaultEstimateGas = 50000000;
 
 /**
-The sendTransaction confirmation popup window template
+ The sendTransaction confirmation popup window template
 
-@class [template] popupWindows_sendTransactionConfirmation
-@constructor
-*/
+ @class [template] popupWindows_sendTransactionConfirmation
+ @constructor
+ */
 
 /**
-Takes a 4-byte function signature and does a best-effort conversion to a
-human readable text signature.
+ Takes a 4-byte function signature and does a best-effort conversion to a
+ human readable text signature.
 
-@method (lookupFunctionSignature)
-*/
+ @method (lookupFunctionSignature)
+ */
 var lookupFunctionSignature = function(data, remoteLookup) {
   return new Q(function(resolve, reject) {
     if (data && data.length > 8) {
@@ -38,31 +38,29 @@ var lookupFunctionSignature = function(data, remoteLookup) {
           : '0x' + data.substr(0, 8);
 
       if (remoteLookup) {
-        https
-          .get(
-            'https://www.4byte.directory/api/v1/signatures/?hex_signature=' +
-              bytesSignature,
-            function(response) {
-              var body = '';
+        https.get(
+          'https://www.4byte.directory/api/v1/signatures/?hex_signature=' +
+          bytesSignature,
+          function(response) {
+            var body = '';
 
-              response.on('data', function(chunk) {
-                body += chunk;
-              });
+            response.on('data', function(chunk) {
+              body += chunk;
+            });
 
-              response.on('end', function() {
-                var responseData = JSON.parse(body);
-                if (responseData.results.length) {
-                  resolve(responseData.results[0].text_signature);
-                } else {
-                  resolve(bytesSignature);
-                }
-              });
-            }
-          )
-          .on('error', function(error) {
-            console.warn('Error querying Function Signature Registry.', err);
-            reject(bytesSignature);
-          });
+            response.on('end', function() {
+              var responseData = JSON.parse(body);
+              if (responseData.results.length) {
+                resolve(responseData.results[0].text_signature);
+              } else {
+                resolve(bytesSignature);
+              }
+            });
+          },
+        ).on('error', function(error) {
+          console.warn('Error querying Function Signature Registry.', err);
+          reject(bytesSignature);
+        });
       } else if (_.first(window.SIGNATURES[bytesSignature])) {
         resolve(_.first(window.SIGNATURES[bytesSignature]));
       } else {
@@ -87,7 +85,7 @@ var signatureLookupCallback = function(textSignature) {
   TemplateVar.set(
     template,
     'executionFunction',
-    textSignature.replace(/\(.+$/g, '')
+    textSignature.replace(/\(.+$/g, ''),
   );
   TemplateVar.set(template, 'hasSignature', true);
 
@@ -136,7 +134,7 @@ Template['popupWindows_sendTransactionConfirmation'].onCreated(function() {
 
       // add gasPrice if not set
       if (!data.gasPrice) {
-        web3.eth.getGasPrice(function(e, res) {
+        webu.huc.getGasPrice(function(e, res) {
           if (!e) {
             data.gasPrice = '0x' + res.toString(16);
             Session.set('data', data);
@@ -146,7 +144,7 @@ Template['popupWindows_sendTransactionConfirmation'].onCreated(function() {
 
       // check if to is a contract
       if (data.to) {
-        web3.eth.getCode(data.to, function(e, res) {
+        webu.huc.getCode(data.to, function(e, res) {
           if (!e && res && res.length > 2) {
             TemplateVar.set(template, 'toIsContract', true);
             setWindowSize(template);
@@ -154,38 +152,36 @@ Template['popupWindows_sendTransactionConfirmation'].onCreated(function() {
         });
 
         if (data.data) {
-          localSignatureLookup(data.data)
-            .then(function(textSignature) {
-              // Clean version of function signature. Striping params
+          localSignatureLookup(data.data).then(function(textSignature) {
+            // Clean version of function signature. Striping params
+            TemplateVar.set(
+              template,
+              'executionFunction',
+              textSignature.replace(/\(.+$/g, ''),
+            );
+            TemplateVar.set(template, 'hasSignature', true);
+
+            var params = textSignature.match(/\((.+)\)/i);
+            if (params) {
               TemplateVar.set(
                 template,
-                'executionFunction',
-                textSignature.replace(/\(.+$/g, '')
+                'executionFunctionParamTypes',
+                params,
               );
-              TemplateVar.set(template, 'hasSignature', true);
-
-              var params = textSignature.match(/\((.+)\)/i);
-              if (params) {
-                TemplateVar.set(
-                  template,
-                  'executionFunctionParamTypes',
-                  params
-                );
-                ipc.send(
-                  'backendAction_decodeFunctionSignature',
-                  textSignature,
-                  data.data
-                );
-              }
-            })
-            .catch(function(bytesSignature) {
-              TemplateVar.set(template, 'executionFunction', bytesSignature);
-              TemplateVar.set(template, 'hasSignature', false);
-            });
+              ipc.send(
+                'backendAction_decodeFunctionSignature',
+                textSignature,
+                data.data,
+              );
+            }
+          }).catch(function(bytesSignature) {
+            TemplateVar.set(template, 'executionFunction', bytesSignature);
+            TemplateVar.set(template, 'hasSignature', false);
+          });
         }
       }
       if (data.from) {
-        web3.eth.getCode(data.from, function(e, res) {
+        webu.huc.getCode(data.from, function(e, res) {
           if (!e && res && res.length > 2) {
             TemplateVar.set(template, 'fromIsContract', true);
           }
@@ -195,7 +191,7 @@ Template['popupWindows_sendTransactionConfirmation'].onCreated(function() {
       // estimate gas usage
       var estimateData = _.clone(data);
       estimateData.gas = defaultEstimateGas;
-      web3.eth.estimateGas(estimateData, function(e, res) {
+      webu.huc.estimateGas(estimateData, function(e, res) {
         console.log('Estimated gas: ', res, e);
         if (!e && res) {
           // set the gas to the estimation, if not provided or lower
@@ -229,15 +225,15 @@ Template['popupWindows_sendTransactionConfirmation'].onRendered(function() {
 
 Template['popupWindows_sendTransactionConfirmation'].helpers({
   /**
-    Returns the total amount
+   Returns the total amount
 
-    @method (totalAmount)
-    */
+   @method (totalAmount)
+   */
   totalAmount: function() {
-    var amount = EthTools.formatBalance(
+    var amount = HucTools.formatBalance(
       this.value,
       '0,0.00[0000000000000000]',
-      'ether'
+      'hucer',
     );
     var dotPos = ~amount.indexOf('.')
       ? amount.indexOf('.') + 3
@@ -245,61 +241,60 @@ Template['popupWindows_sendTransactionConfirmation'].helpers({
 
     return amount
       ? amount.substr(0, dotPos) +
-          '<small style="font-size: 0.5em;">' +
-          amount.substr(dotPos) +
-          '</small>'
+      '<small style="font-size: 0.5em;">' +
+      amount.substr(dotPos) +
+      '</small>'
       : '0';
   },
   /**
-    Calculates the fee used for this transaction in ether
+   Calculates the fee used for this transaction in hucer
 
-    @method (estimatedFee)
-    */
+   @method (estimatedFee)
+   */
   estimatedFee: function() {
     var gas = TemplateVar.get('estimatedGas');
     if (gas && this.gasPrice) {
-      return EthTools.formatBalance(
+      return HucTools.formatBalance(
         new BigNumber(gas, 10).times(new BigNumber(this.gasPrice, 10)),
         '0,0.0[0000000] unit',
-        'ether'
+        'hucer',
       );
     }
   },
   /**
-    Calculates the provided gas amount in ether
+   Calculates the provided gas amount in hucer
 
-    @method (providedGas)
-    */
+   @method (providedGas)
+   */
   providedGas: function() {
     var gas = TemplateVar.get('providedGas');
     if (gas && this.gasPrice) {
-      return EthTools.formatBalance(
+      return HucTools.formatBalance(
         new BigNumber(gas, 10).times(new BigNumber(this.gasPrice, 10)),
         '0,0.0[0000000]',
-        'ether'
+        'hucer',
       );
     }
   },
   /**
-    Shortens the address to 0xffff...ffff
+   Shortens the address to 0xffff...ffff
 
-    @method (shortenAddress)
-    */
+   @method (shortenAddress)
+   */
   shortenAddress: function(address) {
     if (_.isString(address)) {
       return address.substr(0, 6) + '...' + address.substr(-4);
     }
   },
   /**
-    Formats the data so that all zeros are wrapped in span.zero
+   Formats the data so that all zeros are wrapped in span.zero
 
-    @method (formattedData)
-    */
+   @method (formattedData)
+   */
   formattedData: function() {
     return TemplateVar.get('toIsContract')
-      ? this.data
-          .replace(/([0]{2,})/g, '<span class="zero">$1</span>')
-          .replace(/(0x[a-f0-9]{8})/i, '<span class="function">$1</span>')
+      ? this.data.replace(/([0]{2,})/g, '<span class="zero">$1</span>').
+        replace(/(0x[a-f0-9]{8})/i, '<span class="function">$1</span>')
       : this.data.replace(/([0]{2,})/g, '<span class="zero">$1</span>');
   },
 
@@ -307,82 +302,79 @@ Template['popupWindows_sendTransactionConfirmation'].helpers({
     return TemplateVar.get('params');
   },
   /**
-    Formats parameters
+   Formats parameters
 
-    @method (showFormattedParams)
-    */
+   @method (showFormattedParams)
+   */
   showFormattedParams: function() {
     return TemplateVar.get('params') && TemplateVar.get('displayDecodedParams');
   },
   /**
-    Checks if transaction will be invalid
+   Checks if transaction will be invalid
 
-    @method (transactionInvalid)
-    */
+   @method (transactionInvalid)
+   */
   transactionInvalid: function() {
     return (
       TemplateVar.get('estimatedGas') === 'invalid' ||
       TemplateVar.get('estimatedGas') === 0 ||
       typeof TemplateVar.get('estimatedGas') === 'undefined'
     );
-  }
+  },
 });
 
 Template['popupWindows_sendTransactionConfirmation'].events({
   /**
-    Gets the new provided gas in ether amount and calculates the resulting providedGas
+   Gets the new provided gas in hucer amount and calculates the resulting providedGas
 
-    @event change .provided-gas, input .provided-gas
-    */
+   @event change .provided-gas, input .provided-gas
+   */
   'change .provided-gas, input .provided-gas': function(e, template) {
-    var gas = template
-      .$('.provided-gas')
-      .text()
-      .replace(/[, ]+/g, ''); // template.$('.provided-gas').text();
+    var gas = template.$('.provided-gas').text().replace(/[, ]+/g, ''); // template.$('.provided-gas').text();
 
     TemplateVar.set('providedGas', gas);
   },
   /**
-    Increase the estimated gas
+   Increase the estimated gas
 
-    @event click .not-enough-gas
-    */
+   @event click .not-enough-gas
+   */
   'click .not-enough-gas': function() {
     var gas = Number(TemplateVar.get('estimatedGas')) + 100000;
     TemplateVar.set('initialProvidedGas', gas);
     TemplateVar.set('providedGas', gas);
   },
   /**
-    Cancel the transaction confirmation and close the popup
+   Cancel the transaction confirmation and close the popup
 
-    @event click .cancel
-    */
+   @event click .cancel
+   */
   'click .cancel': function() {
     ipc.send(
       'backendAction_unlockedAccountAndSentTransaction',
-      'Transaction not confirmed'
+      'Transaction not confirmed',
     );
     ipc.send('backendAction_closePopupWindow');
   },
   /**
-    Confirm the transaction
+   Confirm the transaction
 
-    @event submit form
-    */
+   @event submit form
+   */
   'submit form': function(e, template) {
     e.preventDefault();
 
     var data = Session.get('data'),
       pw = template.find('input[type="password"]').value,
-      gas = web3.fromDecimal(TemplateVar.get('providedGas'));
+      gas = webu.fromDecimal(TemplateVar.get('providedGas'));
 
     // check if account is about to send to itself
     if (data.to && data.from === data.to.toLowerCase()) {
       GlobalNotification.warning({
         content: TAPi18n.__(
-          'mist.popupWindows.sendTransactionConfirmation.errors.sameAccount'
+          'mist.popupWindows.sendTransactionConfirmation.errors.sameAccount',
         ),
-        duration: 5
+        duration: 5,
       });
 
       return false;
@@ -399,7 +391,7 @@ Template['popupWindows_sendTransactionConfirmation'].events({
     TemplateVar.set('unlocking', true);
 
     // unlock and send transaction!
-    web3.personal.sendTransaction(data, pw || '', function(e, res) {
+    webu.personal.sendTransaction(data, pw || '', function(e, res) {
       pw = null;
       TemplateVar.set(template, 'unlocking', false);
 
@@ -413,9 +405,9 @@ Template['popupWindows_sendTransactionConfirmation'].events({
         if (e.message.indexOf('Unable to connect to socket: timeout') !== -1) {
           GlobalNotification.warning({
             content: TAPi18n.__(
-              'mist.popupWindows.sendTransactionConfirmation.errors.connectionTimeout'
+              'mist.popupWindows.sendTransactionConfirmation.errors.connectionTimeout',
             ),
-            duration: 5
+            duration: 5,
           });
         } else if (
           e.message.indexOf('could not decrypt key with given passphrase') !==
@@ -423,30 +415,30 @@ Template['popupWindows_sendTransactionConfirmation'].events({
         ) {
           GlobalNotification.warning({
             content: TAPi18n.__(
-              'mist.popupWindows.sendTransactionConfirmation.errors.wrongPassword'
+              'mist.popupWindows.sendTransactionConfirmation.errors.wrongPassword',
             ),
-            duration: 3
+            duration: 3,
           });
         } else if (e.message.indexOf('multiple keys match address') !== -1) {
           GlobalNotification.warning({
             content: TAPi18n.__(
-              'mist.popupWindows.sendTransactionConfirmation.errors.multipleKeysMatchAddress'
+              'mist.popupWindows.sendTransactionConfirmation.errors.multipleKeysMatchAddress',
             ),
-            duration: 10
+            duration: 10,
           });
         } else if (
           e.message.indexOf('Insufficient funds for gas * price + value') !== -1
         ) {
           GlobalNotification.warning({
             content: TAPi18n.__(
-              'mist.popupWindows.sendTransactionConfirmation.errors.insufficientFundsForGas'
+              'mist.popupWindows.sendTransactionConfirmation.errors.insufficientFundsForGas',
             ),
-            duration: 5
+            duration: 5,
           });
         } else {
           GlobalNotification.warning({
             content: e.message,
-            duration: 5
+            duration: 5,
           });
         }
       }
@@ -463,33 +455,31 @@ Template['popupWindows_sendTransactionConfirmation'].events({
     var data = Session.get('data');
     TemplateVar.set('lookingUpFunctionSignature', true);
 
-    remoteSignatureLookup(data.data)
-      .then(function(textSignature) {
-        TemplateVar.set(template, 'lookingUpFunctionSignature', false);
+    remoteSignatureLookup(data.data).then(function(textSignature) {
+      TemplateVar.set(template, 'lookingUpFunctionSignature', false);
 
-        // Clean version of function signature. Striping params
-        TemplateVar.set(
-          template,
-          'executionFunction',
-          textSignature.replace(/\(.+$/g, '')
+      // Clean version of function signature. Striping params
+      TemplateVar.set(
+        template,
+        'executionFunction',
+        textSignature.replace(/\(.+$/g, ''),
+      );
+      TemplateVar.set(template, 'hasSignature', true);
+
+      var params = textSignature.match(/\((.+)\)/i);
+      if (params) {
+        console.log('params:', params);
+        TemplateVar.set(template, 'executionFunctionParamTypes', params);
+        ipc.send(
+          'backendAction_decodeFunctionSignature',
+          textSignature,
+          data.data,
         );
-        TemplateVar.set(template, 'hasSignature', true);
-
-        var params = textSignature.match(/\((.+)\)/i);
-        if (params) {
-          console.log('params:', params);
-          TemplateVar.set(template, 'executionFunctionParamTypes', params);
-          ipc.send(
-            'backendAction_decodeFunctionSignature',
-            textSignature,
-            data.data
-          );
-        }
-      })
-      .catch(function(bytesSignature) {
-        TemplateVar.set(template, 'lookingUpFunctionSignature', false);
-        TemplateVar.set(template, 'executionFunction', bytesSignature);
-        TemplateVar.set(template, 'hasSignature', false);
-      });
-  }
+      }
+    }).catch(function(bytesSignature) {
+      TemplateVar.set(template, 'lookingUpFunctionSignature', false);
+      TemplateVar.set(template, 'executionFunction', bytesSignature);
+      TemplateVar.set(template, 'hasSignature', false);
+    });
+  },
 });

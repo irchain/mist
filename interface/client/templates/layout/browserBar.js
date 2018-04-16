@@ -1,15 +1,15 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 /**
-The browserBar template
+ The browserBar template
 
-@class [template] layout_browserBar
-@constructor
-*/
+ @class [template] layout_browserBar
+ @constructor
+ */
 
 Template['layout_browserBar'].onRendered(function() {
   var template = this;
@@ -17,10 +17,10 @@ Template['layout_browserBar'].onRendered(function() {
 
 Template['layout_browserBar'].helpers({
   /**
-    Break the URL in protocol, domain and folders
+   Break the URL in protocol, domain and folders
 
-    @method (breadcrumb)
-    */
+   @method (breadcrumb)
+   */
   breadcrumb: function() {
     if (!this || !this.url) {
       return;
@@ -33,41 +33,41 @@ Template['layout_browserBar'].helpers({
   },
 
   /**
-    Returns the current dapp
+   Returns the current dapp
 
-    @method (dapp)
-    */
+   @method (dapp)
+   */
   dapp: function() {
     return Tabs.findOne(LocalStore.get('selectedTab'));
   },
   /**
-    Returns dapps current accounts
+   Returns dapps current accounts
 
-    @method (dappAccounts)
-    */
+   @method (dappAccounts)
+   */
   dappAccounts: function() {
     if (this.permissions) {
-      return EthAccounts.find({
-        address: { $in: this.permissions.accounts || [] }
+      return HucAccounts.find({
+        address: {$in: this.permissions.accounts || []},
       });
     }
   },
   /**
-    Show the add button, when on a dapp and in doogle
+   Show the add button, when on a dapp and in doogle
 
-    @method (isBrowser)
-    */
+   @method (isBrowser)
+   */
   isBrowser: function() {
     return LocalStore.get('selectedTab') === 'browser';
   },
   /**
-    Current selected view
+   Current selected view
 
-    @method (currentWebView)
-    */
+   @method (currentWebView)
+   */
   currentWebView: function() {
     return '.webview webview[data-id="' + LocalStore.get('selectedTab') + '"]';
-  }
+  },
 });
 
 Template['layout_browserBar'].events({
@@ -109,10 +109,10 @@ Template['layout_browserBar'].events({
     LocalStore.set('selectedTab', 'browser');
   },
   /**
-    Show connect account popup
+   Show connect account popup
 
-    @event click .app-bar > button.accounts'
-    */
+   @event click .app-bar > button.accounts'
+   */
   'click .app-bar > button.accounts': function(e, template) {
     LocalStore.set('chosenTab', LocalStore.get('selectedTab')); // needed by connectAccount
     mist.requestAccount(function(e, addresses) {
@@ -122,8 +122,8 @@ Template['layout_browserBar'].events({
       dbSync.syncDataFromBackend(Tabs).then(function() {
         Tabs.update(tabId, {
           $set: {
-            'permissions.accounts': addresses
-          }
+            'permissions.accounts': addresses,
+          },
         });
       });
     });
@@ -165,9 +165,9 @@ Template['layout_browserBar'].events({
     Tabs.update(tabId, {
       $set: {
         url: url,
-        redirect: url
-      }
+        redirect: url,
+      },
     });
     LocalStore.set('selectedTab', tabId);
-  }
+  },
 });

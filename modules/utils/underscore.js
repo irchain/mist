@@ -33,7 +33,7 @@ _.mixin({
   deepExtend: underscoreDeepExtend(_),
   uuid() {
     return uuid.v4();
-  }
+  },
 });
 
 module.exports = _;

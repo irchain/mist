@@ -22,8 +22,8 @@ showError = function(tabId, e) {
     if (url) {
       Tabs.update(tabId, {
         $set: {
-          redirect: url
-        }
+          redirect: url,
+        },
       });
     }
   }
@@ -55,8 +55,8 @@ webviewChangeUrl = function(tabId, e) {
   // update the URL
   Tabs.update(tabId, {
     $set: {
-      url: url
-    }
+      url: url,
+    },
   });
 };
 
@@ -83,27 +83,27 @@ webviewLoadStop = function(tabId, e) {
       LastVisitedPages.update(find._id, {
         $set: {
           timestamp: moment().unix(),
-          url: url
-        }
+          url: url,
+        },
       });
     } else {
       LastVisitedPages.insert({
         name: title,
         url: url,
         // icon: '',
-        timestamp: moment().unix()
+        timestamp: moment().unix(),
       });
     }
 
     // ADD to doogle history
-    if ((find = History.findOne({ url: url }))) {
-      History.update(find._id, { $set: { timestamp: moment().unix() } });
+    if ((find = History.findOne({url: url}))) {
+      History.update(find._id, {$set: {timestamp: moment().unix()}});
     } else {
       History.insert({
         name: title,
         url: url,
         // icon: '',
-        timestamp: moment().unix()
+        timestamp: moment().unix(),
       });
     }
   }
@@ -126,7 +126,7 @@ webviewLoadStart = function(currentTabId, e) {
   webview.stop(); // doesnt work
   ipc.sendSync(
     'backendAction_stopWebviewNavigation',
-    webview.getWebContents().id
+    webview.getWebContents().id,
   );
 
   var url = Helpers.sanitizeUrl(e.newURL || e.url);
@@ -143,8 +143,8 @@ webviewLoadStart = function(currentTabId, e) {
     Tabs.update(tabId, {
       $set: {
         redirect: url,
-        url: url
-      }
+        url: url,
+      },
     });
   }
   LocalStore.set('selectedTab', tabId);

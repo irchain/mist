@@ -1,5 +1,5 @@
 module.exports = windowType => {
-  const { ipcRenderer, webFrame } = require('electron');
+  const {ipcRenderer, webFrame} = require('electron');
 
   if (process.env.TEST_MODE) {
     window.electronRequire = require;

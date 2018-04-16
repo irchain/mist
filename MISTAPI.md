@@ -12,19 +12,19 @@ if(typeof mist !== 'undefined') {
 }
 ```
 
-You have three different possibilities to use `web3`:
+You have three different possibilities to use `webu`:
 
 ```js
-// 1. simply use it: web3 comes already defined
-web3;
+// 1. simply use it: webu comes already defined
+webu;
 
-// 2. optionally use web3 from Mist or load if outside of Mist
-if (typeof web3 === 'undefined')
-  web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+// 2. optionally use webu from Mist or load if outside of Mist
+if (typeof webu === 'undefined')
+  webu = new Webu(new Webu.providers.HttpProvider('http://localhost:8545'));
 
-// 3. always use web3 provided by the dapp ("Web3" won't be supplied by Mist), but the provider from Mist
-if (typeof web3 !== 'undefined') web3 = new Web3(web3.currentProvider);
-else web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+// 3. always use webu provided by the dapp ("Webu" won't be supplied by Mist), but the provider from Mist
+if (typeof webu !== 'undefined') webu = new Webu(webu.currentProvider);
+else webu = new Webu(new Webu.providers.HttpProvider('http://localhost:8545'));
 ```
 
 ## API

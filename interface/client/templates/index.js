@@ -1,31 +1,31 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 /**
-The body template
+ The body template
 
-@class [template] body
-@constructor
-*/
+ @class [template] body
+ @constructor
+ */
 
 // Generic windows reuse windows by switching the template
 ipc.on('uiAction_switchTemplate', (e, templateName) => {
   TemplateVar.setTo(
     '#generic-body',
     'MainRenderTemplate',
-    `popupWindows_${templateName}`
+    `popupWindows_${templateName}`,
   );
 });
 
 Template.body.helpers({
   /**
-    Chooses the view to render at start
+   Chooses the view to render at start
 
-    @method renderApp
-    */
+   @method renderApp
+   */
   renderApp: function() {
     // Generic windows return the TemplateVar if set in the ipc call above
     const template = TemplateVar.get('MainRenderTemplate');
@@ -45,7 +45,7 @@ Template.body.helpers({
         return false;
       }
     }
-  }
+  },
 });
 
 /*

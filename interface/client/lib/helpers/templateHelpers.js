@@ -1,75 +1,75 @@
 /**
-Helper functions
+ Helper functions
 
-@module Helpers
-**/
-
-/**
-Global template helpers
-
-@class TemplateHelpers
-@constructor
-**/
+ @module Helpers
+ **/
 
 /**
-A simple template helper to log objects in the console.
+ Global template helpers
 
-@method (debug)
-**/
+ @class TemplateHelpers
+ @constructor
+ **/
+
+/**
+ A simple template helper to log objects in the console.
+
+ @method (debug)
+ **/
 Template.registerHelper('debug', function(object) {
   console.log(object);
 });
 
 /**
-Returns the current block
+ Returns the current block
 
-@method (CurrentBlock)
-**/
+ @method (CurrentBlock)
+ **/
 Template.registerHelper('CurrentBlock', function() {
-  return EthBlocks.latest;
+  return HucBlocks.latest;
 });
 
 /**
-Return the dirname.
+ Return the dirname.
 
-@method (dirname)
-**/
+ @method (dirname)
+ **/
 Template.registerHelper('dirname', function() {
   return window.dirname;
 });
 
 /**
-Return the Mist API.
+ Return the Mist API.
 
-@method (mist)
-**/
+ @method (mist)
+ **/
 Template.registerHelper('mist', function() {
   return window.mist;
 });
 
 /**
-Return the app mode.
+ Return the app mode.
 
-@method (mode)
-**/
+ @method (mode)
+ **/
 Template.registerHelper('mode', function() {
   return window.mistMode;
 });
 
 /**
-Return the friendly app name.
+ Return the friendly app name.
 
-@method (appName)
-**/
+ @method (appName)
+ **/
 Template.registerHelper('appName', function() {
-  return window.mistMode === 'mist' ? 'Mist' : 'Ethereum Wallet';
+  return window.mistMode === 'mist' ? 'Mist' : 'Happyuc Wallet';
 });
 
 /**
-Return the app icon path.
+ Return the app icon path.
 
-@method (iconPath)
-**/
+ @method (iconPath)
+ **/
 Template.registerHelper('appIconPath', function() {
   return (
     'file://' + window.dirname + '/icons/' + window.mistMode + '/icon2x.png'
@@ -77,27 +77,27 @@ Template.registerHelper('appIconPath', function() {
 });
 
 /**
-Get all accounts
+ Get all accounts
 
-@method (accounts)
-**/
+ @method (accounts)
+ **/
 Template.registerHelper('accounts', function(identity) {
-  return EthAccounts.find({}, { sort: { name: 1 } });
+  return HucAccounts.find({}, {sort: {name: 1}});
 });
 
 /**
-Check if the given wallet is a watch only wallet, by checking if we are one of owners in the wallet.
+ Check if the given wallet is a watch only wallet, by checking if we are one of owners in the wallet.
 
-@method (isWatchOnly)
-@param {String} id the id of the wallet to check
-**/
+ @method (isWatchOnly)
+ @param {String} id the id of the wallet to check
+ **/
 Template.registerHelper('isWatchOnly', Helpers.isWatchOnly);
 
 /**
-Return the right wallet icon
+ Return the right wallet icon
 
-@method (walletIcon)
-**/
+ @method (walletIcon)
+ **/
 Template.registerHelper('walletIcon', function() {
   var icon = '';
 
@@ -115,13 +115,13 @@ Template.registerHelper('walletIcon', function() {
 });
 
 /**
-Get the account name or display the address
+ Get the account name or display the address
 
-@method (accountNameOrAddress)
-@param {String} address
-*/
+ @method (accountNameOrAddress)
+ @param {String} address
+ */
 Template.registerHelper('accountNameOrAddress', function(address) {
-  var account = EthAccounts.findOne({ address: address });
+  var account = HucAccounts.findOne({address: address});
   if (account) {
     return account.name;
   } else {
@@ -130,38 +130,38 @@ Template.registerHelper('accountNameOrAddress', function(address) {
 });
 
 /**
-Formats a timestamp to any format given.
+ Formats a timestamp to any format given.
 
-    {{formatTime myTime "YYYY-MM-DD"}}
+ {{formatTime myTime "YYYY-MM-DD"}}
 
-@method (formatTime)
-@param {String} time         The timstamp, can be string or unix format
-@param {String} format       the format string, can also be "iso", to format to ISO string, or "fromnow"
-//@param {Boolean} realTime    Whether or not this helper should re-run every 10s
-@return {String} The formated time
-**/
+ @method (formatTime)
+ @param {String} time         The timstamp, can be string or unix format
+ @param {String} format       the format string, can also be "iso", to format to ISO string, or "fromnow"
+ //@param {Boolean} realTime    Whether or not this helper should re-run every 10s
+ @return {String} The formated time
+ **/
 Template.registerHelper('formatTime', Helpers.formatTime);
 
 /**
-Formats a number.
+ Formats a number.
 
-    {{formatNumber myNumber "0,0.0[0000]"}}
+ {{formatNumber myNumber "0,0.0[0000]"}}
 
-@method (formatNumber)
-@param {String} number
-@param {String} format       the format string
-@return {String} The formatted number
-**/
+ @method (formatNumber)
+ @param {String} number
+ @param {String} format       the format string
+ @return {String} The formatted number
+ **/
 Template.registerHelper('formatNumber', Helpers.formatNumber);
 
 /**
-Formats a number.
+ Formats a number.
 
-    {{formatBalance myNumber "0,0.0[0000]"}}
+ {{formatBalance myNumber "0,0.0[0000]"}}
 
-@method (formatBalance)
-@param {String} number
-@param {String} format       the format string
-@return {String} The formatted number
-**/
+ @method (formatBalance)
+ @param {String} number
+ @param {String} format       the format string
+ @return {String} The formatted number
+ **/
 Template.registerHelper('formatBalance', Helpers.formatBalance);

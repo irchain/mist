@@ -1,15 +1,15 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 /**
-The updateAvailable template
+ The updateAvailable template
 
-@class [template] popupWindows_updateAvailable
-@constructor
-*/
+ @class [template] popupWindows_updateAvailable
+ @constructor
+ */
 Template['popupWindows_updateAvailable'].onCreated(function() {
   var template = this;
 
@@ -45,5 +45,5 @@ Template['popupWindows_updateAvailable'].events({
     if (update && update.url) {
       ipc.send('backendAction_openExternalUrl', update.url);
     }
-  }
+  },
 });

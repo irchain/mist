@@ -6,22 +6,24 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ethereum/mist.git"
-  },
   "keywords": [
-    "ethereum",
+    "happyuc",
     "mist",
-    "web3"
+    "webu"
   ],
   "author": "Fabian Vogelsteller <fabian@ethereum.org>",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/ethereum/mist/issues"
+    "url": "https://github.com/happyuc-project/mist/issues"
   },
-  "homepage": "https://github.com/ethereum/mist#readme",
+  "homepage": "https://github.com/happyuc-project/mist#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/happyuc-project/mist.git"
+  },
   "dependencies": {
-    "babel-runtime": "^6.18.0"
+    "babel-runtime": "^6.18.0",
+    "webu": "latest",
+    "meteor-node-stubs": "^0.3.3"
   }
 }

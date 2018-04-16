@@ -1,49 +1,49 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 /**
-The importAccount import template
+ The importAccount import template
 
-@class [template] popupWindows_importAccount
-@constructor
-*/
+ @class [template] popupWindows_importAccount
+ @constructor
+ */
 
 Template['popupWindows_importAccount'].helpers({
   /**
-    Show password
+   Show password
 
-    @method showPassword
-    */
+   @method showPassword
+   */
   showPassword: function() {
     return TemplateVar.get('showPassword') ? 'text' : 'password';
-  }
+  },
 });
 
 Template['popupWindows_importAccount'].events({
   /**
-    On drag enter, change class
+   On drag enter, change class
 
-    @event dragenter .dropable
-    */
+   @event dragenter .dropable
+   */
   'dragenter .dropable': function(e) {
     $(e.currentTarget).addClass('active');
   },
   /**
-    On drag leave, change class
+   On drag leave, change class
 
-    @event dragleave .dropable
-    */
+   @event dragleave .dropable
+   */
   'dragleave .dropable': function(e) {
     $(e.currentTarget).removeClass('active');
   },
   /**
-    When the file is droped, read the path
+   When the file is droped, read the path
 
-    @event drop .dropable
-    */
+   @event drop .dropable
+   */
   'drop .dropable': function(e, template) {
     e.preventDefault();
 
@@ -63,7 +63,7 @@ Template['popupWindows_importAccount'].events({
               template.$('.password').focus();
             });
             break;
-          case 'web3':
+          case 'webu':
             console.log(`Imported ${type} account`);
             TemplateVar.set(template, 'filePath', files[0].path);
             TemplateVar.set(template, 'importing', true);
@@ -74,9 +74,9 @@ Template['popupWindows_importAccount'].events({
           default:
             GlobalNotification.warning({
               content: TAPi18n.__(
-                'mist.popupWindows.onboarding.errors.unknownFile'
+                'mist.popupWindows.onboarding.errors.unknownFile',
               ),
-              duration: 4
+              duration: 4,
             });
         }
       });
@@ -85,26 +85,26 @@ Template['popupWindows_importAccount'].events({
     $(e.currentTarget).removeClass('active');
   },
   /**
-    On drag over prevent redirect
+   On drag over prevent redirect
 
-    @event dragover .dropable
-    */
+   @event dragover .dropable
+   */
   'dragover .dropable': function(e) {
     e.preventDefault();
   },
   /**
-    On show password
+   On show password
 
-    @event click .show-password
-    */
+   @event click .show-password
+   */
   'click .show-password': function(e) {
     TemplateVar.set('showPassword', e.currentTarget.checked);
   },
   /**
-    Checks the password match sends the file path and password to the mist backend to import
+   Checks the password match sends the file path and password to the mist backend to import
 
-    @event submit form
-    */
+   @event submit form
+   */
   'submit form': function(e, template) {
     var pw = template.find('input.password').value;
 
@@ -124,7 +124,7 @@ Template['popupWindows_importAccount'].events({
           TemplateVar.setTo(
             '.onboarding-account',
             'newAccount',
-            web3.toChecksumAddress(address)
+            webu.toChecksumAddress(address),
           );
           TemplateVar.setTo('.onboarding-screen', 'currentActive', 'account');
 
@@ -138,19 +138,19 @@ Template['popupWindows_importAccount'].events({
         if (error === 'Decryption Failed') {
           GlobalNotification.warning({
             content: TAPi18n.__(
-              'mist.popupWindows.onboarding.errors.wrongPassword'
+              'mist.popupWindows.onboarding.errors.wrongPassword',
             ),
-            duration: 4
+            duration: 4,
           });
         } else {
           GlobalNotification.warning({
             content: TAPi18n.__(
               'mist.popupWindows.onboarding.errors.importFailed',
               {
-                error
-              }
+                error,
+              },
             ),
-            duration: 4
+            duration: 4,
           });
         }
       }
@@ -159,5 +159,5 @@ Template['popupWindows_importAccount'].events({
     // clear form
     template.find('input.password').value = '';
     pw = null;
-  }
+  },
 });

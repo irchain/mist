@@ -1,14 +1,14 @@
 /**
-@module preloader PopupWindows
-*/
+ @module preloader PopupWindows
+ */
 
-require('./popupWindowsNoWeb3.js');
-require('./include/web3CurrentProvider.js');
+require('./popupWindowsNoWebu.js');
+require('./include/webuCurrentProvider.js');
 const Q = require('bluebird');
-const web3Admin = require('../web3Admin.js');
+const webuAdmin = require('../webuAdmin.js');
 const https = require('https');
 
-web3Admin.extend(window.web3);
+webuAdmin.extend(window.webu);
 
 // make variables globally accessable
 window.Q = Q;

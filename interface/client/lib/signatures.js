@@ -51,7 +51,7 @@ window.SIGNATURES = {
   '0x6b069710': ['scheduleCall(address,bytes,uint256,uint256,uint8)'],
   '0xb7aec6a5': ['scheduleCall(address,bytes,uint256,uint256,uint8,uint256)'],
   '0xf37b437b': [
-    'scheduleCall(address,bytes,uint256,uint256,uint8,uint256,uint256)'
+    'scheduleCall(address,bytes,uint256,uint256,uint8,uint256,uint256)',
   ],
   '0xd826f88f': ['reset()'],
   '0x638560cf': ['registerBool(address,bool)'],
@@ -61,7 +61,7 @@ window.SIGNATURES = {
   '0x5dcbac7a': ['registerBytes(address,bytes)'],
   '0x31b0795c': ['registerAddress(address,address)'],
   '0x9c1500f0': [
-    'registerMany(address,uint256,int256,uint256,bytes,address,bytes)'
+    'registerMany(address,uint256,int256,uint256,bytes,address,bytes)',
   ],
   '0x5bfdc700': ['registerData(address,int256,bytes,address)'],
   '0x5dfc2e4a': ['noop()'],
@@ -139,12 +139,12 @@ window.SIGNATURES = {
   '0x0fd1f94e': ['firstClaimBlock()'],
   '0x67a59d91': ['scheduleCall(address,bytes,bytes,uint256,uint256,uint8)'],
   '0x4571d4c4': [
-    'FutureCall(address,uint256,uint16,address,bytes,bytes,uint256,uint256,uint256)'
+    'FutureCall(address,uint256,uint16,address,bytes,bytes,uint256,uint256,uint256)',
   ],
   '0xc6236a5c': ['scheduleCall(bytes,uint256,uint256,uint8,uint256)'],
   '0xc19d93fb': ['state()'],
   '0x40953102': [
-    'scheduleCall(address,uint256,bytes,uint256,uint256,uint8,uint256)'
+    'scheduleCall(address,uint256,bytes,uint256,uint256,uint8,uint256)',
   ],
   '0x7d298ee3': ['beforeExecute(address,uint256)'],
   '0xe7329e71': ['scheduleCall(bytes,bytes,uint256,uint256,uint8,uint256)'],
@@ -152,11 +152,11 @@ window.SIGNATURES = {
   '0xd6eafd08': ['scheduleCall(address,bytes,bytes,uint8,uint256[4])'],
   '0x67ce940d': ['getOverhead()'],
   '0x991ffd4e': [
-    'scheduleCall(address,bytes,bytes,uint256,uint256,uint8,uint256)'
+    'scheduleCall(address,bytes,bytes,uint256,uint256,uint8,uint256)',
   ],
   '0x137c638b': ['getExtraGas()'],
   '0xd13d1ace': [
-    'scheduleCall(bytes,bytes,uint16,uint8,uint256,uint256,uint256,uint256,uint256)'
+    'scheduleCall(bytes,bytes,uint16,uint8,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0xf6b4dfb4': ['contractAddress()'],
   '0x38eee93e': ['scheduleCall(address,bytes,bytes,uint16,uint8,uint256[5])'],
@@ -180,10 +180,10 @@ window.SIGNATURES = {
   '0x24032866': ['checkExecutionAuthorization(address,uint256)'],
   '0x61461954': ['execute()'],
   '0x0cb749b6': [
-    'FutureBlockCall(address,uint256,uint8,address,bytes,bytes,uint256,uint256,uint16,uint256,uint256)'
+    'FutureBlockCall(address,uint256,uint8,address,bytes,bytes,uint256,uint256,uint16,uint256,uint256)',
   ],
   '0x4500054f': ['isCancellable()'],
-  '0xa3912ec8': ['receiveEther()'],
+  '0xa3912ec8': ['receiveHucer()'],
   '0x612e45a3': ['newProposal(address,uint256,string,bytes,uint256,bool)'],
   '0xeceb2945': ['checkProposalCode(uint256,address,uint256,bytes)'],
   '0xc9d27afe': ['vote(uint256,bool)'],
@@ -209,7 +209,7 @@ window.SIGNATURES = {
   '0xf42ac1de': ['minQuorum(uint256)'],
   '0xd21b84ac': ['createNewDAO(address)'],
   '0xd92ebe46': [
-    'createDAO(address,uint256,uint256,uint256,string,string,uint8)'
+    'createDAO(address,uint256,uint256,uint256,string,string,uint8)',
   ],
   '0xebae35a6': ['DAOTokenCreationProxyTransferer(address,address)'],
   '0xbe2430fe': ['sendValues()'],
@@ -219,13 +219,13 @@ window.SIGNATURES = {
   '0x4da74ee6': ['setVoteIntention(uint256,bool,bool,string)'],
   '0xf98a4eca': ['executeVote(uint256)'],
   '0xe49dcee9': ['fixTokens()'],
-  '0xde0ff7c5': ['getEther()'],
+  '0xde0ff7c5': ['getHucer()'],
   '0xd9fe60f3': ['DTHPool(address,address,uint256,string,string,string)'],
   '0xdaa283c8': ['__callback(bytes,string)'],
   '0x0221038a': ['payOut(address,uint256)'],
   '0x1fd96b69': ['ManagedAccount(address,bool)'],
   '0x1adf2d1a': [
-    'Offer(address,address,bytes,uint256,uint256,uint128,uint256)'
+    'Offer(address,address,bytes,uint256,uint256,uint128,uint256)',
   ],
   '0x1bcad37a': ['getTotalCost()'],
   '0x60213b88': ['getInitialWithdrawal()'],
@@ -255,7 +255,7 @@ window.SIGNATURES = {
   '0x5d268629': ['Refund()'],
   '0x29f1bff4': ['withdrawFromChildDAO(uint256)'],
   '0x943b0747': [
-    'RewardOffer(address,address,bytes,uint256,uint256,uint128,uint256)'
+    'RewardOffer(address,address,bytes,uint256,uint256,uint128,uint256)',
   ],
   '0x1632070c': ['setRewardDivisor(uint256)'],
   '0xe32e9f22': ['setDeploymentReward(uint256)'],
@@ -360,7 +360,7 @@ window.SIGNATURES = {
   '0xa69df4b5': ['unlock()'],
   '0x8c3c4b34': ['getSaleStatus()'],
   '0xcea943ee': ['getSaleConfig()'],
-  '0x034187fd': ['setEthToCents(uint256)'],
+  '0x034187fd': ['setHucToCents(uint256)'],
   '0xb1adc241': ['BalanceDB()'],
   '0x6c9c2faf': ['getSupply()'],
   '0xf8b2cb4f': ['getBalance(address)'],
@@ -668,7 +668,7 @@ window.SIGNATURES = {
   '0xd0e30db0': ['deposit()'],
   '0xe2faf044': ['createDAO(address,uint256,uint256,uint256)'],
   '0xcc25decd': [
-    'SampleOffer(address,bytes,uint256,uint256,uint256,uint256,uint256)'
+    'SampleOffer(address,bytes,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0x3535cd52': ['setDailyCosts(uint256)'],
   '0xd4065763': ['returnRemainingMoney()'],
@@ -892,7 +892,7 @@ window.SIGNATURES = {
   '0x6560a307': ['suggestedGas()'],
   '0xeec2b628': ['beforeExecute(address)'],
   '0x980e8c81': [
-    'FutureBlockCall(address,uint256,uint8,address,bytes,uint256,uint256,uint256)'
+    'FutureBlockCall(address,uint256,uint8,address,bytes,uint256,uint256,uint256)',
   ],
   '0x08f235ec': ['getDefaultPayment()'],
   '0x21bacf28': ['getDefaultFee()'],
@@ -1186,7 +1186,7 @@ window.SIGNATURES = {
   '0xbcca1fd3': ['changeVotingRules(uint256,uint256,int256)'],
   '0xb1050da5': ['newProposal(address,uint256,string,bytes)'],
   '0xd3c0715b': ['vote(uint256,bool,string)'],
-  '0xbcc6092a': ['MyEtherBank()'],
+  '0xbcc6092a': ['MyHucerBank()'],
   '0xd917deb5': ['Donate()'],
   '0xb774d3d7': ['BankOwner_GetDonationsBalance()'],
   '0x07718a3b': ['BankOwner_WithdrawDonations()'],
@@ -1204,15 +1204,15 @@ window.SIGNATURES = {
   '0xb45c48dc': ['Security_AddPasswordSha3HashToBankAccount(bytes)'],
   '0x766a3f2e': ['Security_ConnectBankAccountToNewOwnerAddress(uint32,string)'],
   '0xf6232556': [
-    'Security_GetNumberOfAttemptsToConnectBankAccountToANewOwnerAddress()'
+    'Security_GetNumberOfAttemptsToConnectBankAccountToANewOwnerAddress()',
   ],
   '0x671fa0a0': ['Inscription(string)'],
-  '0xd6af9411': ['Rouleth()'],
+  '0xd6af9411': ['Roulhuc()'],
   '0x31119b4d': ['changeDeveloper(address)'],
   '0xc87b36ed': ['disableBetting()'],
   '0x5fa21f1f': ['enableBetting()'],
   '0x63a8dac2': [
-    'changeSettings(uint256,uint256,uint256,uint8,uint256,uint256,uint8,uint8)'
+    'changeSettings(uint256,uint256,uint256,uint8,uint256,uint256,uint8,uint8)',
   ],
   '0x2888f9d0': ['updateMaxBet()'],
   '0x53f818d6': ['checkBetValue()'],
@@ -1253,7 +1253,7 @@ window.SIGNATURES = {
   '0xaacc5a17': ['getRandom()'],
   '0x6103d915': ['Winners(uint256)'],
   '0xd743ca38': ['newWinner(uint256,address,uint256,uint256,uint256)'],
-  '0x3e5fd9b5': ['dEthereumlotteryNet(address,address,bool,address)'],
+  '0x3e5fd9b5': ['dHappyuclotteryNet(address,address,bool,address)'],
   '0x149c5066': ['ChanceOfWinning(uint256)'],
   '0x860e9960': ['BetPriceLimit()'],
   '0xe8930efd': ['Investors(address)'],
@@ -1313,7 +1313,7 @@ window.SIGNATURES = {
   '0x6a9d2afd': ['playToWinTest(uint256)'],
   '0x793cd71e': ['cashOut()'],
   '0x2530c905': ['rand(uint256)'],
-  '0x17db59a4': ['dEthereumlotteryNet(address,address,address)'],
+  '0x17db59a4': ['dHappyuclotteryNet(address,address,address)'],
   '0xa0f029fc': ['ContractorInterface(address,address,address)'],
   '0xf765088f': ['UpdateClientAddress(address)'],
   '0x64e24f4b': ['UpdateClientTokenAccount(address)'],
@@ -1321,12 +1321,12 @@ window.SIGNATURES = {
   '0x84dac46e': ['Fucksign()'],
   '0xfc1f2a70': ['Add(uint256,string,string)'],
   '0xa87d942c': ['getCount()'],
-  '0xe3914699': ['dEthereumlotteryNetWinners(address)'],
+  '0xe3914699': ['dHappyuclotteryNetWinners(address)'],
   '0x477bddaa': ['setContractAddress(address)'],
-  '0xc6ae3b57': ['dEthereumlotteryNet(address,address)'],
+  '0xc6ae3b57': ['dHappyuclotteryNet(address,address)'],
   '0xe1376da2': ['updateFirstActiveGamble(uint256)'],
   '0xd499555b': ['getFirstActiveDuel()'],
-  '0xf99fc046': ['dEthereumlotteryNet()'],
+  '0xf99fc046': ['dHappyuclotteryNet()'],
   '0xc494f71a': ['LedgerFund(uint32,uint32,uint64,uint64)'],
   '0xcdb6753b': ['setNav(uint32)'],
   '0xc8691b2a': ['getHistory(uint256)'],
@@ -1362,7 +1362,7 @@ window.SIGNATURES = {
   '0xffcce369': ['changeIPFSHash(string)'],
   '0xb47d89ad': ['Details()'],
   '0x24c9bf5e': ['Prizes()'],
-  '0xcee6ee38': ['aEthereumlotteryNet()'],
+  '0xcee6ee38': ['aHappyuclotteryNet()'],
   '0x91d8b14e': ['BuyTickets()'],
   '0xd224118f': ['PrepareDraw()'],
   '0xd4e78272': ['Draw()'],
@@ -1383,22 +1383,22 @@ window.SIGNATURES = {
   '0x0acc4382': ['getMinDailyWithdrawLimit()'],
   '0xc988d70f': ['getDailyWithdrawLimit()'],
   '0xd7ccc2c3': ['getLastPayment()'],
-  '0x7648c929': ['returnRemainingEther()'],
+  '0x7648c929': ['returnRemainingHucer()'],
   '0x6b256f57': ['DAOSecurity(address,address,bytes,uint256,uint256,uint128)'],
   '0x293ffca3': ['AddressReg()'],
   '0x63a9c3d7': ['verify(address)'],
   '0x0d368fee': ['deverify(address)'],
   '0xd173707d': ['hasPhysicalAddress(address)'],
-  '0x5f2e686d': ['Ethereum_eight_bagger()'],
+  '0x5f2e686d': ['Happyuc_eight_bagger()'],
   '0x1437f9a3': ['Set_your_game_number(uint16)'],
   '0xc3d23e10': ['checkBet()'],
   '0xfd68a422': ['returnmoneycreator(uint8,uint128)'],
   '0x6673ce2b': ['Results_of_the_last_round()'],
   '0x2c329e99': ['Last_block_number_and_bloctime_used()'],
-  '0xdb641ab4': ['Game_balance_in_Ethers()'],
+  '0xdb641ab4': ['Game_balance_in_Hucers()'],
   '0xd6f42038': ['PhoneToAddress()'],
   '0x4636a159': ['newPhoneToAddr(address,uint256)'],
-  '0xe3ffc9a3': ['sendEtherToOwner()'],
+  '0xe3ffc9a3': ['sendHucerToOwner()'],
   '0xb958a5e1': ['getPhoneByAddress(address)'],
   '0x1f83f440': ['getPaymentByAddress(address)'],
   '0xa02b9aac': ['getPaymentDataByAddress(address)'],
@@ -1460,7 +1460,7 @@ window.SIGNATURES = {
   '0x73e30e49': ['majorEventFunc(uint256,bytes,bytes)'],
   '0x53850db3': ['getParticipantById(uint256)'],
   '0xad605729': ['getParticipantCount()'],
-  '0x28f90e4b': ['Etheramid2()'],
+  '0x28f90e4b': ['Huceramid2()'],
   '0xe67cdfb7': ['moveOldUser(uint256)'],
   '0xe837ab59': ['getParticipantByAddress(address)'],
   '0x9c7e8a03': ['addParticipant(address,address,uint256)'],
@@ -1488,7 +1488,7 @@ window.SIGNATURES = {
   '0x46e44f63': ['getCheckRecordTS(bytes)'],
   '0xa352f1a8': ['calcSHA3(bytes)'],
   '0x1eb5ea2e': ['returnFunds()'],
-  '0x4fa99dd0': ['Matching_Ethers()'],
+  '0x4fa99dd0': ['Matching_Hucers()'],
   '0x1a1df394': ['Play(bool)'],
   '0xde14bbf7': ['randomGen(uint256,uint256)'],
   '0x7f98444f': ['randomEnd()'],
@@ -1576,7 +1576,7 @@ window.SIGNATURES = {
   '0x4ff13571': ['x2()'],
   '0xe97dcb62': ['enter()'],
   '0xc8796572': ['collectFees()'],
-  '0xb6509c12': ['Ethereum_twelve_bagger()'],
+  '0xb6509c12': ['Happyuc_twelve_bagger()'],
   '0x421aeda6': ['Set_your_game_number(string)'],
   '0x00873367': ['comparisonchr(string)'],
   '0x43e332c5': ['Last_block_number_and_blockhash_used()'],
@@ -1585,7 +1585,7 @@ window.SIGNATURES = {
   '0x068c966b': ['DrawDetails(uint256)'],
   '0x86e4e178': ['CheckTickets(address,uint256,uint256)'],
   '0x9bb5239a': ['CheckPrize(address,uint256)'],
-  '0x83b23b40': ['cEthereumlotteryNet()'],
+  '0x83b23b40': ['cHappyuclotteryNet()'],
   '0xe56b9dce': ['GetPrize(uint256)'],
   '0xd7e11e9d': ['AddTicket(bytes)'],
   '0x3fbd40fd': ['ProcessDraw()'],
@@ -1609,7 +1609,7 @@ window.SIGNATURES = {
   '0x99c724ef': ['skipInLine(uint256,uint256)'],
   '0x67f809e9': ['DynamicPyramid()'],
   '0x1da0fb1b': [
-    'updateSettings(uint256,uint256,uint256,uint256,uint256,bool)'
+    'updateSettings(uint256,uint256,uint256,uint256,uint256,bool)',
   ],
   '0x60689557': ['Rock()'],
   '0xaf769eff': ['Paper()'],
@@ -1620,7 +1620,7 @@ window.SIGNATURES = {
   '0x6a0e605f': ['MyToken(uint256,string,uint8,string,address)'],
   '0x1b5ee6ae': ['mintToken(int256,address,uint256)'],
   '0x2a64fb63': ['getSaleDate(bytes)'],
-  '0xd8e5ae6a': ['Etheramid()'],
+  '0xd8e5ae6a': ['Huceramid()'],
   '0xd35ada32': ['addParticipant(address,address)'],
   '0x67dd74ca': ['buyTicket(uint256)'],
   '0x48d9614d': ['GetFee()'],
@@ -1653,7 +1653,7 @@ window.SIGNATURES = {
   '0xf24b5779': ['removeTrustedIssuer(address,string)'],
   '0xfe05e8b1': ['assertFact(uint256,string)'],
   '0x5fb3e119': ['Auction()'],
-  '0xfe777bcd': ['etherForSale()'],
+  '0xfe777bcd': ['hucerForSale()'],
   '0x78e97925': ['startTime()'],
   '0x3197cbb6': ['endTime()'],
   '0xe6d9bb0f': ['secondsUntilEnd()'],
@@ -1665,15 +1665,15 @@ window.SIGNATURES = {
   '0x90c3a370': ['AuctionMaster()'],
   '0xd5563f31': ['createAuction(uint256)'],
   '0xe6690fb1': ['nextAuction(uint256)'],
-  '0xf2b26d8f': ['nextEtherForSale()'],
+  '0xf2b26d8f': ['nextHucerForSale()'],
   '0x7a791524': ['setNextFeePercentage(uint8)'],
   '0x5d068051': ['sendFees(address)'],
   '0xb40a5627': ['bidCount()'],
-  '0x2da0d1ea': ['etherSold()'],
+  '0x2da0d1ea': ['hucerSold()'],
   '0xdeb6930c': ['PriceTicker()'],
   '0xa2e62045': ['update()'],
   '0x7bc25372': ['UserCheckBalance(address)'],
-  '0x53b7b2e9': ['cEthereumlotteryNet(bytes)'],
+  '0x53b7b2e9': ['cHappyuclotteryNet(bytes)'],
   '0x78e80b39': ['UserGetPrize()'],
   '0x2b291eb6': ['UserAddTicket(bytes)'],
   '0x3e0663e0': ['AdminDrawProcess()'],
@@ -1697,7 +1697,7 @@ window.SIGNATURES = {
   '0xb78b52df': ['allocate(address,uint256)'],
   '0x6617e11a': ['NiceGuyTax()'],
   '0x0a7493b4': [
-    'Etheropt(uint256,string,uint256,uint256,bytes,address,int256[])'
+    'Huceropt(uint256,string,uint256,uint256,bytes,address,int256[])',
   ],
   '0x7c7c7695': ['getAccountID(address)'],
   '0xce88b145': ['getAccount(uint256)'],
@@ -1713,10 +1713,10 @@ window.SIGNATURES = {
   '0xc398f030': ['expire(uint256,uint8,bytes,bytes,bytes)'],
   '0xec0b4153': ['getMoneyness(int256,uint256,uint256)'],
   '0xc6cb7a96': [
-    'orderMatchTest(uint256,uint256,int256,uint256,uint256,address,address,uint256,int256)'
+    'orderMatchTest(uint256,uint256,int256,uint256,uint256,address,address,uint256,int256)',
   ],
   '0x6663bbec': [
-    'orderMatch(uint256,uint256,int256,uint256,uint256,address,uint8,bytes,bytes,int256)'
+    'orderMatch(uint256,uint256,int256,uint256,uint256,address,uint8,bytes,bytes,int256)',
   ],
   '0x17c65aa7': ['getMaxLossAfterTrade(address,uint256,int256,int256)'],
   '0x209a5b8a': ['moneySumAtSettlement(address,uint256,int256,uint256)'],
@@ -1724,13 +1724,13 @@ window.SIGNATURES = {
   '0xa66f7ad6': ['signRelease(uint256)'],
   '0xbff0fbb8': ['calculateMeat(uint256)'],
   '0xb8d3bfe3': [
-    'MeatGrindersAssociation(address,address,uint256,uint256,uint256,address)'
+    'MeatGrindersAssociation(address,address,uint256,uint256,uint256,address)',
   ],
   '0x5938748e': ['changeVotingRules(address,address,uint256,uint256,uint256)'],
   '0xeb08b304': ['changeMeatProvider(address)'],
   '0x677342ce': ['sqrt(uint256)'],
   '0x4ae85627': ['grindUnicorns(uint256)'],
-  '0x9a92b7e7': ['EthVenturesFinal()'],
+  '0x9a92b7e7': ['HucVenturesFinal()'],
   '0x1097e579': ['Enter()'],
   '0x3edd90e7': ['NewOwner(address)'],
   '0x6b1781b6': ['Emergency()'],
@@ -1752,14 +1752,14 @@ window.SIGNATURES = {
   '0x90e3c278': ['getShares(uint256[128])'],
   '0x76abc03b': ['getShareDistribution(uint256)'],
   '0xff49b26e': [
-    'createEvent(uint256,uint256,uint8,uint32,address,uint256,uint8)'
+    'createEvent(uint256,uint256,uint8,uint32,address,uint256,uint8)',
   ],
   '0x7a29332d': ['buyAllOutcomes(uint256,uint256)'],
   '0x4757f1d2': ['redeemAllOutcomes(uint256,uint256)'],
   '0x154af6b1': ['sendShares(uint256,uint8,uint256,address)'],
   '0xd7ed7453': ['redeemWinnings(uint256)'],
   '0x1335ff36': [
-    'createEventAndMarketMaker(uint256,uint256,uint8,uint32,address,uint256,uint8,uint16,uint256)'
+    'createEventAndMarketMaker(uint256,uint256,uint8,uint32,address,uint256,uint8,uint16,uint256)',
   ],
   '0x968908a3': ['createMarketMaker(uint256,uint16,uint256)'],
   '0xc7489441': ['closeMarketMaker(uint256)'],
@@ -1768,7 +1768,7 @@ window.SIGNATURES = {
   '0x7ef1925b': ['getShareRange(uint256,uint8)'],
   '0x550dd006': ['calcCostsBuying(uint256,uint8,uint8,uint256)'],
   '0x6111dd02': ['calcCostsSelling(uint256,uint8,uint8,uint256)'],
-  '0x8112821f': ['EthVentures()'],
+  '0x8112821f': ['HucVentures()'],
   '0xa20495d3': ['Managed()'],
   '0xb3a2a6c0': ['setOfficialWebsite(string)'],
   '0xa49d53a1': ['SmartRevshare()'],
@@ -1786,7 +1786,7 @@ window.SIGNATURES = {
   '0x41fa4876': ['multiBlockRandomGen(uint256,uint256)'],
   '0x340ddda6': ['MeatConversionCalculator(uint256,uint256)'],
   '0x6fa8de90': ['changeMeatParameters(uint256,uint256)'],
-  '0xa80d4e9a': ['EtherAuction(uint256)'],
+  '0xa80d4e9a': ['HucerAuction(uint256)'],
   '0xe1c7392a': ['init()'],
   '0x1998aeef': ['bid()'],
   '0xfe67a54b': ['endAuction()'],
@@ -1806,8 +1806,8 @@ window.SIGNATURES = {
   '0xa77b2e37': ['Coin()'],
   '0xd0679d34': ['send(address,uint256)'],
   '0x37ae43a3': ['BetOnHashV81()'],
-  '0xd850288b': ['etherlist_top()'],
-  '0x4789aaef': ['EthereumDice()'],
+  '0xd850288b': ['hucerlist_top()'],
+  '0x4789aaef': ['HappyucDice()'],
   '0xc2e9fab3': ['SubUser()'],
   '0x6d853ab6': ['isSubUser(address)'],
   '0x018f5472': ['isAUser(address)'],
@@ -1828,17 +1828,17 @@ window.SIGNATURES = {
   '0x177766e6': ['getOptionChain(uint256)'],
   '0x5025b9ae': ['expire(uint256,uint256,uint8,bytes,bytes,bytes)'],
   '0x0448f79f': [
-    'addOptionChain(uint256,string,uint256,uint256,bytes,address,int256[])'
+    'addOptionChain(uint256,string,uint256,uint256,bytes,address,int256[])',
   ],
   '0x42bf4431': [
-    'orderMatchTest(uint256,uint256,uint256,int256,uint256,uint256,address,address,int256)'
+    'orderMatchTest(uint256,uint256,uint256,int256,uint256,uint256,address,address,int256)',
   ],
   '0xb3760c80': [
-    'orderMatch(uint256,uint256,uint256,int256,uint256,uint256,address,uint8,bytes,bytes,int256)'
+    'orderMatch(uint256,uint256,uint256,int256,uint256,uint256,address,uint8,bytes,bytes,int256)',
   ],
   '0xfe4667e9': ['getMaxLossAfterTrade(address,uint256,uint256,int256,int256)'],
   '0x69d79ad5': [
-    'moneySumAtSettlement(address,uint256,uint256,int256,uint256,uint256)'
+    'moneySumAtSettlement(address,uint256,uint256,int256,uint256,uint256)',
   ],
   '0xabcf1328': ['InterestBank()'],
   '0x6fc9d5e4': ['changeCompareTo(uint256)'],
@@ -1865,7 +1865,7 @@ window.SIGNATURES = {
   '0x8691162a': ['TlcCoin()'],
   '0x4b8e1ba8': ['isMinter(int256,address)'],
   '0x4594d06a': ['delMinter(int256,address)'],
-  '0xc478fc37': ['EtherWheel(uint256,uint256,uint8)'],
+  '0xc478fc37': ['HucerWheel(uint256,uint256,uint8)'],
   '0x8f03850b': ['numContributors()'],
   '0x8b7bcc86': ['numWinners()'],
   '0xe3083fb5': ['removeFromContribution(uint256)'],
@@ -1883,10 +1883,10 @@ window.SIGNATURES = {
   '0x824dbc9a': ['changeMembership(address,uint256,bool,string)'],
   '0x522103fa': ['changeUnicorn(uint256,address)'],
   '0x83876bc9': ['newProposalInWei(address,uint256,string,bytes)'],
-  '0xb9f256cd': ['newProposalInEther(address,uint256,string,bytes)'],
+  '0xb9f256cd': ['newProposalInHucer(address,uint256,string,bytes)'],
   '0x0358d965': ['addPayout(uint256)'],
   '0x686f2c90': ['collectAllFees()'],
-  '0xb4022950': ['collectFeesInEther(uint256)'],
+  '0xb4022950': ['collectFeesInHucer(uint256)'],
   '0x4229616d': ['collectPercentOfFees(uint256)'],
   '0xced92670': ['changeMultiplier(uint256)'],
   '0xfae14192': ['changeFeePercentage(uint256)'],
@@ -1968,7 +1968,7 @@ window.SIGNATURES = {
   '0xd249a52e': ['update(bytes,uint256[],uint256[])'],
   '0x43d24a5e': ['addUpdater(address)'],
   '0x04b07a5e': ['removeUpdater(address)'],
-  '0x76999896': ['KingOfTheEtherThrone()'],
+  '0x76999896': ['KingOfTheHucerThrone()'],
   '0xc8fdc891': ['numberOfMonarchs()'],
   '0xb66a323c': ['claimThrone(string)'],
   '0x0eb3f5a0': ['sweepCommission(uint256)'],
@@ -2013,7 +2013,7 @@ window.SIGNATURES = {
   '0x46b305d6': ['lockBetsForWithdraw()'],
   '0xa1b9af31': ['unlockBets()'],
   '0xc47bc007': ['add_funds()'],
-  '0xcce81927': ['EtherDice(address,address)'],
+  '0xcce81927': ['HucerDice(address,address)'],
   '0x89ef40e7': ['numberOfHealthyGenerations()'],
   '0x918359c6': ['needsBirth()'],
   '0x97950740': ['roomForBirth()'],
@@ -2117,7 +2117,7 @@ window.SIGNATURES = {
   '0xfe13a823': ['computeResponseFirstHalf(uint16)'],
   '0x954ab4b2': ['say()'],
   '0xd6d22fa4': ['MetaCoin()'],
-  '0x7bd703e8': ['getBalanceInEth(address)'],
+  '0x7bd703e8': ['getBalanceInHuc(address)'],
   '0x87def081': ['getFeeRecipient(int256)'],
   '0xa0f61310': ['FakeRelay(bytes)'],
   '0x96e4ee3d': ['convert(uint256,uint256)'],
@@ -2344,7 +2344,7 @@ window.SIGNATURES = {
   '0xf00aac7f': ['ArrayRR()'],
   '0x6c6f1d93': ['getContractCreationValue()'],
   '0xa311dd70': ['setArray(uint8[10])'],
-  '0xf239e528': ['sendOneEtherHome()'],
+  '0xf239e528': ['sendOneHucerHome()'],
   '0xb8c86aa6': ['getArraySettingResult()'],
   '0xd504ea1d': ['getArray()'],
   '0x80db79d9': ['StructAndFor()'],
@@ -2403,7 +2403,7 @@ window.SIGNATURES = {
   '0x694e0d5b': ['StringPasser(uint8[])'],
   '0xa396541e': ['getPongvalTxRetrievalAttempted()'],
   '0x01df7f30': [
-    'validateProposedThroneConfig(uint256,uint256,uint256,uint256)'
+    'validateProposedThroneConfig(uint256,uint256,uint256,uint256)',
   ],
   '0x16870257': ['getTileDescription(uint8,uint8)'],
   '0x5581004d': ['createThrone(bytes,uint256,uint256,uint256,uint256)'],
@@ -2514,7 +2514,7 @@ window.SIGNATURES = {
   '0xfde9ba41': ['transfer(bytes,address,uint256)'],
   '0x0878bc51': ['getAttachesto(uint8)'],
   '0x922dd59a': ['icapTransfer(bytes,address,bytes,uint256)'],
-  '0x4d9e4e22': ['Etheria()'],
+  '0x4d9e4e22': ['Huceria()'],
   '0xe039e4a1': ['getOwner(uint8,uint8)'],
   '0xdd34e129': ['PriceTest()'],
   '0x7d5fec5a': ['setOwner(uint8,uint8,address)'],
@@ -2601,7 +2601,7 @@ window.SIGNATURES = {
   '0x28d3ad3f': ['getPot(uint256)'],
   '0xbcd3d8ca': ['Collector(address,address,uint256)'],
   '0xaf93afdd': [
-    'Shipment(bytes,bytes,bytes,bytes,string,bytes,uint256,uint256,bytes,bytes,uint256,uint256,string,bytes,bytes,bytes)'
+    'Shipment(bytes,bytes,bytes,bytes,string,bytes,uint256,uint256,bytes,bytes,uint256,uint256,string,bytes,bytes,bytes)',
   ],
   '0x7e3faec1': ['GoldTxFeePool(address,address,bytes)'],
   '0x7b789b3d': ['agreement(bytes,bytes,bytes)'],
@@ -2698,7 +2698,7 @@ window.SIGNATURES = {
   '0x31be6985': ['testBitXorSuccess()'],
   '0xa268b332': ['testBitXorFailIndexOOB()'],
   '0xe044c2de': [
-    'newLoan(bytes,address,uint256,uint256,uint256,uint256,uint256,uint256)'
+    'newLoan(bytes,address,uint256,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0x622e88cb': ['testBitsXorSuccess()'],
   '0x8e46fbb2': ['testBitsXorFailIndexOOB()'],
@@ -2738,7 +2738,7 @@ window.SIGNATURES = {
   '0x7d60e343': ['getFileListSize()'],
   '0x3e450fff': ['adminDeleteAccount()'],
   '0xe4360fc8': ['getFileListElement(bytes)'],
-  '0x492b67ea': ['Etherdoc()'],
+  '0x492b67ea': ['Hucerdoc()'],
   '0x3f77b560': ['newDocument(bytes)'],
   '0x3448c7d6': ['createHistory(bytes,address,address)'],
   '0x0b80f8d3': ['invmod(uint256,uint256)'],
@@ -2782,7 +2782,7 @@ window.SIGNATURES = {
   '0x82ab890a': ['update(uint256)'],
   '0xa05e822a': ['howManyOwners()'],
   '0xa0e67e2b': ['getOwners()'],
-  '0x67546967': ['EthBtcEscrow()'],
+  '0x67546967': ['HucBtcEscrow()'],
   '0x63052d82': ['getOwnersIndex(address)'],
   '0x6cf761d4': ['getMinConfirmationsByAddr(address)'],
   '0x97297467': ['checkAndVerify(bytes)'],
@@ -2824,7 +2824,7 @@ window.SIGNATURES = {
   '0x379607f5': ['claim(uint256)'],
   '0x2ac9bf09': ['bid(uint256,uint256,uint256)'],
   '0x1df47aad': ['ReplayProtection()'],
-  '0xc42cd8cf': ['etherSplit(address,address)'],
+  '0xc42cd8cf': ['hucerSplit(address,address)'],
   '0x9f5f7c7f': ['tokenSplit(address,address,address,uint256)'],
   '0x2c215998': ['updateStatus(string)'],
   '0x30ccebb5': ['getStatus(address)'],
@@ -2867,12 +2867,12 @@ window.SIGNATURES = {
   '0x0e0f55d0': ['RewardOrder(uint256,uint256)'],
   '0x0e97cfdf': ['placeOrder(uint256,uint256,uint256)'],
   '0x29ef56b1': ['getAskOrderBookStats()'],
-  '0x3bed33ce': ['withdrawEther(uint256)'],
+  '0x3bed33ce': ['withdrawHucer(uint256)'],
   '0x50baa622': ['withdrawToken(uint256)'],
   '0x512f1e64': ['orderBookLength()'],
   '0x8ea98117': ['setCoordinator(address)'],
   '0x9824425a': ['takeOrder(uint256,uint256,uint256,uint256)'],
-  '0x98ea5fca': ['depositEther()'],
+  '0x98ea5fca': ['depositHucer()'],
   '0xa2f16d80': ['dexWithdrawCollectedFees()'],
   '0xb6ed0632': ['cancelOrder(uint256,uint256)'],
   '0xe71264fa': ['addNewTokens(uint256)'],
@@ -2890,7 +2890,7 @@ window.SIGNATURES = {
   '0xfcc11241': ['addOrder(uint256,uint256,uint256,uint256,uint256,uint8)'],
   '0x5829d310': ['entries(int256)'],
   '0x8f9df278': [
-    'newEntry(int256,bool,uint256,int256,string,bytes32,address,uint256[])'
+    'newEntry(int256,bool,uint256,int256,string,bytes32,address,uint256[])',
   ],
   '0x031d973e': ['closeMarket(bytes32)'],
   '0x16181bb7': ['shortSellShares(bytes32,uint8,uint256,uint256)'],
@@ -2918,7 +2918,7 @@ window.SIGNATURES = {
   '0x9ba5b4e9': ['getEventHashes(bytes32[])'],
   '0xa4a7cf5c': ['redeemWinnings(bytes32)'],
   '0xb11e3b82': [
-    'createEvent(bytes32,bool,int256,int256,uint8,address,address,bytes32[])'
+    'createEvent(bytes32,bool,int256,int256,uint8,address,address,bytes32[])',
   ],
   '0xc10dd4c6': ['getEvents(bytes32[],address)'],
   '0xc51cf179': ['calcBaseFeeForShares(uint256)'],
@@ -2946,11 +2946,11 @@ window.SIGNATURES = {
   '0x049ae734': ['scheduleCall(address,bytes4,uint256,uint256,uint8)'],
   '0x68402460': ['scheduleCall(address,bytes4,uint256,uint256,uint8,uint256)'],
   '0x8b676ae8': [
-    'scheduleCall(address,bytes4,uint256,uint256,uint8,uint256,uint256)'
+    'scheduleCall(address,bytes4,uint256,uint256,uint8,uint256,uint256)',
   ],
   '0x30fd300f': ['registerBytes32(address,bytes32)'],
   '0x741e2345': [
-    'registerMany(address,uint256,int256,uint256,bytes20,address,bytes)'
+    'registerMany(address,uint256,int256,uint256,bytes20,address,bytes)',
   ],
   '0x73b55eaf': ['registerData(address,int256,bytes32,address)'],
   '0xc2b12a73': ['setBytes32(bytes32)'],
@@ -2973,23 +2973,23 @@ window.SIGNATURES = {
   '0xee77fe86': ['scheduleCall(address,bytes4,bytes,uint256,uint256,uint8)'],
   '0xe29fb547': ['scheduleCall(bytes4,uint256,uint256,uint8,uint256)'],
   '0x03d22885': [
-    'scheduleCall(address,uint256,bytes4,uint256,uint256,uint8,uint256)'
+    'scheduleCall(address,uint256,bytes4,uint256,uint256,uint8,uint256)',
   ],
   '0xb549793d': ['scheduleCall(bytes4,bytes,uint256,uint256,uint8,uint256)'],
   '0x7b55c8b5': ['scheduleCall(address,bytes4,bytes,uint8,uint256[4])'],
   '0x4c471cde': [
-    'scheduleCall(address,bytes4,bytes,uint256,uint256,uint8,uint256)'
+    'scheduleCall(address,bytes4,bytes,uint256,uint256,uint8,uint256)',
   ],
   '0x938c4307': [
-    'scheduleCall(bytes4,bytes,uint16,uint8,uint256,uint256,uint256,uint256,uint256)'
+    'scheduleCall(bytes4,bytes,uint16,uint8,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0x0ce46c43': ['scheduleCall(address,bytes4,bytes,uint16,uint8,uint256[5])'],
   '0x528eedcb': ['sendSafe(address,address,uint256)'],
   '0x2812f8b8': [
-    'FutureCall(address,uint256,uint16,address,bytes4,bytes,uint256,uint256,uint256)'
+    'FutureCall(address,uint256,uint16,address,bytes4,bytes,uint256,uint256,uint256)',
   ],
   '0xcdda62ad': [
-    'FutureBlockCall(address,uint256,uint8,address,bytes4,bytes,uint256,uint256,uint16,uint256,uint256)'
+    'FutureBlockCall(address,uint256,uint8,address,bytes4,bytes,uint256,uint256,uint16,uint256,uint256)',
   ],
   '0xc976bbbb': ['_compare(int256,bytes2,int256)'],
   '0x9f2ce678': ['vote(bytes32,bool)'],
@@ -3035,7 +3035,7 @@ window.SIGNATURES = {
   '0x1a26ed1c': ['validateReservedWindowSize(uint256,uint256)'],
   '0x2e898ddc': ['validateTemporalUnit(uint256)'],
   '0xb3aaa277': [
-    'validate(address[4],address,uint256[11],uint256,bytes,uint256)'
+    'validate(address[4],address,uint256[11],uint256,bytes,uint256)',
   ],
   '0xc45b415e': ['createRequest(address[4],address,uint256[11],uint256,bytes)'],
   '0xf00e8651': ['createRequest(address[2],address,uint256[11],uint256,bytes)'],
@@ -3047,7 +3047,7 @@ window.SIGNATURES = {
   '0x610d5de8': ['validateEndowment(uint256,uint256,uint256,uint256,uint256)'],
   '0xcd9a3c98': ['any(bool[7])'],
   '0xf1fe42b8': [
-    'TransactionRequest(address[3],address,uint256[11],uint256,bytes)'
+    'TransactionRequest(address[3],address,uint256[11],uint256,bytes)',
   ],
   '0x00a676f9': ['getExists(bytes32)'],
   '0xf42aa287': ['getBlobStore(bytes12)'],
@@ -3058,10 +3058,10 @@ window.SIGNATURES = {
   '0x606deecd': ['requestData()'],
   '0xf9909915': ['bulkStoreHeader(bytes,int256,bytes,int256)'],
   '0x129484b6': [
-    'changeFeeRecipient(int256,int256,int256,int256,int256,int256)'
+    'changeFeeRecipient(int256,int256,int256,int256,int256,int256)',
   ],
   '0xca0c1e62': [
-    'computeMerkle(int256,int256,int256[],int256,int256,int256[])'
+    'computeMerkle(int256,int256,int256[],int256,int256,int256[])',
   ],
   '0x752d349c': ['depthCheck(int256,int256)'],
   '0x157f8f51': ['feePaid(int256,int256,int256,int256)'],
@@ -3072,21 +3072,21 @@ window.SIGNATURES = {
   '0xc018d0e6': ['getFeeAmount(int256,int256)'],
   '0x16e27349': ['getFeeRecipient(int256,int256)'],
   '0xace51abc': [
-    'helperVerifyHash__(uint256,int256,int256[],int256,uint256,int256,int256[],int256)'
+    'helperVerifyHash__(uint256,int256,int256[],int256,uint256,int256,int256[],int256)',
   ],
   '0x11400d8e': ['priv_fastGetBlockHash__(int256,int256)'],
   '0x3c2e7d54': ['priv_inMainChain__(int256,int256)'],
   '0xecb0256b': [
-    'relayTx(bytes,int256,int256[],int256,int256,bytes,int256,int256[],int256,int256)'
+    'relayTx(bytes,int256,int256[],int256,int256,bytes,int256,int256[],int256,int256)',
   ],
   '0xfae8f9a2': ['setInitialParent(int256,int256,int256,int256,int256,int256)'],
   '0x6e173a7f': ['storeBlockHeader(bytes,bytes)'],
   '0x3af75ee1': ['storeBlockWithFee(bytes,int256,bytes,int256)'],
   '0xfad9bf9e': [
-    'storeBlockWithFeeAndRecipient(bytes,int256,int256,bytes,int256,int256)'
+    'storeBlockWithFeeAndRecipient(bytes,int256,int256,bytes,int256,int256)',
   ],
   '0x05a5b8c6': [
-    'verifyTx(bytes,int256,int256[],int256,bytes,int256,int256[],int256)'
+    'verifyTx(bytes,int256,int256[],int256,bytes,int256,int256[],int256)',
   ],
   '0x9a89ad65': ['within6Confirms(int256,int256)'],
   '0x362af076': ['createRequest(address[3],address,uint256[11],uint256,bytes)'],
@@ -3103,12 +3103,12 @@ window.SIGNATURES = {
   '0x8fbc3ecd': ['BUFFER()'],
   '0x3f0ec70b': ['RequestFactory(address)'],
   '0xfb87d5ea': [
-    'TransactionRequest(address[4],address,uint256[11],uint256,bytes)'
+    'TransactionRequest(address[4],address,uint256[11],uint256,bytes)',
   ],
   '0xb311ee0c': ['refundClaimDeposit()'],
   '0x8dd8596c': ['sendDonation()'],
   '0x6720ceb1': ['sendPayment()'],
-  '0x6949a058': ['sendOwnerEther()'],
+  '0x6949a058': ['sendOwnerHucer()'],
   '0x66671c71': ['BaseScheduler(address,address)'],
   '0xbf8c50ff': ['scheduleTransaction()'],
   '0x93c166ec': ['computeEndowment(uint256,uint256,uint256,uint256)'],
@@ -3152,7 +3152,7 @@ window.SIGNATURES = {
   '0x7c9cd7df': ['changeDeveloper_only_Dev(address)'],
   '0xbb84d362': ['splitProfitVIP_only_Dev()'],
   '0xc7144269': [
-    'changeSettings_only_Dev(uint256,uint256,uint256,uint256,uint16,uint256,uint256,uint256,uint8,uint8)'
+    'changeSettings_only_Dev(uint256,uint256,uint256,uint256,uint16,uint256,uint256,uint256,uint8,uint8)',
   ],
   '0xe56c8552': ['spinTheWheel(address)'],
   '0x433836dc': ['scheduleTransaction(address,bytes,uint8,uint256[3],uint256)'],
@@ -3170,20 +3170,20 @@ window.SIGNATURES = {
   '0x7b632c41': ['TimestampScheduler(address,address)'],
   '0xb69c0896': ['BaseScheduler(address,address,uint256)'],
   '0x30aceb89': [
-    'validateRequestParams(address[3],address,uint256[11],uint256,bytes,uint256)'
+    'validateRequestParams(address[3],address,uint256[11],uint256,bytes,uint256)',
   ],
   '0x15abc160': [
-    'createValidatedRequest(address[3],address,uint256[11],uint256,bytes)'
+    'createValidatedRequest(address[3],address,uint256[11],uint256,bytes)',
   ],
   '0x316b08a0': ['scheduleTransaction(address,bytes,uint256[7],uint256)'],
   '0xd96d7ea2': ['PRE_EXECUTION_GAS()'],
   '0x45104b16': ['EXECUTION_GAS_OVERHEAD()'],
   '0xc7e67360': ['GAS_BUFFER()'],
   '0x5ee345e4': [
-    'computeEndowment(uint256,uint256,uint256,uint256,uint256,uint256)'
+    'computeEndowment(uint256,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0x27960c5f': [
-    'validateEndowment(uint256,uint256,uint256,uint256,uint256,uint256,uint256)'
+    'validateEndowment(uint256,uint256,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0x81baf820': ['BlockScheduler(address)'],
   '0xba8661a2': ['TimestampScheduler(address)'],
@@ -3240,7 +3240,7 @@ window.SIGNATURES = {
   '0xe82f7dd4': ['testThrowsRetractLatestRevisionNotUpdatable()'],
   '0x8e1ffb19': ['testThrowsRetractLatestRevisionEnforceRevisions()'],
   '0xe0cfc05c': [
-    'testThrowsRetractLatestRevisionDoesntHaveAdditionalRevisions()'
+    'testThrowsRetractLatestRevisionDoesntHaveAdditionalRevisions()',
   ],
   '0x40695625': ['testRetractLatestRevision()'],
   '0x1b769e74': ['testThrowsRestartNotUpdatable()'],
@@ -3289,7 +3289,7 @@ window.SIGNATURES = {
   '0x0f3a1412': ['getArrlist(uint256,uint256)'],
   '0xbb5d40eb': ['isValid()'],
   '0x18921de4': [
-    'addSignature(string,uint256[],uint256[],uint256[],bool[],uint256[])'
+    'addSignature(string,uint256[],uint256[],uint256[],bool[],uint256[])',
   ],
   '0xd8c34127': ['isKnownSignature(string)'],
   '0x6ba0b4f2': ['isKnownSelector(bytes4)'],
@@ -3361,7 +3361,7 @@ window.SIGNATURES = {
   '0x2432eb23': ['testThrowRetractLatestRevisionNotUpdatable()'],
   '0x531d1974': ['testThrowRetractLatestRevisionEnforceRevisions()'],
   '0x6edb4cf6': [
-    'testThrowRetractLatestRevisionDoesntHaveAdditionalRevisions()'
+    'testThrowRetractLatestRevisionDoesntHaveAdditionalRevisions()',
   ],
   '0xfaf0952b': ['testThrowRestartNotOwner()'],
   '0x85fe0448': ['testThrowRestartNotUpdatable()'],
@@ -3462,10 +3462,10 @@ window.SIGNATURES = {
   '0xfa9acb05': ['addressInArray(address,address)'],
   '0xb76e4890': ['Tester()'],
   '0x0d2560ee': ['addMe()'],
-  '0x8894dd2b': ['addEther()'],
-  '0x1e9ea66a': ['balanceEther10000000(uint256)'],
-  '0xe5bf93b9': ['balanceEther(uint256)'],
-  '0xcd9f05b8': ['balanceEtherAddress(address)'],
+  '0x8894dd2b': ['addHucer()'],
+  '0x1e9ea66a': ['balanceHucer10000000(uint256)'],
+  '0xe5bf93b9': ['balanceHucer(uint256)'],
+  '0xcd9f05b8': ['balanceHucerAddress(address)'],
   '0xfd7ac203': ['TestToken()'],
   '0x35b09a6e': ['someFunction()'],
   '0x8f2c44a2': ['UnicornMilker()'],
@@ -3483,34 +3483,34 @@ window.SIGNATURES = {
   '0x49aa4ee2': ['removeVote()'],
   '0xa48bdb7c': ['results()'],
   '0x9832ee65': ['resultsWeightedByTokens()'],
-  '0x9dcb5c65': ['resultsWeightedByEther()'],
-  '0x49407a44': ['claimEther(uint256)'],
+  '0x9dcb5c65': ['resultsWeightedByHucer()'],
+  '0x49407a44': ['claimHucer(uint256)'],
   '0x509f8633': ['create_account()'],
   '0x32fefb4c': ['add_account(address,address)'],
   '0x9b5adea2': ['setMinter()'],
   '0x0ecaea73': ['create(address,uint256)'],
   '0xa24835d1': ['destroy(address,uint256)'],
-  '0x36f66528': ['EtherDelta(address,uint256,uint256)'],
+  '0x36f66528': ['HucerDelta(address,uint256,uint256)'],
   '0x338b5dea': ['depositToken(address,uint256)'],
   '0x9e281a98': ['withdrawToken(address,uint256)'],
   '0xf7888aec': ['balanceOf(address,address)'],
   '0x93f0bb51': [
-    'order(address,uint256,address,uint256,uint256,uint256,uint8,bytes32,bytes32)'
+    'order(address,uint256,address,uint256,uint256,uint256,uint8,bytes32,bytes32)',
   ],
   '0x0a19b14a': [
-    'trade(address,uint256,address,uint256,uint256,uint256,address,uint8,bytes32,bytes32,uint256)'
+    'trade(address,uint256,address,uint256,uint256,uint256,address,uint8,bytes32,bytes32,uint256)',
   ],
   '0x6c86888b': [
-    'testTrade(address,uint256,address,uint256,uint256,uint256,address,uint8,bytes32,bytes32,uint256,address)'
+    'testTrade(address,uint256,address,uint256,uint256,uint256,address,uint8,bytes32,bytes32,uint256,address)',
   ],
   '0xfb6e155f': [
-    'availableVolume(address,uint256,address,uint256,uint256,uint256,address,uint8,bytes32,bytes32)'
+    'availableVolume(address,uint256,address,uint256,uint256,uint256,address,uint8,bytes32,bytes32)',
   ],
   '0xbb8be064': ['HardwareToken()'],
   '0x57a373a1': ['uintInArray(uint256,uint256,int256,uint256[],uint256)'],
-  '0x32afa2f9': ['claimEtherOwner(uint256)'],
-  '0xa2a8336f': ['claimEtherSigner(uint256)'],
-  '0x4e077f2a': ['addGasEther()'],
+  '0x32afa2f9': ['claimHucerOwner(uint256)'],
+  '0xa2a8336f': ['claimHucerSigner(uint256)'],
+  '0x4e077f2a': ['addGasHucer()'],
   '0x24804cef': ['Deed()'],
   '0xfaab9d39': ['setRegistrar(address)'],
   '0xfb1669ca': ['setBalance(uint256)'],
@@ -3620,7 +3620,7 @@ window.SIGNATURES = {
   '0x4cb71b9b': ['getAllReleaseHashes()'],
   '0x79cce1c5': ['getReleaseHashes(uint256,uint256)'],
   '0x1f6b0a9d': [
-    'getReleaseLockfileURI(string,uint32,uint32,uint32,string,string)'
+    'getReleaseLockfileURI(string,uint32,uint32,uint32,string,string)',
   ],
   '0x79c3ddc1': ['isPackageOwner(string,address,address)'],
   '0x91060168': ['fetchString(address,bytes4,bytes32)'],
@@ -3675,7 +3675,7 @@ window.SIGNATURES = {
   '0xe21608be': ['ReserveToken()'],
   '0x1cbd0519': ['accountLevel(address)'],
   '0x8abadb6b': ['setAccountLevel(address,uint256)'],
-  '0x4c7f74df': ['EtherDelta(address,address,address,uint256,uint256,uint256)'],
+  '0x4c7f74df': ['HucerDelta(address,address,address,uint256,uint256,uint256)'],
   '0x8f283970': ['changeAdmin(address)'],
   '0xe8f6bc2e': ['changeAccountLevelsAddr(address)'],
   '0x71ffcb16': ['changeFeeAccount(address)'],
@@ -3684,13 +3684,13 @@ window.SIGNATURES = {
   '0x5e1d7ae4': ['changeFeeRebate(uint256)'],
   '0x0b927666': ['order(address,uint256,address,uint256,uint256,uint256)'],
   '0x05888fcd': [
-    'tradeBalances(address,uint256,address,uint256,address,uint256)'
+    'tradeBalances(address,uint256,address,uint256,address,uint256)',
   ],
   '0x46be96c3': [
-    'amountFilled(address,uint256,address,uint256,uint256,uint256,address,uint8,bytes32,bytes32)'
+    'amountFilled(address,uint256,address,uint256,uint256,uint256,address,uint8,bytes32,bytes32)',
   ],
   '0x278b8c0e': [
-    'cancelOrder(address,uint256,address,uint256,uint256,uint256,uint8,bytes32,bytes32)'
+    'cancelOrder(address,uint256,address,uint256,uint256,uint256,uint8,bytes32,bytes32)',
   ],
   '0x60116397': ['Registrar(address,bytes32,uint256)'],
   '0xf4dc2d21': ['Deed(uint256)'],
@@ -3740,10 +3740,10 @@ window.SIGNATURES = {
   '0xb29d7914': ['getRefResults(uint256)'],
   '0xc0df77d0': ['getRefName(uint256)'],
   '0x94d9cf8f': [
-    'CreateProxyWithControllerAndRecovery(address,address[],uint256,uint256)'
+    'CreateProxyWithControllerAndRecovery(address,address[],uint256,uint256)',
   ],
   '0x4a3a87e2': [
-    'CreateProxyWithControllerAndRecoveryKey(address,address,uint256,uint256)'
+    'CreateProxyWithControllerAndRecoveryKey(address,address,uint256,uint256)',
   ],
   '0x4fcf8210': ['eraseRecord(bytes32)'],
   '0xde10f04b': ['eraseNode(bytes32[])'],
@@ -3808,8 +3808,8 @@ window.SIGNATURES = {
   '0xe3579ea5': ['publish(string,string,address,uint256)'],
   '0x4c8cc20b': ['toContentID(address,string,string,address,uint256)'],
   '0x6ce1417e': ['Fund()'],
-  '0xea46193e': ['getEtherBalance()'],
-  '0x55291dbd': ['claimEther()'],
+  '0xea46193e': ['getHucerBalance()'],
+  '0x55291dbd': ['claimHucer()'],
   '0xe9e99d81': ['getChannelFeed(address,uint256,uint256,uint256)'],
   '0x05a17fc6': ['getAccountFeed(address,uint256,uint256,uint256)'],
   '0xd90a88cd': ['getContentReplies(uint256,uint256)'],
@@ -3861,7 +3861,7 @@ window.SIGNATURES = {
   '0xc1d5e84f': ['addNewUser(address)'],
   '0x76849376': ['addNode(bytes32,address)'],
   '0x7d380265': [
-    'addOptionChain(uint256,string,uint256,uint256,bytes32,address,int256[])'
+    'addOptionChain(uint256,string,uint256,uint256,bytes32,address,int256[])',
   ],
   '0x227f9633': ['addOption(string,address,uint256)'],
   '0xdf5dd1a5': ['addOracle(address)'],
@@ -3890,7 +3890,7 @@ window.SIGNATURES = {
   '0x40fdef80': ['administration(uint256,string,uint256,uint256,address)'],
   '0xbc21ce9d': ['Aggregation()'],
   '0x98688a95': ['Ai()'],
-  '0xbd3f0965': ['AiraEtherFunds(string,string)'],
+  '0xbd3f0965': ['AiraHucerFunds(string,string)'],
   '0xe1efda6d': ['airaSend(address,address,uint256)'],
   '0x6d2cb794': ['airaTransfer(address,address,uint256)'],
   '0xa9f8ec6c': ['AlarmClockTipFaucet()'],
@@ -3918,9 +3918,9 @@ window.SIGNATURES = {
   '0x2be6d43c': ['ARKTagger_1_00()'],
   '0xae30d35d': ['ARK_TROGLOg_1_00()'],
   '0x97709cde': [
-    'ARK_VOTER_1_00(uint256,uint256,uint256,uint256,uint256,uint256)'
+    'ARK_VOTER_1_00(uint256,uint256,uint256,uint256,uint256,uint256)',
   ],
-  '0xdba21657': ['askForEther(uint256)'],
+  '0xdba21657': ['askForHucer(uint256)'],
   '0x8a3e44d4': ['assetMoveInformation(address,address)'],
   '0x0399c357': ['assignFreeReadings(address,uint8)'],
   '0x7fe0518a': ['asyncSend(address,uint256)'],
@@ -3963,7 +3963,7 @@ window.SIGNATURES = {
   '0xb0ad38c4': ['buildCity(string,uint256[2],uint256[2])'],
   '0xdad99989': ['burnCoins(address)'],
   '0x5fc5d48b': ['burnUnsoldCoins(address)'],
-  '0x3824d8ee': ['buy100DaoFor1Eth()'],
+  '0x3824d8ee': ['buy100DaoFor1Huc()'],
   '0x561a4873': ['buyAd(string,string,string,uint256,uint8,address)'],
   '0x5f8f0483': ['buyBankerAgreementFromImporterBank()'],
   '0x29274fe1': ['buyBOTx(uint256,string,string,address,uint256)'],
@@ -3993,7 +3993,7 @@ window.SIGNATURES = {
   '0x671dacdc': ['CalculateSqrt(uint256)'],
   '0xdcf8113e': ['campaignEndedSuccessfully()'],
   '0x74e60a48': [
-    'cancelOrder(address,uint256,address,uint256,uint256,uint256,address,uint8,bytes32,bytes32)'
+    'cancelOrder(address,uint256,address,uint256,uint256,uint256,address,uint8,bytes32,bytes32)',
   ],
   '0xdc419fd8': ['cancelOrder(bool,uint256)'],
   '0x3fb0b2c9': ['CancelRoundAndRefundAll()'],
@@ -4069,10 +4069,10 @@ window.SIGNATURES = {
   '0xc5575ef0': ['checkTransferFrom(address,address,uint256)'],
   '0x00a7d6b3': ['checkTransferFromToICAP(address,bytes32,uint256)'],
   '0xbd8c1d33': [
-    'checkTransferFromToICAPWithReference(address,bytes32,uint256,string)'
+    'checkTransferFromToICAPWithReference(address,bytes32,uint256,string)',
   ],
   '0xc6e0c908': [
-    'checkTransferFromWithReference(address,address,uint256,string)'
+    'checkTransferFromWithReference(address,address,uint256,string)',
   ],
   '0x8e4afa51': ['checkTransferToICAP(bytes32,uint256)'],
   '0x058026d0': ['checkTransferToICAPWithReference(bytes32,uint256,string)'],
@@ -4151,10 +4151,10 @@ window.SIGNATURES = {
   '0xc88961da': ['createKingdom(string,address,address,address)'],
   '0xeac116c4': ['createKingdom(string,address,address,address,address)'],
   '0xa21931ea': [
-    'CreateProposal(string,string,string,uint32,string,string,string,uint32,uint32)'
+    'CreateProposal(string,string,string,uint32,string,string,string,uint32,uint32)',
   ],
   '0xa753d6f2': [
-    'CreateProposal(string,string,string,string,string,string,uint32,uint32)'
+    'CreateProposal(string,string,string,string,string,string,uint32,uint32)',
   ],
   '0x35cc59a9': ['createSchema(bytes)'],
   '0x4156fdb7': ['createSwap(uint256)'],
@@ -4162,7 +4162,7 @@ window.SIGNATURES = {
   '0x8ea822d8': ['createThings(bytes32[],uint16[],bytes32[],uint16[],uint88)'],
   '0x72479140': ['CreateTicket(address,uint8,uint8,uint8)'],
   '0x3d6a32bd': [
-    'createTradeContract(address,uint256,uint256,uint256,bool,bool)'
+    'createTradeContract(address,uint256,uint256,uint256,bool,bool)',
   ],
   '0x6f9a5eab': ['createTx(uint256,address,uint256)'],
   '0xe1c66292': ['Create(uint32,address)'],
@@ -4211,10 +4211,10 @@ window.SIGNATURES = {
   '0x56105a08': ['DgxSwap()'],
   '0x594151e0': ['Dice()'],
   '0x5e855f14': [
-    'Dice(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)'
+    'Dice(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0x6545bed3': [
-    'Dice(uint256,uint256,uint256,uint256,uint256,uint256,uint256)'
+    'Dice(uint256,uint256,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0x0f06670a': ['didWin(bytes32)'],
   '0x91b4a0e7': ['Difficulty()'],
@@ -4281,39 +4281,39 @@ window.SIGNATURES = {
   '0x0bd2ae1c': ['ERW()'],
   '0x22f607f6': ['Escrow()'],
   '0x0bad342a': [
-    'EscrowContract(address,address,address,address,uint256,uint256,uint256,uint256)'
+    'EscrowContract(address,address,address,address,uint256,uint256,uint256,uint256)',
   ],
   '0x8383bfc8': ['EscrowFoundry()'],
   '0x1768b436': ['ETCSurvey()'],
-  '0xdbf45aa3': ['EthBank()'],
-  '0x838445e8': ['EtherAds(address,address,address)'],
-  '0x1df5e755': ['Etherandom()'],
-  '0x384e5018': ['etherandomCallbackAddress()'],
-  '0xd216d55d': ['etherandomExec(bytes32,bytes32,uint256)'],
-  '0x1f201e39': ['etherandomExecWithGasLimit(bytes32,bytes32,uint256,uint256)'],
-  '0xa715ff59': ['EtherandomProxy()'],
-  '0x36f9f49c': ['etherandomSeed()'],
-  '0x70e71ea3': ['etherandomSeedWithGasLimit(uint256)'],
-  '0x4d561721': ['etherandomSetNetwork()'],
-  '0x7ca55e00': ['etherandomVerify(bytes32,bytes32,bytes32,uint256,uint256)'],
-  '0x29bed3bf': ['EthereumRoulette()'],
-  '0xd81f53fd': ['EtherId()'],
-  '0x50e06b57': ['Etherization()'],
-  '0xd409ddda': ['EtherizationUtils()'],
-  '0xff7f5f2a': ['EtherizationUtils2()'],
-  '0xf9a794ad': ['EtherLovers()'],
-  '0x1558ae4d': ['Etheroll()'],
+  '0xdbf45aa3': ['HucBank()'],
+  '0x838445e8': ['HucerAds(address,address,address)'],
+  '0x1df5e755': ['Hucerandom()'],
+  '0x384e5018': ['hucerandomCallbackAddress()'],
+  '0xd216d55d': ['hucerandomExec(bytes32,bytes32,uint256)'],
+  '0x1f201e39': ['hucerandomExecWithGasLimit(bytes32,bytes32,uint256,uint256)'],
+  '0xa715ff59': ['HucerandomProxy()'],
+  '0x36f9f49c': ['hucerandomSeed()'],
+  '0x70e71ea3': ['hucerandomSeedWithGasLimit(uint256)'],
+  '0x4d561721': ['hucerandomSetNetwork()'],
+  '0x7ca55e00': ['hucerandomVerify(bytes32,bytes32,bytes32,uint256,uint256)'],
+  '0x29bed3bf': ['HappyucRoulette()'],
+  '0xd81f53fd': ['HucerId()'],
+  '0x50e06b57': ['Hucerization()'],
+  '0xd409ddda': ['HucerizationUtils()'],
+  '0xff7f5f2a': ['HucerizationUtils2()'],
+  '0xf9a794ad': ['HucerLovers()'],
+  '0x1558ae4d': ['Huceroll()'],
   '0xa08d3f83': [
-    'Etheropt(uint256,string,uint256,uint256,bytes32,address,int256[])'
+    'Huceropt(uint256,string,uint256,uint256,bytes32,address,int256[])',
   ],
-  '0xadd43c59': ['EtherTopDog()'],
-  '0x356594ab': ['EtherTransfer()'],
-  '0x0da3e613': ['EthFactory()'],
-  '0xf5f6ea26': ['EthOne()'],
-  '0x3023d0c4': ['Ethstick()'],
-  '0x6f13e01b': ['EthVenturePlugin()'],
-  '0x4054f5de': ['EthVentures3()'],
-  '0x9c172f87': ['EthVentures4()'],
+  '0xadd43c59': ['HucerTopDog()'],
+  '0x356594ab': ['HucerTransfer()'],
+  '0x0da3e613': ['HucFactory()'],
+  '0xf5f6ea26': ['HucOne()'],
+  '0x3023d0c4': ['Hucstick()'],
+  '0x6f13e01b': ['HucVenturePlugin()'],
+  '0x4054f5de': ['HucVentures3()'],
+  '0x9c172f87': ['HucVentures4()'],
   '0xd5171523': ['euroteambet()'],
   '0x9f87acd0': ['exec(bytes32,bytes32,uint256)'],
   '0xf4993bbd': ['executeEmergencyWithdrawal()'],
@@ -4622,7 +4622,7 @@ window.SIGNATURES = {
   '0x1e8c72b4': ['incrUserAvailBal(address,uint256,bool)'],
   '0x3d5db1c2': ['incrUserOnholdBal(address,uint256,bool)'],
   '0x22686250': ['index(int256,uint256)'],
-  '0x1f13de92': ['inEther(uint256)'],
+  '0x1f13de92': ['inHucer(uint256)'],
   '0x9334ab61': ['Infos()'],
   '0x4a1f0bf6': ['inheritToNextGeneration(address)'],
   '0x2cc0b254': ['init(address,bytes32)'],
@@ -4686,7 +4686,7 @@ window.SIGNATURES = {
   '0xb0c7f709': ['kingAutomaticCollectFee()'],
   '0x7e81b6aa': ['KingdomFactory()'],
   '0x5e68ac2c': [
-    'Kingdom(string,address,address,address,uint256,uint256,uint256,uint256,uint256)'
+    'Kingdom(string,address,address,address,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0x31ae0019': ['KissBTC()'],
   '0x07e00bcb': ['kissBTCCallback(uint256,uint256)'],
@@ -4698,7 +4698,7 @@ window.SIGNATURES = {
   '0xd95a2d42': ['lendGovernmentMoney(address)'],
   '0x56d88e27': ['len()'],
   '0xfe71aec5': ['LittleCactus()'],
-  '0x7b647652': ['LittleEthereumDoubler()'],
+  '0x7b647652': ['LittleHappyucDoubler()'],
   '0xf83d08ba': ['lock()'],
   '0xe8d1e961': ['lockAccount(uint256)'],
   '0x3a7d280c': ['login(string)'],
@@ -4722,7 +4722,7 @@ window.SIGNATURES = {
   '0x1077f06c': ['makeClaim(uint256)'],
   '0x059a500c': ['makeDeposit(uint256)'],
   '0x3df16377': [
-    'make_move_and_claim_victory(uint256,uint8,uint8,uint8,uint8,uint8,uint8,uint8)'
+    'make_move_and_claim_victory(uint256,uint8,uint8,uint8,uint8,uint8,uint8,uint8)',
   ],
   '0xa35cfa22': ['make_move(uint256,uint8,uint8,uint8,uint8)'],
   '0x2f1e4968': ['makeNewProposal(string,uint256)'],
@@ -4741,7 +4741,7 @@ window.SIGNATURES = {
   '0xf41bfa9e': ['mint(int256,uint256,string)'],
   '0x411c4e72': ['ModifyFeeFraction(uint256)'],
   '0xa20c404f': [
-    'ModifySettings(uint256,uint256,uint256,uint256,uint256,uint256,uint256)'
+    'ModifySettings(uint256,uint256,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0x689b3e2d': ['Moonraker(address,address)'],
   '0x5837e083': ['move_history(uint256)'],
@@ -4827,8 +4827,8 @@ window.SIGNATURES = {
   '0x902e64e5': ['Oath()'],
   '0xa1920586': ['offer(uint256,uint256)'],
   '0x901717d1': ['one()'],
-  '0xe671f510': ['onEtherandomExec(bytes32,bytes32,uint256)'],
-  '0x041fe13d': ['onEtherandomSeed(bytes32,bytes32)'],
+  '0xe671f510': ['onHucerandomExec(bytes32,bytes32,uint256)'],
+  '0x041fe13d': ['onHucerandomSeed(bytes32,bytes32)'],
   '0xa5eb7a4e': ['operated()'],
   '0x9549355e': ['oracalizeReading(uint256)'],
   '0x9a828a71': ['oracalizeReading(uint256,string)'],
@@ -4861,10 +4861,10 @@ window.SIGNATURES = {
   '0x83a51ad0': ['oraclize_setConfig(bytes32)'],
   '0x01095962': ['oraclize_setCustomGasPrice(uint256)'],
   '0x6b1cb549': [
-    'orderMatch(uint256,uint256,uint256,int256,uint256,uint256,address,uint8,bytes32,bytes32,int256)'
+    'orderMatch(uint256,uint256,uint256,int256,uint256,uint256,address,uint8,bytes32,bytes32,int256)',
   ],
   '0xbd858288': [
-    'orderMatch(uint256,uint256,int256,uint256,uint256,address,uint8,bytes32,bytes32,int256)'
+    'orderMatch(uint256,uint256,int256,uint256,uint256,address,uint8,bytes32,bytes32,int256)',
   ],
   '0x17961d0f': ['ord()'],
   '0x16bac350': ['overthrow(string)'],
@@ -4886,7 +4886,7 @@ window.SIGNATURES = {
   '0x31375242': ['ownerSetTreasury(address)'],
   '0xf738e5ca': ['ownerTakeProfit()'],
   '0x758971e8': ['ownerTakeProfit(bool)'],
-  '0x7ac37d58': ['ownerTransferEther(address,uint256)'],
+  '0x7ac37d58': ['ownerTransferHucer(address,uint256)'],
   '0x150ad2a8': ['owner_transfer_ownership(address)'],
   '0x26da8e17': ['ownerUpdateCostToCallOraclize(uint256)'],
   '0xb33926cb': ['owner_withdraw(uint256)'],
@@ -4894,7 +4894,7 @@ window.SIGNATURES = {
   '0x88c3ba85': ['ParallelGambling()'],
   '0xf65c4d42': ['Participate(uint256)'],
   '0x1b9265b8': ['pay()'],
-  '0x18b749c4': ['payEther(uint256)'],
+  '0x18b749c4': ['payHucer(uint256)'],
   '0x4d268ddd': ['payImporterBankForGoodsBought()'],
   '0xff08d2b0': ['PayMiners()'],
   '0x85db2dda': ['PayoutQueueSize()'],
@@ -4954,10 +4954,10 @@ window.SIGNATURES = {
   '0x4f09eba7': ['proxyApprove(address,uint256,bytes32)'],
   '0xe82b7cb2': ['proxySetCosignerAddress(address,bytes32)'],
   '0xea98e540': [
-    'proxyTransferFromToICAPWithReference(address,bytes32,uint256,string)'
+    'proxyTransferFromToICAPWithReference(address,bytes32,uint256,string)',
   ],
   '0xf0cbe059': [
-    'proxyTransferFromWithReference(address,address,uint256,bytes32,string)'
+    'proxyTransferFromWithReference(address,address,uint256,bytes32,string)',
   ],
   '0xc5487661': ['proxyTransferToICAPWithReference(bytes32,uint256,string)'],
   '0x64ef212e': ['proxyTransferWithReference(address,uint256,bytes32,string)'],
@@ -5007,18 +5007,18 @@ window.SIGNATURES = {
   '0x4420e486': ['register(address)'],
   '0x8d59cc02': ['register(address,string,string)'],
   '0x8b7f0ddd': [
-    'register(address,address,string,string,bytes32[],uint256,string)'
+    'register(address,address,string,string,bytes32[],uint256,string)',
   ],
   '0x7b1a547c': ['registerAs(address,string,uint256,string,address)'],
   '0x3facd57c': [
-    'registerBill(uint256,address,address,uint256,uint256,uint256)'
+    'registerBill(uint256,address,address,uint256,uint256,uint256)',
   ],
   '0x84c344fe': ['_register(bytes4,string)'],
   '0xb0fd935b': ['registerCertificationDb(address)'],
   '0x4cd995da': ['registerCompany(address,string)'],
   '0x669ee827': ['RegisterDevice()'],
   '0xfe63300a': [
-    'registerExternalBill(uint256,address,address,uint256,uint256,uint256)'
+    'registerExternalBill(uint256,address,address,uint256,uint256,uint256)',
   ],
   '0x68af4971': ['registerListening()'],
   '0x00e7d289': ['registerListening(address)'],
@@ -5251,7 +5251,7 @@ window.SIGNATURES = {
   '0x8173b813': ['setNumCities(uint256,uint256)'],
   '0x755b5b75': ['setNumUnits(uint256,uint256)'],
   '0x65228934': [
-    'setOperationsCallGas(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)'
+    'setOperationsCallGas(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0x7adbf973': ['setOracle(address)'],
   '0xc7e22ac4': ['setOracleGas(uint256)'],
@@ -5347,8 +5347,8 @@ window.SIGNATURES = {
   '0x9c709343': ['split(bool,address)'],
   '0xf7654176': ['split()'],
   '0xd9d2d058': ['Splitter()'],
-  '0x2672b3e2': ['SplitterEtcToEth()'],
-  '0x8946d33f': ['SplitterEthToEtc()'],
+  '0x2672b3e2': ['SplitterEtcToHuc()'],
+  '0x8946d33f': ['SplitterHucToEtc()'],
   '0xb7266456': ['StandardToken()'],
   '0x70983e91': ['startBoardProposal(uint256,address)'],
   '0x9f35d3b2': ['start(string,string,uint256,uint256,uint256,uint256)'],
@@ -5384,7 +5384,7 @@ window.SIGNATURES = {
   '0x4cad42d3': ['testWager()'],
   '0xc96593a0': ['The10ETHPyramid()'],
   '0x83d8a90f': ['theDonkeyKing()'],
-  '0x87fd0421': ['TheEthereumLottery()'],
+  '0x87fd0421': ['TheHappyucLottery()'],
   '0x0e3f732a': ['TheGame()'],
   '0xafbec8df': ['TheGrid()'],
   '0x7399646a': ['theRun()'],
@@ -5401,7 +5401,7 @@ window.SIGNATURES = {
   '0x2f5a5c5b': ['timegame()'],
   '0xcfed9199': ['timePassed(uint256)'],
   '0xdd137b5d': ['toBase58(uint256,uint8)'],
-  '0xb05e390a': ['TokenEther(string,string)'],
+  '0xb05e390a': ['TokenHucer(string,string)'],
   '0x7ff9b596': ['tokenPrice()'],
   '0x31380c89': ['TokenSale()'],
   '0x4da47ba0': ['TokenSale(address,uint256)'],
@@ -5437,24 +5437,24 @@ window.SIGNATURES = {
   '0x30e0789e': ['_transfer(address,address,uint256)'],
   '0x63334c58': ['transferETC(address)'],
   '0xd50f6bf0': ['transferETH(address)'],
-  '0x97fcb54e': ['transfer_eth(address,uint256)'],
+  '0x97fcb54e': ['transfer_huc(address,uint256)'],
   '0xa0eda9f2': ['_transferFee(address,uint256,string)'],
   '0xcb712535': ['_transferFrom(address,address,uint256)'],
   '0xc204f9f1': ['_transferFromToICAP(address,bytes32,uint256)'],
   '0xa525f42c': ['transferFromToICAP(address,bytes32,uint256)'],
   '0xcac77df7': [
-    '__transferFromToICAPWithReference(address,bytes32,uint256,string)'
+    '__transferFromToICAPWithReference(address,bytes32,uint256,string)',
   ],
   '0x0b1e400a': [
-    '_transferFromToICAPWithReference(address,bytes32,uint256,string)'
+    '_transferFromToICAPWithReference(address,bytes32,uint256,string)',
   ],
   '0xa48a663c': [
-    'transferFromToICAPWithReference(address,bytes32,uint256,string)'
+    'transferFromToICAPWithReference(address,bytes32,uint256,string)',
   ],
   '0x48a490fb': ['transferFromTreasury(address,uint256)'],
   '0xcacc24eb': ['transferFromViaProxy(address,address,address,uint256)'],
   '0x31c6c4cf': [
-    'transferFromWithReference(address,address,uint256,bytes32,string)'
+    'transferFromWithReference(address,address,uint256,bytes32,string)',
   ],
   '0x3de9e4c6': ['__transferFromWithReference(address,address,uint256,string)'],
   '0xa10bee85': ['_transferFromWithReference(address,address,uint256,string)'],
@@ -5487,7 +5487,7 @@ window.SIGNATURES = {
   '0x464f37c9': ['trustedChildRefund()'],
   '0x866f6736': ['trustedChildWithdraw()'],
   '0x2e6e504a': ['trusteeWithdraw()'],
-  '0x65343fcb': ['TrustEth()'],
+  '0x65343fcb': ['TrustHuc()'],
   '0x5fdf05d7': ['two()'],
   '0x0d0c2008': ['TwoAndAHalfPonzi()'],
   '0x49cc954b': ['twoYearsPassed()'],
@@ -5502,10 +5502,10 @@ window.SIGNATURES = {
   '0xcb3e64fd': ['unhalt()'],
   '0xff81fb91': ['unhint(int256,bytes32)'],
   '0xd4859dbc': [
-    'UniversalFunctionSecure(uint8,bytes32,bytes32,bytes32,bytes32,bytes32)'
+    'UniversalFunctionSecure(uint8,bytes32,bytes32,bytes32,bytes32,bytes32)',
   ],
   '0x579badf6': [
-    'UniversalFunction(uint8,bytes32,bytes32,bytes32,bytes32,bytes32)'
+    'UniversalFunction(uint8,bytes32,bytes32,bytes32,bytes32,bytes32)',
   ],
   '0x2ec2c246': ['unregister(address)'],
   '0x1a0919dc': ['unregister(bytes32)'],
@@ -5518,13 +5518,13 @@ window.SIGNATURES = {
   '0x0e38901a': ['unvault(uint256)'],
   '0xe0b1cccb': ['updateBalance(address,uint256)'],
   '0xfd8055d2': [
-    'updateBOTBillingInfo(uint256,string,address,string,string,uint256)'
+    'updateBOTBillingInfo(uint256,string,address,string,string,uint256)',
   ],
   '0xb4a5ef58': ['updateDefaultTimeoutPeriod(uint256)'],
   '0x2ffb9e64': ['updateGasForXaurData(uint256,uint256)'],
   '0x4f10acc1': ['updateGoldFeeData(uint256)'],
   '0x7c582304': ['updateInvestmentTotal(address,uint256)'],
-  '0xf2016a4f': ['updateMinEthPerNotification(uint256)'],
+  '0xf2016a4f': ['updateMinHucPerNotification(uint256)'],
   '0x10f41715': ['updateMintingData(uint256,uint256)'],
   '0xb3485dca': ['UpdatePrice(uint8,uint32)'],
   '0x482961e1': ['updateReading(uint256,uint256)'],
@@ -5551,9 +5551,9 @@ window.SIGNATURES = {
   '0xb8d4efb5': ['validate_percent(uint8)'],
   '0x67fc1c6a': ['validateProposedMonarchName(string)'],
   '0xd22c391a': [
-    'validateProposedThroneRules(uint256,uint256,uint256,uint256,uint256)'
+    'validateProposedThroneRules(uint256,uint256,uint256,uint256,uint256)',
   ],
-  '0x8f7fe231': ['ValidetherOracle()'],
+  '0x8f7fe231': ['ValidhucerOracle()'],
   '0xc0a239e3': ['valuePerShare()'],
   '0xcc189d00': ['Vault(address,uint256)'],
   '0xe820a32f': ['vetoPayout(uint256,uint256)'],
@@ -5576,8 +5576,8 @@ window.SIGNATURES = {
   '0x655388be': ['walkTowardsBlock()'],
   '0x5d5483b3': ['WatchAppliedFeePercentage()'],
   '0xd628e0a6': ['WatchBalance()'],
-  '0xe0834ea4': ['WatchBalanceInEther()'],
-  '0x252786e4': ['WatchBlockSizeInEther()'],
+  '0xe0834ea4': ['WatchBalanceInHucer()'],
+  '0x252786e4': ['WatchBlockSizeInHucer()'],
   '0xcf6b3822': ['WatchCollectedFeesInSzabo()'],
   '0x82381c96': ['WatchCurrentMultiplier()'],
   '0x20bfec70': ['WatchFees()'],
@@ -5600,7 +5600,7 @@ window.SIGNATURES = {
   '0x07bc6fad': ['withdraw(address,uint256,bytes32,uint256)'],
   '0x8d92fdf3': ['withdrawAsset(uint256)'],
   '0x5f52e9fd': ['WithdrawCashForHardwareReturn(uint256)'],
-  '0x1dd4914b': ['withdrawEtherOrThrow(uint256)'],
+  '0x1dd4914b': ['withdrawHucerOrThrow(uint256)'],
   '0x24600fc3': ['withdrawFunds()'],
   '0xf4aa1291': ['withdrawFundsAdvanced(address,uint256,uint256)'],
   '0xceeafd9d': ['withdrawFundsAdvancedRP(address,uint256,uint256)'],
@@ -5713,7 +5713,7 @@ window.SIGNATURES = {
   '0x596c8976': ['close(uint256,uint256)'],
   '0xdd0d74ff': ['IssueBank(address)'],
   '0x228cb733': ['reward()'],
-  '0x99b721a5': ['rewardEthAnd(address[])'],
+  '0x99b721a5': ['rewardHucAnd(address[])'],
   '0xeacccaf0': ['setReward(address,uint256)'],
   '0x85eddeea': ['setReward(address[],uint256[])'],
   '0xeb4dd8f2': ['confirm(address)'],
@@ -5732,7 +5732,7 @@ window.SIGNATURES = {
   '0x6f7920fd': ['tokenCreationCap()'],
   '0x8d4e4083': ['isFinalized()'],
   '0x91b43d13': ['fundingEndBlock()'],
-  '0xa81c3bdf': ['ethFundDeposit()'],
+  '0xa81c3bdf': ['hucFundDeposit()'],
   '0xc039daf6': ['tokenCreationMin()'],
   '0xd648a647': ['fundingStartBlock()'],
   '0x3a1a635e': ['createNewRevision(bytes20,bytes32)'],
@@ -5752,7 +5752,7 @@ window.SIGNATURES = {
   '0xb2ab530e': ['testFailRetractLatestRevisionNotUpdatable()'],
   '0xc57a99e5': ['testFailRetractLatestRevisionEnforceRevisions()'],
   '0xc204505a': [
-    'testFailRetractLatestRevisionDoesntHaveAdditionalRevisions()'
+    'testFailRetractLatestRevisionDoesntHaveAdditionalRevisions()',
   ],
   '0x617f8666': ['testFailRestartNotOwner()'],
   '0xd2c5c368': ['testFailRestartNotUpdatable()'],
@@ -5785,7 +5785,7 @@ window.SIGNATURES = {
   '0xc7a3778f': ['testControlRetractLatestRevisionNotUpdatable()'],
   '0x6c712471': ['testControlRetractLatestRevisionEnforceRevisions()'],
   '0x610285d2': [
-    'testControlRetractLatestRevisionDoesntHaveAdditionalRevisions()'
+    'testControlRetractLatestRevisionDoesntHaveAdditionalRevisions()',
   ],
   '0xebc697d1': ['testControlRestartNotOwner()'],
   '0x2d985cfb': ['testControlRestartNotUpdatable()'],
@@ -5908,7 +5908,7 @@ window.SIGNATURES = {
   '0x86590955': ['changeHeight(uint256)'],
   '0xd72dec33': ['changeVaccinHistory(address)'],
   '0xdc3d4203': [
-    'createPatient(bytes32,bytes32,uint256,uint256,uint256,bytes32,uint256)'
+    'createPatient(bytes32,bytes32,uint256,uint256,uint256,bytes32,uint256)',
   ],
   '0xe571fd2d': ['addPrescription(uint256,string)'],
   '0xfbbf93a0': ['getDetails()'],
@@ -5922,10 +5922,10 @@ window.SIGNATURES = {
   '0xf1679095': ['getTransferAddressUser(address)'],
   '0x0bf77989': ['debug_coinbaseTxSha(bytes,uint256)'],
   '0x107b1f8c': [
-    'debug_verifyShare(bytes,uint256[],uint256[],bytes,uint256,uint256)'
+    'debug_verifyShare(bytes,uint256[],uint256[],bytes,uint256,uint256)',
   ],
   '0x14ca5398': [
-    'submitFullBlock(bytes,uint256[],uint256[],bytes,bytes,bytes,bytes,bytes,bytes,uint256)'
+    'submitFullBlock(bytes,uint256[],uint256[],bytes,bytes,bytes,bytes,bytes,bytes,uint256)',
   ],
   '0x2850c72a': ['debug_extendCoinbaseTxOutput(uint256,uint256)'],
   '0x3e2ee39e': ['debug_resetuser()'],
@@ -5939,10 +5939,10 @@ window.SIGNATURES = {
   '0xa68393a2': ['debug_getCoinbaseTxOutputLen(uint256)'],
   '0xad076bfc': ['debug_hash256Double_concat(bytes,bytes,bytes)'],
   '0xb2b0aefb': [
-    'verifyPendingShares(uint256[],uint256[],uint256,uint256[],uint256[],bytes,bytes,uint256)'
+    'verifyPendingShares(uint256[],uint256[],uint256,uint256[],uint256[],bytes,bytes,uint256)',
   ],
   '0xed47ca94': [
-    'debug_verifySharesTreeSubmission(uint256[],uint256[],uint256,uint256,uint256,uint256)'
+    'debug_verifySharesTreeSubmission(uint256[],uint256[],uint256,uint256,uint256,uint256)',
   ],
   '0xf16fa954': ['debug_resizeRealPrefix(uint256,uint256)'],
   '0x6104464f': ['previousPublishedVersion()'],
@@ -5952,13 +5952,13 @@ window.SIGNATURES = {
   '0x98e7ea43': ['reward(uint32[],address[])'],
   '0x0456860a': ['acceptAtCommunity(address,uint256)'],
   '0x0a90c704': [
-    'createCommunity(string,string,string,string,uint256,uint256,uint256,uint256,uint256,uint256,uint256,bool,uint256,uint256,uint256)'
+    'createCommunity(string,string,string,string,uint256,uint256,uint256,uint256,uint256,uint256,uint256,bool,uint256,uint256,uint256)',
   ],
   '0x197f3c29': ['notLike(address)'],
   '0x1b7db340': ['sysAdmin()'],
   '0x2925ffc2': ['modifyCommunityTaxes(uint256,uint256,uint256,uint256)'],
   '0x33b85b73': [
-    'modifyCommunityRates(uint256,uint256,uint256,uint256,uint256,bool,uint256,uint256,uint256)'
+    'modifyCommunityRates(uint256,uint256,uint256,uint256,uint256,bool,uint256,uint256,uint256)',
   ],
   '0x3500a48d': ['transferCommunityCommune(uint256,address)'],
   '0x36b33415': ['modifyMemberInfo(string,string,string,string)'],
@@ -5996,7 +5996,7 @@ window.SIGNATURES = {
   '0x656104f5': ['_setOrganiser(address)'],
   '0x70de8c6e': ['start(string,uint64,uint8,uint32)'],
   '0x71bde852': [
-    '_startNextCompetition(string,uint32,uint88,uint8,uint8,uint16,uint64,uint32,bytes32,uint32[])'
+    '_startNextCompetition(string,uint32,uint88,uint8,uint8,uint16,uint64,uint32,bytes32,uint32[])',
   ],
   '0x8d909ad9': ['getSeedAndState(string,address)'],
   '0x8f30435d': ['getCompetitionValues(string,uint8)'],
@@ -6015,7 +6015,7 @@ window.SIGNATURES = {
   '0xd7789a9f': ['unsetEndorsement(address,uint256)'],
   '0xa9d0ddc7': ['addContractWithInfo(string,string)'],
   '0xfa3559f7': ['attestToContract(uint256,bool,string)'],
-  '0x179fc99f': ['etherBalanceOf(address)'],
+  '0x179fc99f': ['hucerBalanceOf(address)'],
   '0x3b0c197e': ['getBook()'],
   '0x42da3b6b': ['getAmount(uint256,address)'],
   '0x6dee2032': ['getOpenOrdersOf(address)'],
@@ -6037,7 +6037,7 @@ window.SIGNATURES = {
   '0x71c79588': ['releaseName(bytes32)'],
   '0x7c72e273': ['auctionFinalize(bytes32)'],
   '0x9bdd7cdb': ['forceRelease(bytes32)'],
-  '0xbfcf63b0': ['claimEther(address,uint256)'],
+  '0xbfcf63b0': ['claimHucer(address,uint256)'],
   '0xc415b95c': ['feeCollector()'],
   '0xd7ad4931': ['buyNow(bytes32)'],
   '0xe2acf75d': ['auctionCancel(bytes32)'],
@@ -6067,7 +6067,7 @@ window.SIGNATURES = {
   '0x5b372532': ['press()'],
   '0x9f095e88': ['asdf()'],
   '0xb0459d49': [
-    'LoanStandard(address,address,uint256,uint256,uint256,uint256,uint256)'
+    'LoanStandard(address,address,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0xa2fb342d': ['lend(address,uint256)'],
   '0xd334d75b': ['expireLoan()'],
@@ -6127,7 +6127,7 @@ window.SIGNATURES = {
   '0x96f47800': ['investInternal(address,uint128)'],
   '0x32013ac3': ['preallocate(address,uint256,uint256)'],
   '0x1a49803b': [
-    'investWithSignedAddress(address,uint128,uint8,bytes32,bytes32)'
+    'investWithSignedAddress(address,uint128,uint8,bytes32,bytes32)',
   ],
   '0xef869443': ['investWithCustomerId(address,uint128)'],
   '0x03f9c793': ['invest(address)'],
@@ -6181,17 +6181,17 @@ window.SIGNATURES = {
   '0x5598c576': ['reveal_move(bytes32,uint8,bytes32,bytes32)'],
   '0x5cf34bcf': ['getMinFee()'],
   '0x6a7bf76a': [
-    'create_game(bytes32,uint32,uint32,uint8,uint16,uint8,address,uint256,bool)'
+    'create_game(bytes32,uint32,uint32,uint8,uint16,uint8,address,uint256,bool)',
   ],
   '0x73931bbf': ['getGame(bytes32)'],
   '0x87287fd7': ['setMinFee(uint8)'],
   '0x89d61d77': ['setOrganizer(address)'],
   '0xa361b184': ['move(bytes32,bytes32)'],
   '0xe4083daf': [
-    'create_game_invite(bytes32,address,uint32,uint32,uint8,uint16,uint8,address,uint256)'
+    'create_game_invite(bytes32,address,uint32,uint32,uint8,uint16,uint8,address,uint256)',
   ],
   '0xf223446c': [
-    'start_game(bytes32,uint8,uint32,uint16,address,uint256,uint8)'
+    'start_game(bytes32,uint8,uint32,uint16,address,uint256,uint8)',
   ],
   '0x3a4de190': ['repost(bytes32)'],
   '0x4b91ab35': ['unfollow(bytes32)'],
@@ -6239,8 +6239,8 @@ window.SIGNATURES = {
   '0x9b99a8e2': ['reserveTokenCount()'],
   '0x4e2280c4': ['clearQuickBuyPath()'],
   '0x9396a7f0': ['getQuickBuyPathLength()'],
-  '0xabeb5f9f': ['hasQuickBuyEtherToken()'],
-  '0xb3a9afb7': ['getQuickBuyEtherToken()'],
+  '0xabeb5f9f': ['hasQuickBuyHucerToken()'],
+  '0xb3a9afb7': ['getQuickBuyHucerToken()'],
   '0x0b3f191a': ['disableChanging(bool)'],
   '0x88c0b8a7': ['setChangeFee(uint32)'],
   '0x48d6ca55': ['getChangeFeeAmount(uint256)'],
@@ -6257,18 +6257,18 @@ window.SIGNATURES = {
   '0xe9ed8667': ['balanceLocks(address)'],
   '0xf339c504': ['lockBalance(uint256)'],
   '0x1d4d691d': [
-    'fill(address,uint256,address,address,uint256,address,uint256,uint256,uint8,bytes32,bytes32)'
+    'fill(address,uint256,address,address,uint256,address,uint256,uint256,uint8,bytes32,bytes32)',
   ],
   '0x20158c44': ['fills(bytes32)'],
   '0x66a26419': [
-    'cancel(address,uint256,address,address,uint256,address,uint256,uint256,uint8,bytes32,bytes32)'
+    'cancel(address,uint256,address,address,uint256,address,uint256,uint256,uint8,bytes32,bytes32)',
   ],
   '0x673a5ae3': [
-    'Sale(address,address,uint256,string,uint8,string,uint256,uint256,uint256,uint256,uint256,uint256)'
+    'Sale(address,address,uint256,string,uint8,string,uint256,uint256,uint256,uint256,uint256,uint256)',
   ],
   '0x94b5255b': ['distributePreBuyersRewards(address[],uint256[])'],
   '0x555c4758': [
-    'distributeTimelockedTokens(address[],uint256[],uint256[],uint256[])'
+    'distributeTimelockedTokens(address[],uint256[],uint256[],uint256[])',
   ],
   '0x8b9b1cbd': ['withdrawRemainder()'],
   '0xa2b40d19': ['changePrice(uint256)'],
@@ -6406,7 +6406,7 @@ window.SIGNATURES = {
   '0xf3f480d9': ['challengePeriod()'],
   '0xf7553098': ['voteForOutcome(int256,uint256)'],
   '0xce70faec': [
-    'createUltimateOracle(address,address,uint8,uint256,uint256,uint256)'
+    'createUltimateOracle(address,address,uint8,uint256,uint256,uint256)',
   ],
   '0x91e8609f': ['getParentId(bytes32,uint256)'],
   '0xb4a39dfd': ['getChildId(bytes32,uint256)'],
@@ -6419,7 +6419,7 @@ window.SIGNATURES = {
   '0x025e7c27': ['owners(uint256)'],
   '0x0cbe1eb8': ['USDDOWNLOADPRICE()'],
   '0x11851b5e': ['BOARD_3()'],
-  '0x1e9be6a1': ['usdEthPrice()'],
+  '0x1e9be6a1': ['usdHucPrice()'],
   '0x3c540687': ['txCount()'],
   '0x436da5fe': ['transferLog(uint256)'],
   '0x44fddeb7': ['BLOCKAPPS()'],
@@ -6458,5 +6458,5 @@ window.SIGNATURES = {
   '0x0a6fbb05': ['SetPass(bytes32)'],
   '0x31fd725a': ['PassHasBeenSet(bytes32)'],
   '0x6cd5c39b': ['deployContract()'],
-  '0xe79487da': ['checkInvariant()']
+  '0xe79487da': ['checkInvariant()'],
 };

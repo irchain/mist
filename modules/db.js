@@ -20,10 +20,10 @@ exports.init = () => {
 
       const tempdb = new Loki(filePath, {
         env: 'NODEJS',
-        autoload: false
+        autoload: false,
       });
 
-      return new Q.promisify(tempdb.saveDatabase, { context: tempdb })();
+      return new Q.promisify(tempdb.saveDatabase, {context: tempdb})();
     }
   }).then(() => {
     log.info(`Loading db: ${filePath}`);
@@ -40,7 +40,7 @@ exports.init = () => {
             reject(new Error('Error instantiating db'));
           }
           resolve();
-        }
+        },
       });
     });
   });
@@ -49,7 +49,7 @@ exports.init = () => {
 exports.getCollection = name => {
   if (!db.getCollection(name)) {
     db.addCollection(name, {
-      unique: ['_id']
+      unique: ['_id'],
     });
   }
 

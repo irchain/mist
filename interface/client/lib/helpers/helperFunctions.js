@@ -1,54 +1,54 @@
 /**
-Helper functions
+ Helper functions
 
-@module Helpers
-**/
+ @module Helpers
+ **/
 
 /**
-The Helpers class containing helper functions
+ The Helpers class containing helper functions
 
-@class Helpers
-@constructor
-**/
+ @class Helpers
+ @constructor
+ **/
 Helpers = {};
 
 /**
-The preloader dirname
+ The preloader dirname
 
-@property preloaderDirname
-**/
+ @property preloaderDirname
+ **/
 Helpers.preloaderDirname = window.dirname + '/modules/preloader';
 
 /**
-Reruns functions reactively, based on an interval. Use it like so:
+ Reruns functions reactively, based on an interval. Use it like so:
 
-    Helpers.rerun['10s'].tick();
+ Helpers.rerun['10s'].tick();
 
 
-@method rerun
-**/
+ @method rerun
+ **/
 Helpers.rerun = {
   '10s': new ReactiveTimer(10),
-  '1s': new ReactiveTimer(1)
+  '1s': new ReactiveTimer(1),
 };
 
 /**
-Get the webview from either and ID, or the string "browser"
+ Get the webview from either and ID, or the string "browser"
 
-@method getWebview
-@param {String} id  The Id of a tab or the string "browser"
-*/
+ @method getWebview
+ @param {String} id  The Id of a tab or the string "browser"
+ */
 Helpers.getWebview = function(id) {
   return $('webview[data-id="' + id + '"]')[0];
 };
 
 /**
-Get tab by url and return the id
+ Get tab by url and return the id
 
-@method getTabIdByUrl
-@param {String} url
-@return {String} id
-*/
+ @method getTabIdByUrl
+ @param {String} url
+ @return {String} id
+ */
 Helpers.getTabIdByUrl = function(url, returnEmpty) {
   var tabs = Tabs.find().fetch();
   url = Helpers.sanitizeUrl(url);
@@ -72,11 +72,11 @@ Helpers.getTabIdByUrl = function(url, returnEmpty) {
 };
 
 /**
-Format Urls, e.g add a default protocol if on is missing.
+ Format Urls, e.g add a default protocol if on is missing.
 
-@method formatUrl
-@param {String} url
-**/
+ @method formatUrl
+ @param {String} url
+ **/
 Helpers.formatUrl = function(url) {
   if (!url) return;
 
@@ -84,12 +84,12 @@ Helpers.formatUrl = function(url) {
   if (url.length === 64 && !!url.match(/^[0-9a-f]+$/)) {
     // if the url looks like a hash, add bzz
     url = 'bzz://' + url;
-  } else if (!!url.match(/^([a-z]*:\/\/)?[^/]*\.eth(\/.*)?$/i)) {
-    // if uses .eth as a TLD
+  } else if (!!url.match(/^([a-z]*:\/\/)?[^/]*\.huc(\/.*)?$/i)) {
+    // if uses .huc as a TLD
     url = 'bzz://' + url.replace(/^([a-z]*:\/\/)?/i, '');
   } else if (!!url.match(/^[^\.\/]*$/i)) {
     // doesn't have a protocol nor a TLD
-    url = 'bzz://' + url + '.eth';
+    url = 'bzz://' + url + '.huc';
   } else if (url.indexOf('://') === -1) {
     // if it doesn't have a protocol
     url = 'http://' + url;
@@ -99,11 +99,11 @@ Helpers.formatUrl = function(url) {
 };
 
 /**
-Sanatizes URLs to prevent phishing and XSS attacks
+ Sanatizes URLs to prevent phishing and XSS attacks
 
-@method sanitizeUrl
-@param {String} url
-**/
+ @method sanitizeUrl
+ @param {String} url
+ **/
 Helpers.sanitizeUrl = function(url, returnEmptyURL) {
   url = String(url);
 
@@ -118,11 +118,11 @@ Helpers.sanitizeUrl = function(url, returnEmptyURL) {
 };
 
 /**
-Takes an URL and creates a breadcrumb out of it.
+ Takes an URL and creates a breadcrumb out of it.
 
-@method generateBreadcrumb
-@return Spacebars.SafeString
-**/
+ @method generateBreadcrumb
+ @return Spacebars.SafeString
+ **/
 Helpers.generateBreadcrumb = function(url) {
   var filteredUrl;
   var pathname;
@@ -132,7 +132,7 @@ Helpers.generateBreadcrumb = function(url) {
     host: Blaze._escape(url.host),
     pathname: Blaze._escape(url.pathname),
     search: Blaze._escape(url.search),
-    hash: Blaze._escape(url.hash)
+    hash: Blaze._escape(url.hash),
   };
 
   filteredUrl.pathname += filteredUrl.search.replace(/\?/g, '/');
@@ -142,23 +142,23 @@ Helpers.generateBreadcrumb = function(url) {
     filteredUrl.pathname.replace(/\/$/g, '').split('/'),
     function(el) {
       return el === '';
-    }
+    },
   );
 
   return new Spacebars.SafeString(
     filteredUrl.protocol +
-      '//' +
-      _.flatten(['<span>' + filteredUrl.host + ' </span>', pathname]).join(
-        ' ▸ '
-      )
+    '//' +
+    _.flatten(['<span>' + filteredUrl.host + ' </span>', pathname]).join(
+      ' ▸ ',
+    ),
   );
 };
 
 /**
-Clear localStorage
+ Clear localStorage
 
-@method getLocalStorageSize
-**/
+ @method getLocalStorageSize
+ **/
 Helpers.getLocalStorageSize = function() {
   var size = 0;
   if (localStorage) {
@@ -171,15 +171,15 @@ Helpers.getLocalStorageSize = function() {
 };
 
 /**
-Makes tab with index active
+ Makes tab with index active
 
-@method selecTabWithIndex
-@param {Integer} index
-*/
+ @method selecTabWithIndex
+ @param {Integer} index
+ */
 Helpers.selectTabWithIndex = function(index) {
   var tabList = Tabs.find(
     {},
-    { sort: { position: 1 }, fields: { _id: 1 } }
+    {sort: {position: 1}, fields: {_id: 1}},
   ).fetch();
   if (index < tabList.length) {
     LocalStore.set('selectedTab', tabList[index]._id);
@@ -187,23 +187,23 @@ Helpers.selectTabWithIndex = function(index) {
 };
 
 /**
-Makes last tab active
+ Makes last tab active
 
-@method selecLastTab
-*/
+ @method selecLastTab
+ */
 Helpers.selectLastTab = function() {
   var lastTab = Tabs.findOne(
     {},
-    { sort: { position: -1 }, fields: { _id: 1 }, limit: 1 }
+    {sort: {position: -1}, fields: {_id: 1}, limit: 1},
   );
   LocalStore.set('selectedTab', lastTab._id);
 };
 
 /**
-Selects previous or next tab (offset +1 or -1)
+ Selects previous or next tab (offset +1 or -1)
 
-@method selectTabWithOffset
-*/
+ @method selectTabWithOffset
+ */
 Helpers.selectTabWithOffset = function(offset) {
   var tabList;
   var currentTabIndex;
@@ -213,8 +213,8 @@ Helpers.selectTabWithOffset = function(offset) {
     return;
   }
   tabList = _.pluck(
-    Tabs.find({}, { sort: { position: 1 }, fields: { _id: 1 } }).fetch(),
-    '_id'
+    Tabs.find({}, {sort: {position: 1}, fields: {_id: 1}}).fetch(),
+    '_id',
   );
   currentTabIndex = tabList.indexOf(LocalStore.get('selectedTab'));
 
@@ -227,10 +227,10 @@ Helpers.selectTabWithOffset = function(offset) {
 };
 
 /**
-Detect Network
+ Detect Network
 
-@method detectNetwork
-**/
+ @method detectNetwork
+ **/
 Helpers.detectNetwork = function(hash) {
   var network = {};
 
@@ -269,13 +269,13 @@ Helpers.detectNetwork = function(hash) {
 };
 
 /**
-Displays an error as global notification
+ Displays an error as global notification
 
-@method displayError
-@param {Object} error The error object
-@param {Boolean} accounts will show the accounts errors
-@return {Boolean}
-**/
+ @method displayError
+ @param {Object} error The error object
+ @param {Boolean} accounts will show the accounts errors
+ @return {Boolean}
+ **/
 // Helpers.displayError = function(error, accounts) {
 //     var duration = 8;
 
@@ -314,17 +314,17 @@ Displays an error as global notification
 // };
 
 /**
-Get form values and build a parameters object out of it.
+ Get form values and build a parameters object out of it.
 
-@method formValuesToParameters
-@param {Element} elements   DOM-Elements elements, selects, inputs and textareas, to get values from. Must have a name tag
-@return {Object} An object with parameters to pass to the API Controller e.g.:
+ @method formValuesToParameters
+ @param {Element} elements   DOM-Elements elements, selects, inputs and textareas, to get values from. Must have a name tag
+ @return {Object} An object with parameters to pass to the API Controller e.g.:
 
-    {
-        key1: 'value1',
-        key2: 'value2'
-    }
-**/
+ {
+     key1: 'value1',
+     key2: 'value2'
+ }
+ **/
 // Helpers.formValuesToParameters = function(elements) {
 //     var parameters = {};
 
@@ -353,12 +353,12 @@ Get form values and build a parameters object out of it.
 // };
 
 /**
-Reactive wrapper for the moment package.
+ Reactive wrapper for the moment package.
 
-@method moment
-@param {String} time    a date object passed to moment function.
-@return {Object} the moment js package
-**/
+ @method moment
+ @param {String} time    a date object passed to moment function.
+ @return {Object} the moment js package
+ **/
 // Helpers.moment = function(time){
 
 //     // react to language changes as well
@@ -372,15 +372,15 @@ Reactive wrapper for the moment package.
 // };
 
 /**
-Formats a timestamp to any format given.
+ Formats a timestamp to any format given.
 
-    Helpers.formatTime(myTime, "YYYY-MM-DD")
+ Helpers.formatTime(myTime, "YYYY-MM-DD")
 
-@method formatTime
-@param {String} time         The timstamp, can be string or unix format
-@param {String} format       the format string, can also be "iso", to format to ISO string, or "fromnow"
-@return {String} The formated time
-**/
+ @method formatTime
+ @param {String} time         The timstamp, can be string or unix format
+ @param {String} format       the format string, can also be "iso", to format to ISO string, or "fromnow"
+ @return {String} The formated time
+ **/
 // Helpers.formatTime = function(time, format) { //parameters
 
 //     // make sure not existing values are not Spacebars.kw
@@ -408,15 +408,15 @@ Formats a timestamp to any format given.
 // };
 
 /**
-Formats a given number
+ Formats a given number
 
-    Helpers.formatNumber(10000, "0.0[000]")
+ Helpers.formatNumber(10000, "0.0[000]")
 
-@method formatNumber
-@param {Number|String|BigNumber} number the number to format
-@param {String} format           the format string e.g. "0.0[000]" see http://numeraljs.com for more.
-@return {String} The formated time
-**/
+ @method formatNumber
+ @param {Number|String|BigNumber} number the number to format
+ @param {String} format           the format string e.g. "0.0[000]" see http://numeraljs.com for more.
+ @return {String} The formated time
+ **/
 // Helpers.formatNumber = function(number, format){
 //     if(format instanceof Spacebars.kw)
 //         format = null;
@@ -434,17 +434,17 @@ Formats a given number
 // };
 
 /**
-Formats a given number toa unit balance
+ Formats a given number toa unit balance
 
-    Helpers.formatBalance(10000, "0.0[000]")
+ Helpers.formatBalance(10000, "0.0[000]")
 
-@method formatBalance
-@param {Number|String|BigNumber} number the number to format
-@param {String} format           the format string e.g. "0.0[000]" see http://numeraljs.com for more.
-@return {String} The formated balance including the unit
-**/
+ @method formatBalance
+ @param {Number|String|BigNumber} number the number to format
+ @param {String} format           the format string e.g. "0.0[000]" see http://numeraljs.com for more.
+ @return {String} The formated balance including the unit
+ **/
 // Helpers.formatBalance = function(number, format){
-//     number = web3.fromWei(number, LocalStore.get('etherUnit'));
+//     number = webu.fromWei(number, LocalStore.get('hucerUnit'));
 
-//     return Helpers.formatNumber(number, format) +' '+ LocalStore.get('etherUnit');
+//     return Helpers.formatNumber(number, format) +' '+ LocalStore.get('hucerUnit');
 // };

@@ -235,7 +235,7 @@
     event,
     fn,
     context,
-    once
+    once,
   ) {
     var evt = prefix ? prefix + event : event;
 
@@ -288,7 +288,7 @@
    * @api public
    */
   EventEmitter.prototype.removeAllListeners = function removeAllListeners(
-    event
+    event,
   ) {
     var evt;
 

@@ -61,7 +61,7 @@ class SwarmNode extends EventEmitter {
       binPath: swarmBinPath,
       onProgress: size =>
         this.emit('downloadProgress', (totalDownloaded += size) / totalSize),
-      archives: clientBinaries.swarm.archives
+      archives: clientBinaries.swarm.archives,
     };
 
     return new Q((resolve, reject) => {
@@ -72,7 +72,7 @@ class SwarmNode extends EventEmitter {
             this._stop = stop;
             this._swarm = swarm;
             resolve(this);
-          })
+          }),
       ).catch(reject);
     });
   }

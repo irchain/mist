@@ -12,7 +12,7 @@
 
     window.postMessage(
       payload,
-      !location.origin || location.origin === 'null' ? '*' : location.origin
+      !location.origin || location.origin === 'null' ? '*' : location.origin,
     );
   };
 
@@ -45,13 +45,13 @@
   };
 
   /**
-     Mist API
+   Mist API
 
-     Provides an API for all dapps, which specifically targets features from the Mist browser
+   Provides an API for all dapps, which specifically targets features from the Mist browser
 
-     @class mist
-     @constructor
-     */
+   @class mist
+   @constructor
+   */
   const mist = {
     callbacks: {},
     version: '__version__',
@@ -66,56 +66,56 @@
       }
 
       postMessage({
-        type: 'mistAPI_requestAccount'
+        type: 'mistAPI_requestAccount',
       });
     },
     solidity: {
-      version: '__solidityVersion__'
+      version: '__solidityVersion__',
     },
     sounds: {
       bip: function playSound() {
         postMessage({
           type: 'mistAPI_sound',
-          message: 'bip'
+          message: 'bip',
         });
       },
       bloop: function playSound() {
         postMessage({
           type: 'mistAPI_sound',
-          message: 'bloop'
+          message: 'bloop',
         });
       },
       invite: function playSound() {
         postMessage({
           type: 'mistAPI_sound',
-          message: 'invite'
+          message: 'invite',
         });
-      }
+      },
     },
     menu: {
       entries: {},
       /**
-             Sets the badge text for the apps menu button
+       Sets the badge text for the apps menu button
 
-             Example
+       Example
 
-             mist.menu.setBadge('Some Text')
+       mist.menu.setBadge('Some Text')
 
-             @method setBadge
-             @param {String} text
-             */
+       @method setBadge
+       @param {String} text
+       */
       setBadge(text) {
         postMessage({
           type: 'mistAPI_setBadge',
-          message: text
+          message: text,
         });
       },
       /**
-             Adds/Updates a menu entry
+       Adds/Updates a menu entry
 
-             Example
+       Example
 
-             mist.menu.add('tkrzU', {
+       mist.menu.add('tkrzU', {
                     name: 'My Meny Entry',
                     badge: 50,
                     position: 1,
@@ -124,11 +124,11 @@
                     // Router.go('/chat/1245');
                 })
 
-             @method add
-             @param {String} id          The id of the menu, has to be the same accross page reloads.
-             @param {Object} options     The menu options like {badge: 23, name: 'My Entry'}
-             @param {Function} callback  Change the callback to be called when the menu is pressed.
-             */
+       @method add
+       @param {String} id          The id of the menu, has to be the same accross page reloads.
+       @param {Object} options     The menu options like {badge: 23, name: 'My Entry'}
+       @param {Function} callback  Change the callback to be called when the menu is pressed.
+       */
       add(id, options, callback) {
         const args = Array.prototype.slice.call(arguments);
         callback =
@@ -159,12 +159,12 @@
           position: options.position,
           selected: !!options.selected,
           name: options.name,
-          badge: options.badge
+          badge: options.badge,
         };
 
         queue.push({
           action: 'addMenu',
-          entry
+          entry,
         });
 
         if (callback) {
@@ -175,25 +175,25 @@
         return true;
       },
       /**
-             Updates a menu entry from the mist sidebar.
+       Updates a menu entry from the mist sidebar.
 
-             @method update
-             @param {String} id          The id of the menu, has to be the same accross page reloads.
-             @param {Object} options     The menu options like {badge: 23, name: 'My Entry'}
-             @param {Function} callback  Change the callback to be called when the menu is pressed.
-             */
+       @method update
+       @param {String} id          The id of the menu, has to be the same accross page reloads.
+       @param {Object} options     The menu options like {badge: 23, name: 'My Entry'}
+       @param {Function} callback  Change the callback to be called when the menu is pressed.
+       */
       update() {
         this.add.apply(this, arguments);
       },
       /**
-             Removes a menu entry from the mist sidebar.
+       Removes a menu entry from the mist sidebar.
 
-             @method remove
-             @param {String} id
-             @param {String} id          The id of the menu, has to be the same accross page reloads.
-             @param {Object} options     The menu options like {badge: 23, name: 'My Entry'}
-             @param {Function} callback  Change the callback to be called when the menu is pressed.
-             */
+       @method remove
+       @param {String} id
+       @param {String} id          The id of the menu, has to be the same accross page reloads.
+       @param {Object} options     The menu options like {badge: 23, name: 'My Entry'}
+       @param {Function} callback  Change the callback to be called when the menu is pressed.
+       */
       remove(id) {
         const filteredId = prefix + filterId(id);
 
@@ -201,18 +201,18 @@
 
         queue.push({
           action: 'removeMenu',
-          filteredId
+          filteredId,
         });
       },
       /**
-             Marks a menu entry as selected
+       Marks a menu entry as selected
 
-             @method select
-             @param {String} id
-             */
+       @method select
+       @param {String} id
+       */
       select(id) {
         const filteredId = prefix + filterId(id);
-        queue.push({ action: 'selectMenu', id: filteredId });
+        queue.push({action: 'selectMenu', id: filteredId});
 
         for (const e in this.entries) {
           if ({}.hasOwnProperty.call(this.entries, e)) {
@@ -221,15 +221,15 @@
         }
       },
       /**
-             Removes all menu entries.
+       Removes all menu entries.
 
-             @method clear
-             */
+       @method clear
+       */
       clear() {
         this.entries = {};
-        queue.push({ action: 'clearMenu' });
-      }
-    }
+        queue.push({action: 'clearMenu'});
+      },
+    },
   };
 
   // Wait for response messages
@@ -268,7 +268,7 @@
     if (queue.length > 0) {
       postMessage({
         type: 'mistAPI_menuChanges',
-        message: queue
+        message: queue,
       });
 
       queue = [];

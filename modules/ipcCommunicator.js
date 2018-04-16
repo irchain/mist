@@ -1,20 +1,20 @@
 /**
-Window communication
+ Window communication
 
-@module ipcCommunicator
-*/
+ @module ipcCommunicator
+ */
 
 const _ = global._;
 const fs = require('fs');
-const { app, ipcMain: ipc, shell, webContents } = require('electron');
+const {app, ipcMain: ipc, shell, webContents} = require('electron');
 const Windows = require('./windows');
 const logger = require('./utils/logger');
 const appMenu = require('./menuItems');
 const Settings = require('./settings');
-const ethereumNode = require('./happyucNode.js');
-const keyfileRecognizer = require('ethereum-keyfile-recognizer');
+const happyucNode = require('./happyucNode.js');
+const keyfileRecognizer = require('happyuc-keyfile-recognizer');
 
-import { getLanguage } from './core/settings/actions';
+import {getLanguage} from './core/settings/actions';
 
 const log = logger.create('ipcCommunicator');
 
@@ -89,7 +89,7 @@ ipc.on('backendAction_windowMessageToOwner', (e, error, value) => {
         'uiAction_windowMessage',
         senderWindowType,
         error,
-        value
+        value,
       );
     }
 
@@ -100,7 +100,7 @@ ipc.on('backendAction_windowMessageToOwner', (e, error, value) => {
         senderWindowType,
         senderWindow.ownerId,
         error,
-        value
+        value,
       );
     }
   }
@@ -128,8 +128,8 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
       const keyfile = JSON.parse(data);
       const result = keyfileRecognizer(keyfile);
       /** result
-       *  [ 'ethersale', undefined ]   Ethersale keyfile
-       *               [ 'web3', 3 ]   web3 (v3) keyfile
+       *  [ 'hucersale', undefined ]   Hucersale keyfile
+       *               [ 'webu', 3 ]   webu (v3) keyfile
        *                        null   no valid  keyfile
        */
 
@@ -137,33 +137,33 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
 
       log.debug(`Importing ${type} account...`);
 
-      if (type === 'ethersale') {
+      if (type === 'hucersale') {
         e.sender.send('uiAction_checkedWalletFile', null, 'presale');
-      } else if (type === 'web3') {
-        e.sender.send('uiAction_checkedWalletFile', null, 'web3');
+      } else if (type === 'webu') {
+        e.sender.send('uiAction_checkedWalletFile', null, 'webu');
 
         let keystorePath = Settings.userHomePath;
-        // eth
-        if (ethereumNode.isHuc) {
+        // huc
+        if (happyucNode.isHuc) {
           if (process.platform === 'win32') {
-            keystorePath = `${Settings.appDataPath}\\Web3\\keys`;
+            keystorePath = `${Settings.appDataPath}\\Webu\\keys`;
           } else {
-            keystorePath += '/.web3/keys';
+            keystorePath += '/.webu/keys';
           }
-          // geth
+          // ghuc
         } else {
           if (process.platform === 'darwin')
-            keystorePath += '/Library/Ethereum/keystore';
+            keystorePath += '/Library/Happyuc/keystore';
 
           if (
             process.platform === 'freebsd' ||
             process.platform === 'linux' ||
             process.platform === 'sunos'
           )
-            keystorePath += '/.ethereum/keystore';
+            keystorePath += '/.happyuc/keystore';
 
           if (process.platform === 'win32')
-            keystorePath = `${Settings.appDataPath}\\Ethereum\\keystore`;
+            keystorePath = `${Settings.appDataPath}\\Happyuc\\keystore`;
         }
 
         if (!/^[0-9a-fA-F]{40}$/.test(keyfile.address)) {
@@ -171,7 +171,7 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
         }
 
         fs.writeFile(`${keystorePath}/0x${keyfile.address}`, data, err => {
-          if (err) throw new Error("Can't write file to disk");
+          if (err) throw new Error('Can\'t write file to disk');
         });
       } else {
         throw new Error('Account import: Cannot recognize keyfile (invalid)');
@@ -195,14 +195,14 @@ ipc.on('backendAction_importWalletFile', (e, path, pw) => {
   const ClientBinaryManager = require('./clientBinaryManager'); // eslint-disable-line global-require
   let error = false;
 
-  const binPath = ClientBinaryManager.getClient('geth').binPath;
+  const binPath = ClientBinaryManager.getClient('ghuc').binPath;
   const nodeProcess = spawn(binPath, ['wallet', 'import', path]);
 
   nodeProcess.once('error', () => {
     error = true;
     e.sender.send(
       'uiAction_importedWalletFile',
-      'Couldn\'t start the "geth wallet import <file.json>" process.'
+      'Couldn\'t start the "ghuc wallet import <file.json>" process.',
     );
   });
   nodeProcess.stdout.on('data', _data => {
@@ -213,7 +213,7 @@ ipc.on('backendAction_importWalletFile', (e, path, pw) => {
 
     if (
       /Decryption failed|not equal to expected addr|could not decrypt/.test(
-        data
+        data,
       )
     ) {
       e.sender.send('uiAction_importedWalletFile', 'Decryption Failed');
@@ -247,7 +247,7 @@ ipc.on('backendAction_importWalletFile', (e, path, pw) => {
 });
 
 const createAccountPopup = e => {
-  Windows.createPopup('requestAccount', { ownerId: e.sender.id });
+  Windows.createPopup('requestAccount', {ownerId: e.sender.id});
 };
 
 // MIST API
@@ -259,10 +259,10 @@ ipc.on('mistAPI_requestAccount', e => {
   } else {
     // Mist
     // if coming from wallet, skip connect, go straight to create
-    if (e.sender.history[0] === 'https://wallet.ethereum.org/') {
+    if (e.sender.history[0] === 'https://localhost:3050/') {
       createAccountPopup(e);
     } else {
-      Windows.createPopup('connectAccount', { ownerId: e.sender.id });
+      Windows.createPopup('connectAccount', {ownerId: e.sender.id});
     }
   }
 });

@@ -1,10 +1,10 @@
 /**
-Gets the favicon url
+ Gets the favicon url
 
-@module getFavicon
-*/
+ @module getFavicon
+ */
 
-const { ipcRenderer } = require('electron');
+const {ipcRenderer} = require('electron');
 
 (function() {
   document.addEventListener('DOMContentLoaded', DOMContentLoaded, false);

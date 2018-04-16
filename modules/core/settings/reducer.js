@@ -3,7 +3,7 @@ export const SwarmState = {
   Enabling: 'Enabling',
   Disabling: 'Disabling',
   Disabled: 'Disabled',
-  Error: 'Error'
+  Error: 'Error',
 };
 
 export const initialState = {
@@ -21,56 +21,56 @@ export const initialState = {
   swarmEnableOnStart: false,
   uiMode: '',
   updateCheckerRan: false,
-  cliFlags: {}
+  cliFlags: {},
 };
 
 const settings = (state = initialState, action) => {
   switch (action.type) {
     case '[MAIN]:DB:INIT':
-      return Object.assign({}, state, { dbInit: true });
+      return Object.assign({}, state, {dbInit: true});
     case '[MAIN]:DB:SYNC_TO_BACKEND':
-      return Object.assign({}, state, { dbSync: true });
+      return Object.assign({}, state, {dbSync: true});
     case '[MAIN]:PROTOCOL:REGISTER':
       return Object.assign({}, state, {
-        protocols: state.protocols.concat(action.payload.protocol)
+        protocols: state.protocols.concat(action.payload.protocol),
       });
     case '[MAIN]:BUILD_CONFIG:SYNC':
       const key = Object.keys(action.payload)[0];
-      return Object.assign({}, state, { [key]: action.payload[key] });
+      return Object.assign({}, state, {[key]: action.payload[key]});
     case '[MAIN]:IGNORE_GPU_BLACKLIST:SET':
-      return Object.assign({}, state, { ignoreGpuBlacklist: true });
+      return Object.assign({}, state, {ignoreGpuBlacklist: true});
     case '[MAIN]:TEST_MODE:SET':
-      return Object.assign({}, state, { autoTestMode: true });
+      return Object.assign({}, state, {autoTestMode: true});
     case '[MAIN]:CLI_FLAGS:SYNC':
       return Object.assign({}, state, {
-        cliFlags: action.payload.cliFlags
+        cliFlags: action.payload.cliFlags,
       });
     case '[MAIN]:SET_LANGUAGE_ON_MAIN:SUCCESS':
-      return Object.assign({}, state, { i18n: action.payload.i18n });
+      return Object.assign({}, state, {i18n: action.payload.i18n});
     case '[MAIN]:SWARM:ENABLING':
       return Object.assign({}, state, {
-        swarmState: SwarmState.Enabling
+        swarmState: SwarmState.Enabling,
       });
     case '[MAIN]:SWARM:ENABLED':
-      return Object.assign({}, state, { swarmState: SwarmState.Enabled });
+      return Object.assign({}, state, {swarmState: SwarmState.Enabled});
     case '[MAIN]:SWARM:DISABLING':
       return Object.assign({}, state, {
-        swarmState: SwarmState.Disabling
+        swarmState: SwarmState.Disabling,
       });
     case '[MAIN]:SWARM:DISABLED':
       return Object.assign({}, state, {
-        swarmState: SwarmState.Disabled
+        swarmState: SwarmState.Disabled,
       });
     case '[MAIN]:SWARM:FAILURE':
-      return Object.assign({}, state, { swarmState: SwarmState.Error });
+      return Object.assign({}, state, {swarmState: SwarmState.Error});
     case '[MAIN]:SWARM:ENABLE_ON_START':
-      return Object.assign({}, state, { swarmEnableOnStart: true });
+      return Object.assign({}, state, {swarmEnableOnStart: true});
     case '[MAIN]:SWARM:DISABLE_ON_START':
-      return Object.assign({}, state, { swarmEnableOnStart: false });
+      return Object.assign({}, state, {swarmEnableOnStart: false});
     case '[MAIN]:UPDATE_CHECKER:FINISH':
-      return Object.assign({}, state, { updateCheckerRan: true });
+      return Object.assign({}, state, {updateCheckerRan: true});
     case '[MAIN]:IPC_PROVIDER_BACKEND:FINISH':
-      return Object.assign({}, state, { ipcProviderBackendInit: true });
+      return Object.assign({}, state, {ipcProviderBackendInit: true});
     default:
       return state;
   }

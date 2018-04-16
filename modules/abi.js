@@ -1,10 +1,10 @@
 /**
-Decodes Data into values, for a given signature.
+ Decodes Data into values, for a given signature.
 
-@module ABI
-*/
+ @module ABI
+ */
 const _ = global._;
-const { ipcMain: ipc } = require('electron');
+const {ipcMain: ipc} = require('electron');
 const abi = require('ethereumjs-abi');
 
 function isHexType(type) {
@@ -41,11 +41,11 @@ ipc.on('backendAction_decodeFunctionSignature', (event, _signature, _data) => {
       } else if (res) {
         paramsResponse[index] = padLeft(
           paramsResponse[index],
-          Number(res[1]) * 2
+          Number(res[1]) * 2,
         );
       }
 
-      paramsDictArr.push({ type, value: prefix + paramsResponse[index] });
+      paramsDictArr.push({type, value: prefix + paramsResponse[index]});
     });
 
     event.sender.send('uiAction_decodedFunctionSignatures', paramsDictArr);

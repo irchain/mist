@@ -1,9 +1,9 @@
 /**
-@module preloader browser
-*/
+ @module preloader browser
+ */
 const _ = require('underscore');
 require('./include/common')('browser');
-const { ipcRenderer, webFrame, remote } = require('electron');
+const {ipcRenderer, webFrame, remote} = require('electron');
 const mist = require('./include/mistAPI.js');
 require('./include/getFavicon.js');
 require('./include/getMetaTags.js');
@@ -16,7 +16,7 @@ const path = remote.require('path');
 Object.defineProperty(navigator, 'language', {
   get() {
     return ipcRenderer.sendSync('backendAction_getLanguage');
-  }
+  },
 });
 
 // notifiy the tab to store the webview id
@@ -37,7 +37,7 @@ const sanatizeJsonRpc = function(message) {
     jsonrpc: message.jsonrpc,
     id: message.id,
     method: message.method,
-    params: message.params
+    params: message.params,
   };
 };
 
@@ -54,11 +54,11 @@ window.addEventListener('message', function message(event) {
     return;
   }
 
-  // EthereumProvider: connect
+  // HappyucProvider: connect
   if (data.type === 'create') {
     ipcRenderer.send('ipcProvider-create');
 
-    // EthereumProvider: write
+    // HappyucProvider: write
   } else if (data.type === 'write') {
     let messageIsArray = _.isArray(data.message);
 
@@ -99,7 +99,7 @@ const postMessage = function(payload) {
 
   window.postMessage(
     payload,
-    !location.origin || location.origin === 'null' ? '*' : location.origin
+    !location.origin || location.origin === 'null' ? '*' : location.origin,
   );
 };
 
@@ -111,13 +111,13 @@ const postMessage = function(payload) {
       result = {
         type: arguments[1],
         error: arguments[2],
-        value: arguments[3]
+        value: arguments[3],
       };
     }
 
     postMessage({
       type: type,
-      message: result
+      message: result,
     });
   });
 });
@@ -127,36 +127,31 @@ const postMessage = function(payload) {
   ipcRenderer.on(`ipcProvider-` + type, function onIpcRenderer(e, result) {
     postMessage({
       type: type,
-      message: JSON.parse(result)
+      message: JSON.parse(result),
     });
   });
 });
 
-// load ethereumProvider
-const bignumber = fs
-  .readFileSync(path.join(__dirname, '/injected/BigNumber.js'))
-  .toString();
-const eventEmitter3 = fs
-  .readFileSync(path.join(__dirname, '/injected/EventEmitter3.js'))
-  .toString();
-let mistAPI = fs
-  .readFileSync(path.join(__dirname, '/injected/mistAPI.js'))
-  .toString();
-const ethereumProvider = fs
-  .readFileSync(path.join(__dirname, '/injected/EthereumProvider.js'))
-  .toString();
+// load happyucProvider
+const bignumber = fs.readFileSync(
+  path.join(__dirname, '/injected/BigNumber.js')).toString();
+const eventEmitter3 = fs.readFileSync(
+  path.join(__dirname, '/injected/EventEmitter3.js')).toString();
+let mistAPI = fs.readFileSync(path.join(__dirname, '/injected/mistAPI.js')).
+  toString();
+const happyucProvider = fs.readFileSync(
+  path.join(__dirname, '/injected/HappyucProvider.js')).toString();
 
-mistAPI = mistAPI
-  .replace('__version__', packageJson.version)
-  .replace('__license__', packageJson.license)
-  .replace('__platform__', process.platform)
-  .replace(
+mistAPI = mistAPI.replace('__version__', packageJson.version).
+  replace('__license__', packageJson.license).
+  replace('__platform__', process.platform).
+  replace(
     '__solidityVersion__',
-    String(packageJson.dependencies.solc).match(/\d+\.\d+\.\d+/)[0]
+    String(packageJson.dependencies.solc).match(/\d+\.\d+\.\d+/)[0],
   );
 
 webFrame.executeJavaScript(
-  mistAPI + bignumber + eventEmitter3 + ethereumProvider
+  mistAPI + bignumber + eventEmitter3 + happyucProvider,
 );
 
 // notifiy the tab to store the webview id

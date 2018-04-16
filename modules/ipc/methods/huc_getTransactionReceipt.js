@@ -4,7 +4,7 @@ const eth = require('ethereumjs-util');
 
 /**
  * Process method: eth_getTransactionReceipt
- * Due to a geth's light client v1 bug, it does not return
+ * Due to a ghuc's light client v1 bug, it does not return
  * contractAddress value on the receipts. Let's fix that.
  */
 
@@ -40,7 +40,7 @@ module.exports = class extends BaseProcessor {
 
       const fromAddress = transactionInfo.result.result.from;
       const nonce = parseInt(transactionInfo.result.result.nonce, 16);
-      const possibleContractAddress = `0x${eth
+      const possibleContractAddress = `0x${huc
         .generateAddress(fromAddress, nonce)
         .toString('hex')}`;
 

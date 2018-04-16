@@ -1,13 +1,13 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 /**
-The about template
+ The about template
 
-@class [template] popupWindows_generic
-@constructor
-*/
+ @class [template] popupWindows_generic
+ @constructor
+ */
 Template['popupWindows_generic'].onCreated(function() {});

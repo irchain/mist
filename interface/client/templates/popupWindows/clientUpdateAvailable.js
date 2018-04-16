@@ -1,8 +1,8 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 Template['popupWindows_clientUpdateAvailable'].events({
   'click .ok': function(e) {
@@ -10,5 +10,5 @@ Template['popupWindows_clientUpdateAvailable'].events({
   },
   'click .cancel': function(e) {
     ipc.send('backendAction_windowCallback', 'skip');
-  }
+  },
 });

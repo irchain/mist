@@ -1,19 +1,19 @@
-const { getLanguage } = require('./actions.js');
+const {getLanguage} = require('./actions.js');
 
 /**
-The init function of Mist
+ The init function of Mist
 
-@method mistInit
-*/
+ @method mistInit
+ */
 mistInit = function() {
   console.info('Initialise Mist Interface');
 
-  EthBlocks.init();
-  const ethBlocksInterval = setInterval(() => {
-    if (_.isEmpty(EthBlocks.latest)) {
-      EthBlocks.init();
+  HucBlocks.init();
+  const hucBlocksInterval = setInterval(() => {
+    if (_.isEmpty(HucBlocks.latest)) {
+      HucBlocks.init();
     } else {
-      clearInterval(ethBlocksInterval);
+      clearInterval(hucBlocksInterval);
     }
   }, 500);
 
@@ -29,32 +29,32 @@ mistInit = function() {
 
       Tabs.insert({
         _id: 'browser',
-        url: 'https://ethereum.org',
-        redirect: 'https://ethereum.org',
-        position: 0
+        url: 'https://happyuc.org',
+        redirect: 'https://happyuc.org',
+        position: 0,
       });
     } else {
       Tabs.upsert(
-        { _id: 'browser' },
+        {_id: 'browser'},
         {
-          $set: { position: 0 }
-        }
+          $set: {position: 0},
+        },
       );
     }
 
     // overwrite wallet on start again, but use $set to preserve account titles
     Tabs.upsert(
-      { _id: 'wallet' },
+      {_id: 'wallet'},
       {
         $set: {
-          url: 'https://wallet.ethereum.org',
-          redirect: 'https://wallet.ethereum.org',
+          url: 'https://wallet.happyuc.org',
+          redirect: 'https://wallet.happyuc.org',
           position: 1,
           permissions: {
-            admin: true
-          }
-        }
-      }
+            admin: true,
+          },
+        },
+      },
     );
 
     // on first use of Mist, show the wallet to nudge the user to create an account
@@ -72,7 +72,7 @@ Meteor.startup(function() {
 
   if (!location.hash) {
     // Main window
-    EthAccounts.init();
+    HucAccounts.init();
     mistInit();
   }
 
@@ -87,10 +87,10 @@ Meteor.startup(function() {
         numeral.language(lang);
       } catch (err) {
         console.warn(
-          `numeral.js couldn't set number formating: ${err.message}`
+          `numeral.js couldn't set number formating: ${err.message}`,
         );
       }
-      EthTools.setLocale(lang);
+      HucTools.setLocale(lang);
     }
   });
 });

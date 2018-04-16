@@ -1,15 +1,15 @@
 /**
 
-@module Collections
-*/
+ @module Collections
+ */
 
 // BROWSER RELATED
 // Contains the accounts
-Tabs = new Mongo.Collection('tabs', { connection: null });
+Tabs = new Mongo.Collection('tabs', {connection: null});
 LastVisitedPages = new Mongo.Collection('last-visted-pages', {
-  connection: null
+  connection: null,
 });
-History = new Mongo.Collection('history', { connection: null });
+History = new Mongo.Collection('history', {connection: null});
 
 // Sync collection from and to the backend loki.js
 if (typeof window.dbSync !== 'undefined') {
@@ -20,9 +20,9 @@ if (typeof window.dbSync !== 'undefined') {
 
 // ETHEREUM RELATED
 
-// Accounts collection is add by the ethereum:accounts package
+// Accounts collection is add by the happyuc:accounts package
 
-// LastBlock collection is add by the ethereum:accounts package
+// LastBlock collection is add by the happyuc:accounts package
 
 // contains blockchain meta data
 // LastBlock = new Mongo.Collection('lastblock', {connection: null});

@@ -15,5 +15,5 @@ Meteor.Spinner.options = {
   className: 'spinner', // The CSS class to assign to the spinner
   zIndex: 2e9, // The z-index (defaults to 2000000000)
   top: '50%', // Top position relative to parent
-  left: '50%' // Left position relative to parent
+  left: '50%', // Left position relative to parent
 };

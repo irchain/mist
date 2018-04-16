@@ -1,15 +1,15 @@
 /**
-Template Controllers
+ Template Controllers
 
-@module Templates
-*/
+ @module Templates
+ */
 
 /**
-The request account popup window template
+ The request account popup window template
 
-@class [template] popupWindows_unlockMasterPassword
-@constructor
-*/
+ @class [template] popupWindows_unlockMasterPassword
+ @constructor
+ */
 
 Template['popupWindows_unlockMasterPassword'].onRendered(function() {
   var template = this;
@@ -28,9 +28,9 @@ Template['popupWindows_unlockMasterPassword'].onRendered(function() {
 
       GlobalNotification.warning({
         content: TAPi18n.__(
-          'mist.popupWindows.unlockMasterPassword.errors.wrongPassword'
+          'mist.popupWindows.unlockMasterPassword.errors.wrongPassword',
         ),
-        duration: 3
+        duration: 3,
       });
 
       Session.set('data', false);
@@ -52,5 +52,5 @@ Template['popupWindows_unlockMasterPassword'].events({
 
     template.find('input.password').value = '';
     pw = null;
-  }
+  },
 });
