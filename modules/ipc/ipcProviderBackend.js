@@ -4,21 +4,19 @@
  @module ipcProviderBackend
  */
 
-const _ = global._;
-const Q = require("bluebird");
+const _                = global._;
+const Q                = require("bluebird");
 const { ipcMain: ipc } = require("electron");
-const fs = require("fs");
-const path = require("path");
-
-const log = require("../utils/logger").create("ipcProviderBackend");
-const Sockets = require("../socketManager");
-const Settings = require("../settings");
-const happyucNode = require("../happyucNode");
+const fs               = require("fs");
+const path             = require("path");
+const log              = require("../utils/logger").create("ipcProviderBackend");
+const Sockets          = require("../socketManager");
+const Settings         = require("../settings");
+const happyucNode      = require("../happyucNode");
 
 const ERRORS = {
   INVALID_PAYLOAD        : {
-    code   : -32600,
-    message: "Payload, or some of its content properties are invalid. Please check if they are valid HEX with '0x' prefix."
+    code: -32600, message: "Payload, or some of its content properties are invalid. Please check if they are valid HEX with '0x' prefix."
   }, METHOD_DENIED       : {
     code: -32601, message: "Method __method__ not allowed."
   }, METHOD_TIMEOUT      : {
@@ -55,8 +53,8 @@ class IpcProviderBackend {
     // get response processors
     this._processors = {};
     processors.forEach(p => {
-      const name = path.basename(p, ".js");
-      const PClass = require(path.join(__dirname, "methods", p));
+      const name             = path.basename(p, ".js");
+      const PClass           = require(path.join(__dirname, "methods", p));
       this._processors[name] = new PClass(name, this);
     });
 
@@ -70,7 +68,7 @@ class IpcProviderBackend {
    * @return {Promise}
    */
   _getOrCreateConnection(event) {
-    const owner = event.sender;
+    const owner   = event.sender;
     const ownerId = owner.id;
 
     let socket;
@@ -100,8 +98,7 @@ class IpcProviderBackend {
             Sockets.remove(ownerId);
           }));
 
-          socket.on("connect",
-            data => { if (!owner.isDestroyed()) owner.send("ipcProvider-connect", JSON.stringify(data)); });
+          socket.on("connect", data => { if (!owner.isDestroyed()) owner.send("ipcProvider-connect", JSON.stringify(data)); });
 
           // pass notifications back up the chain
           socket.on("data-notification", data => {

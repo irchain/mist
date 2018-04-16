@@ -237,9 +237,7 @@ class HappyucNode extends EventEmitter {
    * @return {Promise} resolves to result or error.
    */
   send(method, params) {
-    return this._socket.send({
-      method, params
-    });
+    return this._socket.send({ method, params });
   }
 
   /**
@@ -371,25 +369,13 @@ class HappyucNode extends EventEmitter {
         // Starts Ropsten network
         case "test":
           args = [
-            "--testnet",
-            "--syncmode",
-            syncMode,
-            "--cache",
-            process.arch === "x64" ? "1024" : "512",
-            "--ipcpath",
-            Settings.rpcIpcPath];
+            "--testnet", "--syncmode", syncMode, "--cache", process.arch === "x64" ? "1024" : "512", "--ipcpath", Settings.rpcIpcPath];
           break;
 
         // Starts Rinkeby network
         case "rinkeby":
           args = [
-            "--rinkeby",
-            "--syncmode",
-            syncMode,
-            "--cache",
-            process.arch === "x64" ? "1024" : "512",
-            "--ipcpath",
-            Settings.rpcIpcPath];
+            "--rinkeby", "--syncmode", syncMode, "--cache", process.arch === "x64" ? "1024" : "512", "--ipcpath", Settings.rpcIpcPath];
           break;
 
         // Starts local network

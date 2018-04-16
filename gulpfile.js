@@ -4,10 +4,10 @@
  prefer-spread
  */
 
-const _ = require("underscore");
-const gulp = require("gulp");
+const _        = require("underscore");
+const gulp     = require("gulp");
 const minimist = require("minimist");
-const runSeq = require("run-sequence");
+const runSeq   = require("run-sequence");
 
 // available crossplatform builds
 let platforms = ["linux"];
@@ -20,7 +20,7 @@ let platforms = ["linux"];
 // }
 
 // parse commandline arguments
-const args = process.argv.slice(2);
+const args    = process.argv.slice(2);
 const options = minimist(args, {
   string: ["walletSource", "test", "skipTasks"], boolean: _.flatten(["wallet", platforms]), default: {
     wallet: false, walletSource: "local", test: "basic", skipTasks: ""
@@ -42,8 +42,8 @@ if (_.isEmpty(_.intersection(args, platformFlags))) {
 }
 
 // prepare global variables (shared with other gulp task files)
-options.type = options.wallet ? "wallet" : "mist";
-options.platforms = platforms;
+options.type            = options.wallet ? "wallet" : "mist";
+options.platforms       = platforms;
 options.activePlatforms = _.keys(_.pick(_.pick(options, platforms), key => key));
 
 exports.options = options;
@@ -54,7 +54,7 @@ require("require-dir")("./gulpTasks");
 gulp.task("upload-queue", gulp.series("checksums", "upload-binaries"));
 
 const skipTasks = options.skipTasks.replace(/\s/g, "").split(",");
-const tasks = [
+const tasks     = [
   "clean-dist",
   "copy-app-source-files",
   "transpile-main",

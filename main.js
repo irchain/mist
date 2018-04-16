@@ -289,14 +289,10 @@ function handleNodeSync() {
     });
 
     nodeSync.on("finished", () => {
-      log.info("111111111111111111111111111111111111111111");
       nodeSync.removeAllListeners("error");
-      log.info("222222222222222222222222222222222222222222");
       nodeSync.removeAllListeners("finished");
-      log.info("finished4444444444444444444444444444444444");
       resolve();
     });
-    log.info(nodeSync.on);
   });
 }
 

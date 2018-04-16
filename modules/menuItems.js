@@ -1,13 +1,13 @@
 const { app, BrowserWindow, ipcMain: ipc, Menu, shell, dialog } = require("electron");
-const fs = require("fs");
-const path = require("path");
-const Windows = require("./windows");
-const Settings = require("./settings");
-const log = require("./utils/logger").create("menuItems");
-const swarmLog = require("./utils/logger").create("swarm");
-const updateChecker = require("./updateChecker");
-const happyucNode = require("./happyucNode.js");
-const ClientBinaryManager = require("./clientBinaryManager");
+const fs                                                        = require("fs");
+const path                                                      = require("path");
+const Windows                                                   = require("./windows");
+const Settings                                                  = require("./settings");
+const log                                                       = require("./utils/logger").create("menuItems");
+const swarmLog                                                  = require("./utils/logger").create("swarm");
+const updateChecker                                             = require("./updateChecker");
+const happyucNode                                               = require("./happyucNode.js");
+const ClientBinaryManager                                       = require("./clientBinaryManager");
 
 import { setLanguage, toggleSwarm, toggleSwarmOnStart } from "./core/settings/actions";
 import { SwarmState } from "./core/settings/reducer";
@@ -77,7 +77,7 @@ const stopMining = webviews => {
 // null -> obj
 let menuTempl = function(webviews) {
   const menu = [];
-  webviews = webviews || [];
+  webviews   = webviews || [];
 
   // APP
   const fileMenu = [];
@@ -151,12 +151,12 @@ let menuTempl = function(webviews) {
       enabled    : store.getState().settings.swarmState == SwarmState.Enabled,
       click() {
         const focusedWindow = BrowserWindow.getFocusedWindow();
-        const paths = dialog.showOpenDialog(focusedWindow, {
+        const paths         = dialog.showOpenDialog(focusedWindow, {
           properties: ["openFile", "openDirectory"]
         });
         if (paths && paths.length === 1) {
-          const isDir = fs.lstatSync(paths[0]).isDirectory();
-          const defaultPath = path.join(paths[0], "index.html");
+          const isDir        = fs.lstatSync(paths[0]).isDirectory();
+          const defaultPath  = path.join(paths[0], "index.html");
           const uploadConfig = {
             path       : paths[0],
             kind       : isDir ? "directory" : "file",
@@ -257,7 +257,7 @@ let menuTempl = function(webviews) {
   };
 
   const currentLanguage = Settings.language;
-  const languageMenu = Object.keys(i18n.options.resources).filter(langCode => langCode !== "dev").map(langCode => {
+  const languageMenu    = Object.keys(i18n.options.resources).filter(langCode => langCode !== "dev").map(langCode => {
     const menuItem = {
       label  : i18n.t(`mist.applicationMenu.view.langCodes.${langCode}`),
       type   : "checkbox",
@@ -369,7 +369,7 @@ let menuTempl = function(webviews) {
   if (process.platform === "darwin" || process.platform === "win32") {
     const nodeSubmenu = [];
 
-    const hucClient = ClientBinaryManager.getClient("huc");
+    const hucClient  = ClientBinaryManager.getClient("huc");
     const ghucClient = ClientBinaryManager.getClient("ghuc");
 
     if (ghucClient) {
@@ -458,15 +458,13 @@ let menuTempl = function(webviews) {
 
   // Enables mining menu: only in Solo mode and Ropsten network (testnet)
   if (happyucNode.isOwnNode && (happyucNode.isTestNetwork || happyucNode.isDevNetwork)) {
+    let stopMiningStr  = "mist.applicationMenu.develop.stopMining";
+    let startMiningStr = "mist.applicationMenu.develop.startMining";
     devToolsMenu.push({
-      label                                                                                          : global.mining ? i18n.t("mist.applicationMenu.develop.stopMining") : i18n.t(
-        "mist.applicationMenu.develop.startMining"), accelerator: "CommandOrControl+Shift+M", enabled: true, click() {
-        if (global.mining) {
-          stopMining(webviews);
-        } else {
-          startMining(webviews);
-        }
-      }
+      label      : global.mining ? i18n.t(stopMiningStr) : i18n.t(startMiningStr),
+      accelerator: "CommandOrControl+Shift+M",
+      enabled    : true,
+      click      : () => global.mining ? stopMining(webviews) : startMining(webviews)
     });
   }
 
@@ -478,9 +476,7 @@ let menuTempl = function(webviews) {
       enabled: true,
       checked: [SwarmState.Enabling, SwarmState.Enabled].includes(global.store.getState().settings.swarmState),
       type   : "checkbox",
-      click() {
-        store.dispatch(toggleSwarm());
-      }
+      click  : () => store.dispatch(toggleSwarm())
     });
   }
 

@@ -1,10 +1,11 @@
-const _ = global._;
-const Q = require('bluebird');
-const oboe = require('oboe');
-const SocketBase = require('./base');
+const _          = global._;
+const Q          = require("bluebird");
+const oboe       = require("oboe");
+const log        = require(".././utils/logger").create("WebuBase");
+const SocketBase = require("./base");
 
 const Socket = SocketBase.Socket;
-const STATE = SocketBase.STATE;
+const STATE  = SocketBase.STATE;
 
 module.exports = class WebuSocket extends Socket {
   constructor(socketMgr, id) {
@@ -17,7 +18,7 @@ module.exports = class WebuSocket extends Socket {
 
   /**
    * Send an RPC call.
-   * @param {Array|Object} single or array of payloads.
+   * @param payload
    * @param {Object} options Additional options.
    * @param {Boolean} [options.fullResult] If set then will return full result
    *  JSON, not just result value.
@@ -25,41 +26,31 @@ module.exports = class WebuSocket extends Socket {
    */
   send(payload, options) {
     return Q.try(() => {
-      if (!this.isConnected) {
-        throw new Error('Not connected');
-      }
+      if (!this.isConnected) throw new Error("Not connected");
 
       const isBatch = _.isArray(payload);
 
-      const finalPayload = isBatch
-        ? _.map(payload, p => this._finalizeSinglePayload(p))
-        : this._finalizeSinglePayload(payload);
+      const finalPayload = isBatch ? _.map(payload, p => this._finalizeSinglePayload(p)) : this._finalizeSinglePayload(payload);
 
       /*
-            For batch requeests we use the id of the first request as the
-            id to refer to the batch as one. We can do this because the
-            response will also come back as a batch, in the same order as the
-            the requests within the batch were sent.
-             */
+       For batch requeests we use the id of the first request as the
+       id to refer to the batch as one. We can do this because the
+       response will also come back as a batch, in the same order as the
+       the requests within the batch were sent.
+       */
       const id = isBatch ? finalPayload[0].id : finalPayload.id;
 
-      this._log.trace(isBatch ? 'Batch request' : 'Request', id, finalPayload);
+      this._log.trace(isBatch ? "Batch request" : "Request", id, finalPayload);
 
       this._sendRequests[id] = {
-        options,
-        /* Preserve the original id of the request so that we can
-                update the response with it */
-        origId: isBatch ? _.map(payload, p => p.id) : payload.id,
+        options, /* Preserve the original id of the request so that we can
+         update the response with it */
+        origId: isBatch ? _.map(payload, p => p.id) : payload.id
       };
 
       this.write(JSON.stringify(finalPayload));
 
-      return new Q((resolve, reject) => {
-        _.extend(this._sendRequests[id], {
-          resolve,
-          reject,
-        });
-      });
+      return new Q((resolve, reject) => _.extend(this._sendRequests[id], { resolve, reject }));
     });
   }
 
@@ -71,16 +62,9 @@ module.exports = class WebuSocket extends Socket {
    * @return {Object} final payload object
    */
   _finalizeSinglePayload(payload) {
-    if (!payload.method) {
-      throw new Error('Method required');
-    }
+    if (!payload.method) throw new Error("Method required");
 
-    return {
-      jsonrpc: '2.0',
-      id: _.uuid(),
-      method: payload.method,
-      params: payload.params || [],
-    };
+    return { jsonrpc: "2.0", id: _.uuid(), method: payload.method, params: payload.params || [] };
   }
 
   /**
@@ -88,7 +72,7 @@ module.exports = class WebuSocket extends Socket {
    */
   _handleSocketResponse() {
     oboe(this).done(result => {
-      this._log.trace('JSON response', result);
+      this._log.trace("JSON response", result);
 
       try {
         const isBatch = _.isArray(result);
@@ -98,14 +82,10 @@ module.exports = class WebuSocket extends Socket {
         const req = firstItem.id ? this._sendRequests[firstItem.id] : null;
 
         if (req) {
-          this._log.trace(
-            isBatch ? 'Batch response' : 'Response',
-            firstItem.id,
-            result,
-          );
+          this._log.trace(isBatch ? "Batch response" : "Response", firstItem.id, result);
 
           // if we don't want full JSON result, send just the result
-          if (!_.get(req, 'options.fullResult')) {
+          if (!_.get(req, "options.fullResult")) {
             if (isBatch) {
               result = _.map(result, r => r.result);
             } else {
@@ -125,18 +105,17 @@ module.exports = class WebuSocket extends Socket {
           }
 
           req.resolve({
-            isBatch,
-            result,
+            isBatch, result
           });
         } else {
           // not a response to a request so pass it on as a notification
-          this.emit('data-notification', result);
+          this.emit("data-notification", result);
         }
       } catch (err) {
-        this._log.error('Error handling socket response', err);
+        this._log.error("Error handling socket response", err);
       }
     }).fail(err => {
-      this._log.error('Socket response error', err);
+      this._log.error("Socket response error", err);
 
       _.each(this._sendRequests, req => {
         req.reject(err);

@@ -83,11 +83,14 @@ class NodeSync extends EventEmitter {
       }
 
       log.trace("Check sync status");
-      log.info(happyucNode);
+
       happyucNode
         .send("huc_syncing", [])
         .then(ret => {
           const result = ret.result;
+
+          // TODO to fix syncing bug
+          return this._onSyncDone();
 
           // got a result, check for error
           if (result) {
@@ -107,27 +110,27 @@ class NodeSync extends EventEmitter {
             }
           } else {
             // got no result, let's check the block number
-            log.debug("Check latest block number");
+            return happyucNode
+              .send("huc_getBlockByNumber", ["latest", false])
+              .then(ret2 => {
+                const blockResult = ret2.result;
+                const now         = Math.floor(new Date().getTime() / 1000);
 
-            return happyucNode.send("huc_getBlockByNumber", ["latest", false]).then(ret2 => {
-              const blockResult = ret2.result;
-              const now         = Math.floor(new Date().getTime() / 1000);
+                if (!blockResult) return this._sync();
 
-              if (!blockResult) return this._sync();
+                log.debug(`Last block: ${Number(blockResult.number)}; timestamp: ${blockResult.timestamp}`);
 
-              log.debug(`Last block: ${Number(blockResult.number)}; timestamp: ${blockResult.timestamp}`);
+                const diff = now - +blockResult.timestamp;
 
-              const diff = now - +blockResult.timestamp;
-
-              // need sync if > 1 minute
-              if (diff > 60) {
-                this.emit("nodeSyncing", result);
-                log.trace("Keep syncing...");
-                return this._sync();
-              }
-              log.info("No more sync necessary");
-              return this._onSyncDone();
-            });
+                // need sync if > 1 minute
+                if (diff > 60) {
+                  this.emit("nodeSyncing", result);
+                  log.trace("Keep syncing...");
+                  return this._sync();
+                }
+                log.info("No more sync necessary");
+                return this._onSyncDone();
+              });
           }
         })
         .catch(err => log.error("Node crashed while syncing?", err) || this._onSyncError(err));

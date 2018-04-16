@@ -1,7 +1,7 @@
 const { app, BrowserWindow, ipcMain: ipc } = require("electron");
-const Settings = require("./settings");
-const log = require("./utils/logger").create("Windows");
-const EventEmitter = require("events").EventEmitter;
+const Settings                             = require("./settings");
+const log                                  = require("./utils/logger").create("Windows");
+const EventEmitter                         = require("events").EventEmitter;
 import {
   closeWindow, openWindow, resetGenericWindow, reuseGenericWindow
 } from "./core/ui/actions";
@@ -10,18 +10,18 @@ class GenericWindow extends EventEmitter {
   constructor(mgr) {
     super();
 
-    this._mgr = mgr;
-    this._log = log.create("generic");
-    this.isPrimary = false;
-    this.type = "generic";
-    this.isPopup = true;
-    this.ownerId = null;
+    this._mgr        = mgr;
+    this._log        = log.create("generic");
+    this.isPrimary   = false;
+    this.type        = "generic";
+    this.isPopup     = true;
+    this.ownerId     = null;
     this.isAvailable = true;
-    this.actingType = null;
+    this.actingType  = null;
 
     this._log.debug("Creating generic window");
     let electronOptions = this._mgr.getDefaultOptionsForType("generic");
-    this.window = new BrowserWindow(electronOptions);
+    this.window         = new BrowserWindow(electronOptions);
 
     // set Accept_Language header
     this.session = this.window.webContents.session;
@@ -71,7 +71,7 @@ class GenericWindow extends EventEmitter {
     this._log.debug("Hide");
     this.window.hide();
     this.send("uiAction_switchTemplate", "generic");
-    this.actingType = null;
+    this.actingType  = null;
     this.isAvailable = true;
     this.emit("hidden");
     store.dispatch(resetGenericWindow());
@@ -89,7 +89,7 @@ class GenericWindow extends EventEmitter {
 
   reuse(type, options, callback) {
     this.isAvailable = false;
-    this.actingType = type;
+    this.actingType  = type;
     if (callback) {
       this.callback = callback;
     }
@@ -121,12 +121,12 @@ class Window extends EventEmitter {
 
     opts = opts || {};
 
-    this._mgr = mgr;
-    this._log = log.create(type);
+    this._mgr      = mgr;
+    this._log      = log.create(type);
     this.isPrimary = !!opts.primary;
-    this.type = type;
-    this.isPopup = !!opts.isPopup;
-    this.ownerId = opts.ownerId; // the window which creates this new window
+    this.type      = type;
+    this.isPopup   = !!opts.isPopup;
+    this.ownerId   = opts.ownerId; // the window which creates this new window
 
     let electronOptions = {
       title           : Settings.appName,
@@ -191,8 +191,8 @@ class Window extends EventEmitter {
     this.window.once("closed", () => {
       this._log.debug("Closed");
 
-      this.isShown = false;
-      this.isClosed = true;
+      this.isShown        = false;
+      this.isClosed       = true;
       this.isContentReady = false;
 
       this.emit("closed");
@@ -298,7 +298,7 @@ class Windows {
       log.debug("Set window id", id);
 
       const bwnd = BrowserWindow.fromWebContents(event.sender);
-      const wnd = _.find(this._windows, w => {
+      const wnd  = _.find(this._windows, w => {
         return w.window === bwnd;
       });
 
@@ -320,7 +320,7 @@ class Windows {
   create(type, opts, callback) {
     store.dispatch({ type: "[MAIN]:WINDOW:CREATE_START", payload: { type } });
 
-    const options = _.deepExtend(this.getDefaultOptionsForType(type), opts || {});
+    const options  = _.deepExtend(this.getDefaultOptionsForType(type), opts || {});
     const existing = this.getByType(type);
 
     if (existing && existing.ownerId === options.ownerId) {
@@ -501,7 +501,7 @@ class Windows {
     }
 
     // If generic window is available, recycle it (unless on blacklist)
-    const genericWindow = this.getByType("generic");
+    const genericWindow          = this.getByType("generic");
     const genericWindowBlacklist = ["remix", "updateAvailable", "connectAccount"];
     if (!genericWindowBlacklist.includes(type) && genericWindow && genericWindow.isAvailable) {
       genericWindow.reuse(type, opts, callback);
