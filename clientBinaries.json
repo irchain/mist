@@ -23,7 +23,23 @@
               }
             }
           }
-        }
+        },
+         "mac": {
+                    "x64": {
+                        "download": {
+                            "url": "",
+                            "type": "tar",
+                            "bin": "ghuc"
+                        },
+                        "bin": "ghuc",
+                        "commands": {
+                            "sanity": {
+                                "args": ["version"],
+                                "output": [ "Ghuc", "" ]
+                            }
+                        }
+                    }
+                }
       }
     }
   }
