@@ -153,7 +153,7 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
           // ghuc
         } else {
           if (process.platform === 'darwin')
-            keystorePath += '/Library/Happyuc/keystore';
+            keystorePath += '/Library/HappyUC/keystore';
 
           if (
             process.platform === 'freebsd' ||
@@ -163,7 +163,7 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
             keystorePath += '/.happyuc/keystore';
 
           if (process.platform === 'win32')
-            keystorePath = `${Settings.appDataPath}\\Happyuc\\keystore`;
+            keystorePath = `${Settings.appDataPath}\\HappyUC\\keystore`;
         }
 
         if (!/^[0-9a-fA-F]{40}$/.test(keyfile.address)) {

@@ -209,7 +209,7 @@ let menuTempl = function(webviews) {
                 // ghuc
               } else {
                 if (process.platform === "darwin") {
-                  userPath += "/Library/Happyuc/keystore";
+                  userPath += "/Library/HappyUC/keystore";
                 }
 
                 if (process.platform === "freebsd" || process.platform === "linux" || process.platform === "sunos") {
@@ -217,7 +217,7 @@ let menuTempl = function(webviews) {
                 }
 
                 if (process.platform === "win32") {
-                  userPath = `${Settings.appDataPath}\\Happyuc\\keystore`;
+                  userPath = `${Settings.appDataPath}\\HappyUC\\keystore`;
                 }
               }
 

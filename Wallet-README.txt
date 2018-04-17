@@ -1,6 +1,6 @@
-Happyuc Wallet
+HappyUC Wallet
 
-The Happyuc wallet, which allows you to create simple and multisig wallets to manage your ether.
+The HappyUC wallet, which allows you to create simple and multisig wallets to manage your ether.
 
 The wallet contains its own node, but can also use an already running one, if the IPC path of that node is the standard path.
 (See below)
@@ -9,11 +9,11 @@ The wallet contains its own node, but can also use an already running one, if th
 
 When you start the wallet on a testnet (e.g. different `--datadir`) you need to make sure to set the `--ipcpath` back to the original one.
 
-On OSX its `~/Library/Happyuc/ghuc.ipc` on linux `~/.happyuc/ghuc.ipc` and on windows it uses a named pipe, which doesn't need to be renamed.
+On OSX its `~/Library/HappyUC/ghuc.ipc` on linux `~/.happyuc/ghuc.ipc` and on windows it uses a named pipe, which doesn't need to be renamed.
 
 Example:
 
-    $ ghuc --datadir /my/chain/ --networkid 23 --ipcpath ~/Library/Happyuc/ghuc.ipc
+    $ ghuc --datadir /my/chain/ --networkid 23 --ipcpath ~/Library/HappyUC/ghuc.ipc
 
 ### Original contract
 
@@ -37,8 +37,8 @@ The wallet (Mist) stores its data at:
 
 The nodes data is stored at:
 
-* Mac: ~/Library/Happyuc
-* Windows: %APPDATA%\Roaming\Happyuc
+* Mac: ~/Library/HappyUC
+* Windows: %APPDATA%\Roaming\HappyUC
 * Linux: ~/.happyuc
 
 ## Issues

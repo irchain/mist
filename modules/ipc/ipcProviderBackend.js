@@ -124,7 +124,7 @@ class IpcProviderBackend {
                     const onStateChange = newState => {
                       if (happyucNode.STATES.CONNECTED === newState) {
                         happyucNode.removeListener("state", onStateChange);
-                        log.debug(`Happyuc node connected, resume connecting socket ${ownerId}`);
+                        log.debug(`HappyUC node connected, resume connecting socket ${ownerId}`);
                         resolve();
                       }
                     };
@@ -161,7 +161,7 @@ class IpcProviderBackend {
   }
 
   /**
-   * Handler for when Happyuc node state changes.
+   * Handler for when HappyUC node state changes.
    *
    * Auto-reconnect sockets when happyuc node state changes
    *
@@ -171,7 +171,7 @@ class IpcProviderBackend {
     switch (state) { // eslint-disable-line default-case
       // stop syncing when node about to be stopped
       case happyucNode.STATES.STOPPING:
-        log.info("Happyuc node stopping, disconnecting sockets");
+        log.info("HappyUC node stopping, disconnecting sockets");
 
         Q.all(_.map(this._connections, item => {
           return item.socket.isConnected ? item.socket.disconnect().then(() => {

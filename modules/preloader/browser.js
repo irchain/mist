@@ -54,11 +54,11 @@ window.addEventListener('message', function message(event) {
     return;
   }
 
-  // HappyucProvider: connect
+  // HappyUCProvider: connect
   if (data.type === 'create') {
     ipcRenderer.send('ipcProvider-create');
 
-    // HappyucProvider: write
+    // HappyUCProvider: write
   } else if (data.type === 'write') {
     let messageIsArray = _.isArray(data.message);
 
@@ -140,7 +140,7 @@ const eventEmitter3 = fs.readFileSync(
 let mistAPI = fs.readFileSync(path.join(__dirname, '/injected/mistAPI.js')).
   toString();
 const happyucProvider = fs.readFileSync(
-  path.join(__dirname, '/injected/HappyucProvider.js')).toString();
+  path.join(__dirname, '/injected/HappyUCProvider.js')).toString();
 
 mistAPI = mistAPI.replace('__version__', packageJson.version).
   replace('__license__', packageJson.license).

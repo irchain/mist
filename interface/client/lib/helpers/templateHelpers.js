@@ -62,7 +62,7 @@ Template.registerHelper('mode', function() {
  @method (appName)
  **/
 Template.registerHelper('appName', function() {
-  return window.mistMode === 'mist' ? 'Mist' : 'Happyuc Wallet';
+  return window.mistMode === 'mist' ? 'Mist' : 'HappyUC Wallet';
 });
 
 /**

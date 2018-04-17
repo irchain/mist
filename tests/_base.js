@@ -92,7 +92,7 @@ exports.mocha = (_module, options) => {
 
       this.geth = yield startGhuc();
 
-      const appFileName  = options.app === "wallet" ? "Happyuc Wallet" : "Mist";
+      const appFileName  = options.app === "wallet" ? "HappyUC Wallet" : "Mist";
       const platformArch = `${process.platform}-${process.arch}`;
       console.info(`${appFileName} :: ${platformArch}`);
 

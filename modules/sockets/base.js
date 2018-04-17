@@ -8,7 +8,7 @@ const CONNECT_INTERVAL_MS = 1000;
 const CONNECT_TIMEOUT_MS = 3000;
 
 /**
- * Socket connecting to Happyuc Node.
+ * Socket connecting to HappyUC Node.
  */
 class Socket extends EventEmitter {
   constructor(socketMgr, id) {

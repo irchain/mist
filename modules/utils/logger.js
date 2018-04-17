@@ -22,7 +22,7 @@ exports.setup = function(options) {
         type: 'file',
         filename: `${logFolder}/category/main.log`,
       },
-      HappyucNode: {
+      HappyUCNode: {
         type: 'file',
         filename: `${logFolder}/category/happyuc_node.log`,
       },
@@ -33,7 +33,7 @@ exports.setup = function(options) {
     },
     categories: {
       default: {appenders: ['out', 'all', 'main'], level},
-      HappyucNode: {appenders: ['out', 'all', 'HappyucNode'], level},
+      HappyUCNode: {appenders: ['out', 'all', 'HappyUCNode'], level},
       swarm: {appenders: ['out', 'all', 'swarm'], level},
     },
   };

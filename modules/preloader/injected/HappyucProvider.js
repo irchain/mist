@@ -15,7 +15,7 @@
   // on events are: "connect", "data", "error", "end", "timeout"
   // "data" will get notifications
 
-  function HappyucProvider() {
+  function HappyUCProvider() {
     var _this = this;
     // Call constructor of superclass to initialize superclass-derived members.
     EventEmitter.call(this);
@@ -91,8 +91,8 @@
     });
   }
 
-  HappyucProvider.prototype = Object.create(EventEmitter.prototype);
-  HappyucProvider.prototype.constructor = HappyucProvider;
+  HappyUCProvider.prototype = Object.create(EventEmitter.prototype);
+  HappyUCProvider.prototype.constructor = HappyUCProvider;
 
   /**
    Get the adds a callback to the responseCallbacks object,
@@ -100,7 +100,7 @@
 
    @method _addResponseCallback
    */
-  HappyucProvider.prototype._addResponseCallback = function(
+  HappyUCProvider.prototype._addResponseCallback = function(
     payload,
     callback,
   ) {
@@ -122,7 +122,7 @@
 
    @method _reconnectCheck
    */
-  HappyucProvider.prototype._reconnectCheck = function() {
+  HappyUCProvider.prototype._reconnectCheck = function() {
     var _this = this;
     var reconnectIntervalId;
 
@@ -142,7 +142,7 @@
 
    @method connect
    */
-  HappyucProvider.prototype._connect = function(payload, callback) {
+  HappyUCProvider.prototype._connect = function(payload, callback) {
     postMessage({
       type: 'create',
     });
@@ -156,7 +156,7 @@
    @param {Function} callback the callback to call
    */
   // TODO transform to: send(method, params, callback)
-  HappyucProvider.prototype.send = function send(payload, callback) {
+  HappyUCProvider.prototype.send = function send(payload, callback) {
     this._addResponseCallback(payload, callback);
     postMessage(
       {
@@ -169,10 +169,10 @@
 
   delete window.EventEmitter;
   // TODO set real happyuc provider
-  // window.happyuc = new HappyucProvider();
+  // window.happyuc = new HappyUCProvider();
 
   // For backwards compatibility of webu.currentProvider;
-  HappyucProvider.prototype.sendSync = function() {
+  HappyUCProvider.prototype.sendSync = function() {
     return {
       jsonrpc: '2.0',
       error: {
@@ -181,11 +181,11 @@
       },
     };
   };
-  HappyucProvider.prototype.sendAsync = HappyucProvider.prototype.send;
-  HappyucProvider.prototype.isConnected = function() {
+  HappyUCProvider.prototype.sendAsync = HappyUCProvider.prototype.send;
+  HappyUCProvider.prototype.isConnected = function() {
     return true;
   };
   window.webu = {
-    currentProvider: new HappyucProvider(),
+    currentProvider: new HappyUCProvider(),
   };
 })();

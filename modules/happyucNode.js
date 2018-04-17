@@ -13,7 +13,7 @@ const ClientBinaryManager = require("./clientBinaryManager");
 
 import logger from "./utils/logger";
 
-const happyucNodeLog = logger.create("HappyucNode");
+const happyucNodeLog = logger.create("HappyUCNode");
 
 const DEFAULT_NODE_TYPE = "ghuc";
 const DEFAULT_NETWORK   = "main";
@@ -32,9 +32,9 @@ const STATES = {
 };
 
 /**
- * Happyuc nodes manager.
+ * HappyUC nodes manager.
  */
-class HappyucNode extends EventEmitter {
+class HappyUCNode extends EventEmitter {
   constructor() {
     super();
 
@@ -503,6 +503,6 @@ class HappyucNode extends EventEmitter {
   }
 }
 
-HappyucNode.STARTING = 0;
+HappyUCNode.STARTING = 0;
 
-module.exports = new HappyucNode();
+module.exports = new HappyUCNode();

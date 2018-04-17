@@ -46,7 +46,7 @@ class NodeSync extends EventEmitter {
             this._sync();
           });
         } else {
-          throw new Error("Cannot sync - Happyuc node not yet connected");
+          throw new Error("Cannot sync - HappyUC node not yet connected");
         }
       })
       .then(() => this.emit("finished"))
@@ -141,12 +141,12 @@ class NodeSync extends EventEmitter {
     switch (state) { // eslint-disable-line default-case
       // stop syncing when node about to be stopped
       case happyucNode.STATES.STOPPING:
-        log.info("Happyuc node stopping, so stop sync");
+        log.info("HappyUC node stopping, so stop sync");
         this.stop();
         break;
       // auto-sync whenever node gets connected
       case happyucNode.STATES.CONNECTED:
-        log.info("Happyuc node connected, re-start sync");
+        log.info("HappyUC node connected, re-start sync");
 
         // stop syncing, then start again
         this.stop().then(() => this.start());
