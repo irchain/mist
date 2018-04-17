@@ -27,9 +27,9 @@
          "mac": {
                     "x64": {
                         "download": {
-                            "url": "",
-                            "type": "tar",
-                            "bin": "ghuc"
+                            "url": "https://github.com/happyuc-project/happyuc-go/raw/master/target/ghuc-mac-amd64.zip",
+                            "type": "zip",
+                            "bin": "ghuc-mac-amd64/ghuc"
                         },
                         "bin": "ghuc",
                         "commands": {
