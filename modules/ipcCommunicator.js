@@ -128,7 +128,7 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
       const keyfile = JSON.parse(data);
       const result = keyfileRecognizer(keyfile);
       /** result
-       *  [ 'hucersale', undefined ]   Hucersale keyfile
+       *  [ 'hucsale', undefined ]   Hucsale keyfile
        *               [ 'webu', 3 ]   webu (v3) keyfile
        *                        null   no valid  keyfile
        */
@@ -137,7 +137,7 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
 
       log.debug(`Importing ${type} account...`);
 
-      if (type === 'hucersale') {
+      if (type === 'hucsale') {
         e.sender.send('uiAction_checkedWalletFile', null, 'presale');
       } else if (type === 'webu') {
         e.sender.send('uiAction_checkedWalletFile', null, 'webu');

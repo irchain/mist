@@ -444,7 +444,7 @@ Helpers.detectNetwork = function(hash) {
  @return {String} The formated balance including the unit
  **/
 // Helpers.formatBalance = function(number, format){
-//     number = webu.fromWei(number, LocalStore.get('hucerUnit'));
+//     number = webu.fromWei(number, LocalStore.get('hucUnit'));
 
-//     return Helpers.formatNumber(number, format) +' '+ LocalStore.get('hucerUnit');
+//     return Helpers.formatNumber(number, format) +' '+ LocalStore.get('hucUnit');
 // };

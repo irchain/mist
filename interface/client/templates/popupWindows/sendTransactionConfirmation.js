@@ -233,7 +233,7 @@ Template['popupWindows_sendTransactionConfirmation'].helpers({
     var amount = HucTools.formatBalance(
       this.value,
       '0,0.00[0000000000000000]',
-      'hucer',
+      'huc',
     );
     var dotPos = ~amount.indexOf('.')
       ? amount.indexOf('.') + 3
@@ -247,7 +247,7 @@ Template['popupWindows_sendTransactionConfirmation'].helpers({
       : '0';
   },
   /**
-   Calculates the fee used for this transaction in hucer
+   Calculates the fee used for this transaction in huc
 
    @method (estimatedFee)
    */
@@ -257,12 +257,12 @@ Template['popupWindows_sendTransactionConfirmation'].helpers({
       return HucTools.formatBalance(
         new BigNumber(gas, 10).times(new BigNumber(this.gasPrice, 10)),
         '0,0.0[0000000] unit',
-        'hucer',
+        'huc',
       );
     }
   },
   /**
-   Calculates the provided gas amount in hucer
+   Calculates the provided gas amount in huc
 
    @method (providedGas)
    */
@@ -272,7 +272,7 @@ Template['popupWindows_sendTransactionConfirmation'].helpers({
       return HucTools.formatBalance(
         new BigNumber(gas, 10).times(new BigNumber(this.gasPrice, 10)),
         '0,0.0[0000000]',
-        'hucer',
+        'huc',
       );
     }
   },
@@ -325,7 +325,7 @@ Template['popupWindows_sendTransactionConfirmation'].helpers({
 
 Template['popupWindows_sendTransactionConfirmation'].events({
   /**
-   Gets the new provided gas in hucer amount and calculates the resulting providedGas
+   Gets the new provided gas in huc amount and calculates the resulting providedGas
 
    @event change .provided-gas, input .provided-gas
    */
