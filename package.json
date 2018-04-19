@@ -10,7 +10,7 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps; cd interface && yarn",
     "dev:electron": "electron -r babel-register main.js",
-    "dev:meteor": "cd interface && meteor --no-release-check",
+    "dev:meteor": "cd interface && meteor",
     "dev:tools": "open http://remotedev.io/local/",
     "test:basic": "gulp test --test=basic",
     "test:unit": "mocha --compilers babel-register tests/unit/**/* --watch",
