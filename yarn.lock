@@ -3408,9 +3408,9 @@ gulplog@^1.0.0:
   dependencies:
     glogg "^1.0.0"
 
-happyuc-client-binaries@>=1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/happyuc-client-binaries/-/happyuc-client-binaries-1.0.4.tgz#0c0402cd2deef21642a3946fdbd210924b0475ae"
+happyuc-client-binaries@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/happyuc-client-binaries/-/happyuc-client-binaries-1.0.7.tgz#7953147615d6a1b7c77b1948aee10d3ebc6dc306"
   dependencies:
     buffered-spawn "^3.3.2"
     crypto "^1.0.1"
@@ -3424,7 +3424,7 @@ happyuc-client-binaries@>=1.0.4:
     path "^0.12.7"
     tmp "^0.0.33"
 
-happyuc-keyfile-recognizer@latest:
+happyuc-keyfile-recognizer@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/happyuc-keyfile-recognizer/-/happyuc-keyfile-recognizer-1.0.0.tgz#c78f1ab59b7de32d7291a3129b8c1eef0642952e"
   dependencies:
