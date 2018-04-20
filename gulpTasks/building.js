@@ -91,7 +91,6 @@ gulp.task('bundling-interface', cb => {
     );
   };
 
-  // TODO switch wallet app local -> remote
   if (type === 'wallet') {
     if (options.walletSource === 'local') {
       console.log('Use local wallet at ../meteor-dapp-wallet/app');
@@ -129,7 +128,7 @@ gulp.task('build-dist', cb => {
     name: applicationName.replace(/\s/, ''),
     productName: applicationName,
     description: applicationName,
-    homepage: 'https://github.com/happyuc-project/mist',
+    homepage: 'https://github.com/happyUC-project/mist',
     build: {
       appId: `org.happyuc.${type}`,
       asar: true,

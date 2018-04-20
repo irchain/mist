@@ -1,7 +1,7 @@
 /**
- Sets the happyuc provider, as well as "webu" for backwards compatibility.
+ Sets the happyUC provider, as well as "webu" for backwards compatibility.
 
- @module happyucProvider
+ @module happyUCProvider
  */
 const Webu = require('webu');
 const BigNumber = require('bignumber.js');

@@ -208,8 +208,8 @@ exports.mocha = (_module, options) => {
         });
         Tabs.upsert({ _id: "wallet" }, {
           $set: {
-            url        : "https://wallet.happyuc.org",
-            redirect   : "https://wallet.happyuc.org",
+            url        : "https://wallet.happyUC.org",
+            redirect   : "https://wallet.happyUC.org",
             position   : 1,
             permissions: { admin: true }
           }

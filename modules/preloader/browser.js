@@ -132,14 +132,14 @@ const postMessage = function(payload) {
   });
 });
 
-// load happyucProvider
+// load happyUCProvider
 const bignumber = fs.readFileSync(
   path.join(__dirname, '/injected/BigNumber.js')).toString();
 const eventEmitter3 = fs.readFileSync(
   path.join(__dirname, '/injected/EventEmitter3.js')).toString();
 let mistAPI = fs.readFileSync(path.join(__dirname, '/injected/mistAPI.js')).
   toString();
-const happyucProvider = fs.readFileSync(
+const happyUCProvider = fs.readFileSync(
   path.join(__dirname, '/injected/HappyUCProvider.js')).toString();
 
 mistAPI = mistAPI.replace('__version__', packageJson.version).
@@ -151,7 +151,7 @@ mistAPI = mistAPI.replace('__version__', packageJson.version).
   );
 
 webFrame.executeJavaScript(
-  mistAPI + bignumber + eventEmitter3 + happyucProvider,
+  mistAPI + bignumber + eventEmitter3 + happyUCProvider,
 );
 
 // notifiy the tab to store the webview id

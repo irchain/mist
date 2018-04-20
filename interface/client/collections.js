@@ -20,9 +20,9 @@ if (typeof window.dbSync !== 'undefined') {
 
 // ETHEREUM RELATED
 
-// Accounts collection is add by the happyuc:accounts package
+// Accounts collection is add by the happyUC:accounts package
 
-// LastBlock collection is add by the happyuc:accounts package
+// LastBlock collection is add by the happyUC:accounts package
 
 // contains blockchain meta data
 // LastBlock = new Mongo.Collection('lastblock', {connection: null});

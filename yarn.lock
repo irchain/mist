@@ -3056,7 +3056,7 @@ ghuc-private@latest:
     gulp-mocha "^5.0.0"
     lodash "^4.17.4"
     sinon "^4.4.9"
-    webu "git+https://github.com/happyuc-project/webu.js.git"
+    webu "git+https://github.com/happyUC-project/webu.js.git"
 
 glob-parent@^3.1.0:
   version "3.1.0"
@@ -3410,7 +3410,7 @@ gulplog@^1.0.0:
 
 happyuc-client-binaries@^1.0.7:
   version "1.0.7"
-  resolved "https://registry.yarnpkg.com/happyuc-client-binaries/-/happyuc-client-binaries-1.0.7.tgz#7953147615d6a1b7c77b1948aee10d3ebc6dc306"
+  resolved "https://registry.yarnpkg.com/happyUC-client-binaries/-/happyUC-client-binaries-1.0.7.tgz#7953147615d6a1b7c77b1948aee10d3ebc6dc306"
   dependencies:
     buffered-spawn "^3.3.2"
     crypto "^1.0.1"
@@ -3426,7 +3426,7 @@ happyuc-client-binaries@^1.0.7:
 
 happyuc-keyfile-recognizer@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/happyuc-keyfile-recognizer/-/happyuc-keyfile-recognizer-1.0.0.tgz#c78f1ab59b7de32d7291a3129b8c1eef0642952e"
+  resolved "https://registry.yarnpkg.com/happyUC-keyfile-recognizer/-/happyUC-keyfile-recognizer-1.0.0.tgz#c78f1ab59b7de32d7291a3129b8c1eef0642952e"
   dependencies:
     json-structure-diff "^0.0.2"
     underscore "^1.8.3"
@@ -7531,9 +7531,9 @@ webdriverio@^4.8.0:
     wdio-dot-reporter "~0.0.8"
     wgxpath "~1.0.0"
 
-webu@^latest:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/webu/-/webu-1.0.1.tgz#3d869c314807383e865df2534d4efb58ce4c2b4d"
+webu@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/webu/-/webu-1.0.5.tgz#fc46ddee866dbd39a8a687d5891be766bff7c295"
   dependencies:
     bignumber.js "git+https://github.com/frozeman/bignumber.js-nolookahead.git"
     crypto-js "^3.1.4"
@@ -7543,7 +7543,7 @@ webu@^latest:
 
 "webu@git+https://github.com/happyuc-project/webu.js.git":
   version "1.0.1"
-  resolved "git+https://github.com/happyuc-project/webu.js.git#f18a772493da95f4555be19b0b46eb06bc0e21ef"
+  resolved "git+https://github.com/happyUC-project/webu.js.git#f18a772493da95f4555be19b0b46eb06bc0e21ef"
   dependencies:
     bignumber.js "git+https://github.com/frozeman/bignumber.js-nolookahead.git"
     crypto-js "^3.1.4"

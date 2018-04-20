@@ -11,7 +11,7 @@ lockSourceIssue: false
 
 # Set custom aliases for targets
 aliases:
-    wallet: happyuc/meteor-dapp-wallet
-    geth: happyuc/go-happyuc
+    wallet: happyUC/meteor-dapp-wallet
+    geth: happyUC/go-happyUC
     parity: paritytech/parity
 

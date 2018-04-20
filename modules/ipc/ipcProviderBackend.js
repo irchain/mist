@@ -1,5 +1,5 @@
 /**
- The IPC provider backend filter and tunnel all incoming request to the happyuc node.
+ The IPC provider backend filter and tunnel all incoming request to the happyUC node.
 
  @module ipcProviderBackend
  */
@@ -12,7 +12,7 @@ const path             = require("path");
 const log              = require("../utils/logger").create("ipcProviderBackend");
 const Sockets          = require("../socketManager");
 const Settings         = require("../settings");
-const happyucNode      = require("../happyucNode");
+const happyUCNode      = require("../happyUCNode");
 
 const ERRORS = {
   INVALID_PAYLOAD        : {
@@ -39,7 +39,7 @@ class IpcProviderBackend {
 
     this.ERRORS = ERRORS;
 
-    happyucNode.on("state", _.bind(this._onNodeStateChanged, this));
+    happyUCNode.on("state", _.bind(this._onNodeStateChanged, this));
     ipc.on("ipcProvider-create", _.bind(this._getOrCreateConnection, this));
     ipc.on("ipcProvider-destroy", _.bind(this._destroyConnection, this));
     ipc.on("ipcProvider-write", _.bind(this._sendRequest, this, false));
@@ -119,16 +119,16 @@ class IpcProviderBackend {
                 log.debug(`Connecting socket ${ownerId}`);
 
                 // wait for node to connect first.
-                if (happyucNode.state !== happyucNode.STATES.CONNECTED) {
+                if (happyUCNode.state !== happyUCNode.STATES.CONNECTED) {
                   return new Q((resolve) => {
                     const onStateChange = newState => {
-                      if (happyucNode.STATES.CONNECTED === newState) {
-                        happyucNode.removeListener("state", onStateChange);
+                      if (happyUCNode.STATES.CONNECTED === newState) {
+                        happyUCNode.removeListener("state", onStateChange);
                         log.debug(`HappyUC node connected, resume connecting socket ${ownerId}`);
                         resolve();
                       }
                     };
-                    happyucNode.on("state", onStateChange);
+                    happyUCNode.on("state", onStateChange);
                   });
                 }
               })
@@ -163,14 +163,14 @@ class IpcProviderBackend {
   /**
    * Handler for when HappyUC node state changes.
    *
-   * Auto-reconnect sockets when happyuc node state changes
+   * Auto-reconnect sockets when happyUC node state changes
    *
    * @param {String} state The new state.
    */
   _onNodeStateChanged(state) {
     switch (state) { // eslint-disable-line default-case
       // stop syncing when node about to be stopped
-      case happyucNode.STATES.STOPPING:
+      case happyUCNode.STATES.STOPPING:
         log.info("HappyUC node stopping, disconnecting sockets");
 
         Q.all(_.map(this._connections, item => {

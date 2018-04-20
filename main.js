@@ -30,7 +30,7 @@ const db = (global.db = require("./modules/db"));
 require("./modules/ipcCommunicator.js");
 const appMenu            = require("./modules/menuItems");
 const ipcProviderBackend = require("./modules/ipc/ipcProviderBackend.js");
-const huappyucNode       = require("./modules/happyucNode.js");
+const huappyucNode       = require("./modules/happyUCNode.js");
 const nodeSync           = require("./modules/nodeSync.js");
 
 // Define global vars; The preloader makes some globals available to the client.
@@ -245,7 +245,7 @@ function checkForLegacyChain() {
       message: global.i18n.t("mist.errors.legacyChain.title"),
       detail : global.i18n.t("mist.errors.legacyChain.description")
     }, () => {
-      shell.openExternal("https://github.com/happyuc-project/mist/releases");
+      shell.openExternal("https://github.com/happyUC-project/mist/releases");
       store.dispatch(quitApp());
     });
 

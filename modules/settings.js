@@ -159,7 +159,7 @@ class Settings {
     if (process.platform === "darwin") {
       ipcPath += "/Library/HappyUC/ghuc.ipc";
     } else if (process.platform === "freebsd" || process.platform === "linux" || process.platform === "sunos") {
-      ipcPath += "/.happyuc/ghuc.ipc";
+      ipcPath += "/.happyUC/ghuc.ipc";
     } else if (process.platform === "win32") {
       ipcPath = "\\\\.\\pipe\\ghuc.ipc";
     }

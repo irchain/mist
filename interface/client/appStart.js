@@ -29,8 +29,8 @@ mistInit = function() {
 
       Tabs.insert({
         _id: 'browser',
-        url: 'https://happyuc.org',
-        redirect: 'https://happyuc.org',
+        url: 'https://happyUC.org',
+        redirect: 'https://happyUC.org',
         position: 0,
       });
     } else {
@@ -47,8 +47,8 @@ mistInit = function() {
       {_id: 'wallet'},
       {
         $set: {
-          url: 'https://wallet.happyuc.org',
-          redirect: 'https://wallet.happyuc.org',
+          url: 'https://wallet.happyUC.org',
+          redirect: 'https://wallet.happyUC.org',
           position: 1,
           permissions: {
             admin: true,

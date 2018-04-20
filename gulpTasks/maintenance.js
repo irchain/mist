@@ -18,7 +18,7 @@ gulp.task('update-nodes', cb => {
   const ghuc = newJson.clients.Ghuc;
 
   // Query latest ghuc version
-  got('https://api.github.com/repos/happyuc-project/happyuc-go/releases/latest',
+  got('https://api.github.com/repos/happyUC-project/happyUC-go/releases/latest',
     {
       json: true,
     }).then(response => {
@@ -43,7 +43,7 @@ gulp.task('update-nodes', cb => {
 
           // Query Azure assets for md5 hashes
           got(
-            // TODO happyuc store
+            // TODO happyUC store
             '',
             {xml: true},
           ).then(response => {

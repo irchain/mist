@@ -12,7 +12,7 @@ const EventEmitter = require("events").EventEmitter;
 const log = require("./utils/logger").create("ClientBinaryManager");
 
 // should be       'https://raw.githubusercontent.com/ethereum/mist/master/clientBinaries.json'
-// TODO add happyuc clientBinaries.json url
+// TODO add happyUC clientBinaries.json url
 const BINARY_URL = "";
 // TODO modify regex rule
 const ALLOWED_DOWNLOAD_URLS_REGEX = "";
