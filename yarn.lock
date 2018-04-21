@@ -798,9 +798,9 @@ beeper@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/beeper/-/beeper-1.1.1.tgz#e6d5ea8c5dad001304a70b22638447f69cb2f809"
 
-bignumber.js@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-6.0.0.tgz#bbfa047644609a5af093e9cbd83b0461fa3f6002"
+bignumber.js@^4.0.2:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-4.1.0.tgz#db6f14067c140bd46624815a7916c92d9b6c24b1"
 
 "bignumber.js@git+https://github.com/frozeman/bignumber.js-nolookahead.git":
   version "2.0.7"
@@ -3056,7 +3056,7 @@ ghuc-private@latest:
     gulp-mocha "^5.0.0"
     lodash "^4.17.4"
     sinon "^4.4.9"
-    webu "git+https://github.com/happyUC-project/webu.js.git"
+    webu "git+https://github.com/happyuc-project/webu.js.git"
 
 glob-parent@^3.1.0:
   version "3.1.0"
@@ -7541,9 +7541,9 @@ webu@^1.0.5:
     xhr2 "*"
     xmlhttprequest "*"
 
-"webu@git+https://github.com/happyuc-project/webu.js.git":
-  version "1.0.1"
-  resolved "git+https://github.com/happyUC-project/webu.js.git#f18a772493da95f4555be19b0b46eb06bc0e21ef"
+"webu@git+https://github.com/happyUC-project/webu.js.git":
+  version "1.0.5"
+  resolved "git+https://github.com/happyUC-project/webu.js.git#9378fcf81af42c411a3d861ff72f42eaca32ca15"
   dependencies:
     bignumber.js "git+https://github.com/frozeman/bignumber.js-nolookahead.git"
     crypto-js "^3.1.4"

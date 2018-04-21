@@ -276,42 +276,42 @@ Helpers.detectNetwork = function(hash) {
  @param {Boolean} accounts will show the accounts errors
  @return {Boolean}
  **/
-// Helpers.displayError = function(error, accounts) {
-//     var duration = 8;
+Helpers.displayError = function(error, accounts) {
+    var duration = 8;
 
-//     if(error) {
+    if(error) {
 
-//         if(error.reason){
-//             // hack to make account errors still work
-//             if(accounts) {
-//                 GlobalNotification.error({
-//                     content: 'i18n:accounts.error.' + error.reason.toLowerCase().replace(/[ ]+/g, ''),
-//                     duration: duration
-//                 });
+        if(error.reason){
+            // hack to make account errors still work
+            if(accounts) {
+                GlobalNotification.error({
+                    content: 'i18n:accounts.error.' + error.reason.toLowerCase().replace(/[ ]+/g, ''),
+                    duration: duration
+                });
 
-//             } else {
-//                 GlobalNotification.error({
-//                     content: 'i18n:'+ error.reason,
-//                     duration: duration
-//                 });
-//             }
-//         } else if(error.message) {
-//             GlobalNotification.error({
-//                 content: error.message,
-//                 duration: duration
-//             });
-//         } else {
-//             GlobalNotification.error({
-//                 content: error,
-//                 duration: duration
-//             });
-//         }
+            } else {
+                GlobalNotification.error({
+                    content: 'i18n:'+ error.reason,
+                    duration: duration
+                });
+            }
+        } else if(error.message) {
+            GlobalNotification.error({
+                content: error.message,
+                duration: duration
+            });
+        } else {
+            GlobalNotification.error({
+                content: error,
+                duration: duration
+            });
+        }
 
-//         return true;
+        return true;
 
-//     } else
-//         return false;
-// };
+    } else
+        return false;
+};
 
 /**
  Get form values and build a parameters object out of it.
@@ -325,32 +325,32 @@ Helpers.detectNetwork = function(hash) {
      key2: 'value2'
  }
  **/
-// Helpers.formValuesToParameters = function(elements) {
-//     var parameters = {};
+Helpers.formValuesToParameters = function(elements) {
+    var parameters = {};
 
-//     $(elements).each(function(){
-//         var $element = $(this),
-//             name = $element.attr('name'),
-//             value = $element.val();
+    $(elements).each(function(){
+        var $element = $(this),
+            name = $element.attr('name'),
+            value = $element.val();
 
-//         // add only values wich are not null or empty
-//         if(name && !_.isEmpty(value) && value !== 'null' && value !== 'NULL') {
-//             if(_.isFinite(value))
-//                 parameters[name] = parseInt(value);
-//             else if(_.isBoolean(value))
-//                 parameters[name] = (value === 'true' || value === 'True' || value === 'TRUE') ? true : false;
-//             else if($element.attr('type') === 'radio')
-//                 parameters[name] = ($element.is(':checked')) ? true : false;
-//             else if($element.attr('type') === 'checkbox')
-//                 parameters[name] = ($element.is(':checked')) ? true : false;
-//             else
-//                 parameters[name] = value;
-//         }
-//         $element = null;
-//     });
+        // add only values wich are not null or empty
+        if(name && !_.isEmpty(value) && value !== 'null' && value !== 'NULL') {
+            if(_.isFinite(value))
+                parameters[name] = parseInt(value);
+            else if(_.isBoolean(value))
+                parameters[name] = (value === 'true' || value === 'True' || value === 'TRUE') ? true : false;
+            else if($element.attr('type') === 'radio')
+                parameters[name] = ($element.is(':checked')) ? true : false;
+            else if($element.attr('type') === 'checkbox')
+                parameters[name] = ($element.is(':checked')) ? true : false;
+            else
+                parameters[name] = value;
+        }
+        $element = null;
+    });
 
-//     return parameters;
-// };
+    return parameters;
+};
 
 /**
  Reactive wrapper for the moment package.
@@ -359,17 +359,17 @@ Helpers.detectNetwork = function(hash) {
  @param {String} time    a date object passed to moment function.
  @return {Object} the moment js package
  **/
-// Helpers.moment = function(time){
+Helpers.moment = function(time){
 
-//     // react to language changes as well
-//     TAPi18n.getLanguage();
+    // react to language changes as well
+    TAPi18n.getLanguage();
 
-//     if(_.isFinite(time) && moment.unix(time).isValid())
-//         return moment.unix(time);
-//     else
-//         return moment(time);
+    if(_.isFinite(time) && moment.unix(time).isValid())
+        return moment.unix(time);
+    else
+        return moment(time);
 
-// };
+};
 
 /**
  Formats a timestamp to any format given.
@@ -381,31 +381,31 @@ Helpers.detectNetwork = function(hash) {
  @param {String} format       the format string, can also be "iso", to format to ISO string, or "fromnow"
  @return {String} The formated time
  **/
-// Helpers.formatTime = function(time, format) { //parameters
+Helpers.formatTime = function(time, format) { //parameters
 
-//     // make sure not existing values are not Spacebars.kw
-//     if(format instanceof Spacebars.kw)
-//         format = null;
+    // make sure not existing values are not Spacebars.kw
+    if(format instanceof Spacebars.kw)
+        format = null;
 
-//     if(time) {
+    if(time) {
 
-//         if(_.isString(format) && !_.isEmpty(format)) {
+        if(_.isString(format) && !_.isEmpty(format)) {
 
-//             if(format.toLowerCase() === 'iso')
-//                 time = Helpers.moment(time).toISOString();
-//             else if(format.toLowerCase() === 'fromnow') {
-//                 // make reactive updating
-//                 Helpers.rerun['10s'].tick();
-//                 time = Helpers.moment(time).fromNow();
-//             } else
-//                 time = Helpers.moment(time).format(format);
-//         }
+            if(format.toLowerCase() === 'iso')
+                time = Helpers.moment(time).toISOString();
+            else if(format.toLowerCase() === 'fromnow') {
+                // make reactive updating
+                Helpers.rerun['10s'].tick();
+                time = Helpers.moment(time).fromNow();
+            } else
+                time = Helpers.moment(time).format(format);
+        }
 
-//         return time;
+        return time;
 
-//     } else
-//         return '';
-// };
+    } else
+        return '';
+};
 
 /**
  Formats a given number
@@ -417,21 +417,21 @@ Helpers.detectNetwork = function(hash) {
  @param {String} format           the format string e.g. "0.0[000]" see http://numeraljs.com for more.
  @return {String} The formated time
  **/
-// Helpers.formatNumber = function(number, format){
-//     if(format instanceof Spacebars.kw)
-//         format = null;
+Helpers.formatNumber = function(number, format){
+    if(format instanceof Spacebars.kw)
+        format = null;
 
-//     if(number instanceof BigNumber)
-//         number = number.toString(10);
+    if(number instanceof BigNumber)
+        number = number.toString(10);
 
-//     format = format || '0,0.0[0000]';
+    format = format || '0,0.0[0000]';
 
-//     if(!_.isFinite(number))
-//         number = numeral().unformat(number);
+    if(!_.isFinite(number))
+        number = numeral().unformat(number);
 
-//     if(_.isFinite(number))
-//         return numeral(number).format(format);
-// };
+    if(_.isFinite(number))
+        return numeral(number).format(format);
+};
 
 /**
  Formats a given number toa unit balance
@@ -443,8 +443,8 @@ Helpers.detectNetwork = function(hash) {
  @param {String} format           the format string e.g. "0.0[000]" see http://numeraljs.com for more.
  @return {String} The formated balance including the unit
  **/
-// Helpers.formatBalance = function(number, format){
-//     number = webu.fromWei(number, LocalStore.get('hucUnit'));
+Helpers.formatBalance = function(number, format){
+    number = webu.fromWei(number, LocalStore.get('hucUnit'));
 
-//     return Helpers.formatNumber(number, format) +' '+ LocalStore.get('hucUnit');
-// };
+    return Helpers.formatNumber(number, format) +' '+ LocalStore.get('hucUnit');
+};
