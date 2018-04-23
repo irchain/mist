@@ -29,10 +29,7 @@ module.exports = function(windowId) {
     console[method] = (function(origMethod) {
       return function() {
         const args = Array.from(arguments);
-
         const suffix = `@ ${this.lineNumber ? `${this.fileName}:${this.lineNumber}:1` : extractLineNumberFromStack(new Error().stack)}`;
-
-        console.log("-------------------------------------------------", suffix);
 
         origMethod.apply(console, args.concat([suffix]));
 
