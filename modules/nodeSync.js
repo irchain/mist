@@ -9,7 +9,7 @@ const _                = global._;
 const Q                = require("bluebird");
 const EventEmitter     = require("events").EventEmitter;
 const { ipcMain: ipc } = require("electron");
-const happyucNode      = require("./happyucNode");
+const happyUCNode      = require("./happyUCNode");
 const log              = require("./utils/logger").create("NodeSync");
 
 const SYNC_CHECK_INTERVAL_MS = 2000;
@@ -17,7 +17,7 @@ const SYNC_CHECK_INTERVAL_MS = 2000;
 class NodeSync extends EventEmitter {
   constructor() {
     super();
-    happyucNode.on("state", _.bind(this._onNodeStateChanged, this));
+    happyUCNode.on("state", _.bind(this._onNodeStateChanged, this));
   }
 
   /**
@@ -31,7 +31,7 @@ class NodeSync extends EventEmitter {
 
     this._syncPromise = Q
       .try(() => {
-        if (happyucNode.isIpcConnected) {
+        if (happyUCNode.isIpcConnected) {
           return new Q((resolve, reject) => {
             log.info("Starting sync loop");
             this._syncInProgress = true;
@@ -46,7 +46,7 @@ class NodeSync extends EventEmitter {
             this._sync();
           });
         } else {
-          throw new Error("Cannot sync - Happyuc node not yet connected");
+          throw new Error("Cannot sync - HappyUC node not yet connected");
         }
       })
       .then(() => this.emit("finished"))
@@ -84,7 +84,7 @@ class NodeSync extends EventEmitter {
 
       log.trace("Check sync status");
 
-      happyucNode
+      happyUCNode
         .send("huc_syncing", [])
         .then(ret => {
           const result = ret.result;
@@ -110,7 +110,7 @@ class NodeSync extends EventEmitter {
             }
           } else {
             // got no result, let's check the block number
-            return happyucNode
+            return happyUCNode
               .send("huc_getBlockByNumber", ["latest", false])
               .then(ret2 => {
                 const blockResult = ret2.result;
@@ -140,13 +140,13 @@ class NodeSync extends EventEmitter {
   _onNodeStateChanged(state) {
     switch (state) { // eslint-disable-line default-case
       // stop syncing when node about to be stopped
-      case happyucNode.STATES.STOPPING:
-        log.info("Happyuc node stopping, so stop sync");
+      case happyUCNode.STATES.STOPPING:
+        log.info("HappyUC node stopping, so stop sync");
         this.stop();
         break;
       // auto-sync whenever node gets connected
-      case happyucNode.STATES.CONNECTED:
-        log.info("Happyuc node connected, re-start sync");
+      case happyUCNode.STATES.CONNECTED:
+        log.info("HappyUC node connected, re-start sync");
 
         // stop syncing, then start again
         this.stop().then(() => this.start());

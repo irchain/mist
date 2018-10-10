@@ -581,7 +581,7 @@ class Windows {
     if (!anyOpen) {
       log.info("All primary windows closed/invisible, so quitting app...");
 
-      app.quit();
+      // app.quit();
     }
   }
 }

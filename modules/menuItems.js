@@ -6,7 +6,7 @@ const Settings                                                  = require("./set
 const log                                                       = require("./utils/logger").create("menuItems");
 const swarmLog                                                  = require("./utils/logger").create("swarm");
 const updateChecker                                             = require("./updateChecker");
-const happyucNode                                               = require("./happyucNode.js");
+const happyUCNode                                               = require("./happyUCNode.js");
 const ClientBinaryManager                                       = require("./clientBinaryManager");
 
 import { setLanguage, toggleSwarm, toggleSwarmOnStart } from "./core/settings/actions";
@@ -33,11 +33,11 @@ const createMenu = function(webviews) {
 };
 
 const restartNode = function(newType, newNetwork, syncMode, webviews) {
-  newNetwork = newNetwork || happyucNode.network;
+  newNetwork = newNetwork || happyUCNode.network;
 
   log.info("Switch node", newType, newNetwork);
 
-  return happyucNode.restart(newType, newNetwork, syncMode).then(() => {
+  return happyUCNode.restart(newType, newNetwork, syncMode).then(() => {
     Windows.getByType("main").load(global.interfaceAppUrl);
 
     createMenu(webviews);
@@ -48,7 +48,7 @@ const restartNode = function(newType, newNetwork, syncMode, webviews) {
 };
 
 const startMining = webviews => {
-  happyucNode.send("miner_start", [1]).then(ret => {
+  happyUCNode.send("miner_start", [1]).then(ret => {
     log.info("miner_start", ret.result);
 
     if (ret.result) {
@@ -61,7 +61,7 @@ const startMining = webviews => {
 };
 
 const stopMining = webviews => {
-  happyucNode.send("miner_stop", [1]).then(ret => {
+  happyUCNode.send("miner_stop", [1]).then(ret => {
     log.info("miner_stop", ret.result);
 
     if (ret.result) {
@@ -186,7 +186,7 @@ let menuTempl = function(webviews) {
       }, {
         label      : i18n.t("mist.applicationMenu.file.importPresale"),
         accelerator: "CommandOrControl+I",
-        enabled    : happyucNode.isMainNetwork,
+        enabled    : happyUCNode.isMainNetwork,
         click() {
           Windows.createPopup("importAccount");
         }
@@ -199,7 +199,7 @@ let menuTempl = function(webviews) {
               let userPath = Settings.userHomePath;
 
               // huc
-              if (happyucNode.isHuc) {
+              if (happyUCNode.isHuc) {
                 if (process.platform === "win32") {
                   userPath = `${Settings.appDataPath}\\Webu\\keys`;
                 } else {
@@ -209,15 +209,15 @@ let menuTempl = function(webviews) {
                 // ghuc
               } else {
                 if (process.platform === "darwin") {
-                  userPath += "/Library/Happyuc/keystore";
+                  userPath += "/Library/HappyUC/keystore";
                 }
 
                 if (process.platform === "freebsd" || process.platform === "linux" || process.platform === "sunos") {
-                  userPath += "/.happyuc/keystore";
+                  userPath += "/.happyUC/keystore";
                 }
 
                 if (process.platform === "win32") {
-                  userPath = `${Settings.appDataPath}\\Happyuc\\keystore`;
+                  userPath = `${Settings.appDataPath}\\HappyUC\\keystore`;
                 }
               }
 
@@ -375,8 +375,8 @@ let menuTempl = function(webviews) {
     if (ghucClient) {
       nodeSubmenu.push({
         label  : `Ghuc ${ghucClient.version}`,
-        checked: happyucNode.isOwnNode && happyucNode.isGhuc,
-        enabled: happyucNode.isOwnNode,
+        checked: happyUCNode.isOwnNode && happyUCNode.isGhuc,
+        enabled: happyUCNode.isOwnNode,
         type   : "checkbox",
         click() {
           restartNode("ghuc", null, "fast", webviews);
@@ -387,8 +387,8 @@ let menuTempl = function(webviews) {
     if (hucClient) {
       nodeSubmenu.push({
         label  : `Huc ${hucClient.version} (C++)`,
-        checked: happyucNode.isOwnNode && happyucNode.isHuc,
-        enabled: happyucNode.isOwnNode, // enabled: false,
+        checked: happyUCNode.isOwnNode && happyUCNode.isHuc,
+        enabled: happyUCNode.isOwnNode, // enabled: false,
         type   : "checkbox",
         click() {
           restartNode("huc");
@@ -397,7 +397,7 @@ let menuTempl = function(webviews) {
     }
 
     devToolsMenu.push({
-      label: i18n.t("mist.applicationMenu.develop.happyucNode"), submenu: nodeSubmenu
+      label: i18n.t("mist.applicationMenu.develop.happyUCNode"), submenu: nodeSubmenu
     });
   }
 
@@ -407,57 +407,57 @@ let menuTempl = function(webviews) {
       {
         label      : i18n.t("mist.applicationMenu.develop.mainNetwork"),
         accelerator: "CommandOrControl+Alt+1",
-        checked    : happyucNode.isOwnNode && happyucNode.isMainNetwork,
-        enabled    : happyucNode.isOwnNode,
+        checked    : happyUCNode.isOwnNode && happyUCNode.isMainNetwork,
+        enabled    : happyUCNode.isOwnNode,
         type       : "checkbox",
         click() {
-          restartNode(happyucNode.type, "main");
+          restartNode(happyUCNode.type, "main");
         }
       }, {
         label      : "Ropsten - Test network",
         accelerator: "CommandOrControl+Alt+2",
-        checked    : happyucNode.isOwnNode && happyucNode.network === "test",
-        enabled    : happyucNode.isOwnNode,
+        checked    : happyUCNode.isOwnNode && happyUCNode.network === "test",
+        enabled    : happyUCNode.isOwnNode,
         type       : "checkbox",
         click() {
-          restartNode(happyucNode.type, "test");
+          restartNode(happyUCNode.type, "test");
         }
       }, {
         label      : "Rinkeby - Test network",
         accelerator: "CommandOrControl+Alt+3",
-        checked    : happyucNode.isOwnNode && happyucNode.network === "rinkeby",
-        enabled    : happyucNode.isOwnNode,
+        checked    : happyUCNode.isOwnNode && happyUCNode.network === "rinkeby",
+        enabled    : happyUCNode.isOwnNode,
         type       : "checkbox",
         click() {
-          restartNode(happyucNode.type, "rinkeby");
+          restartNode(happyUCNode.type, "rinkeby");
         }
       }, {
         label      : "Solo network",
         accelerator: "CommandOrControl+Alt+4",
-        checked    : happyucNode.isOwnNode && happyucNode.isDevNetwork,
-        enabled    : happyucNode.isOwnNode,
+        checked    : happyUCNode.isOwnNode && happyUCNode.isDevNetwork,
+        enabled    : happyUCNode.isOwnNode,
         type       : "checkbox",
         click() {
-          restartNode(happyucNode.type, "dev");
+          restartNode(happyUCNode.type, "dev");
         }
       }]
   });
 
   // Light mode switch should appear when not in Solo Mode (dev network)
-  if (happyucNode.isOwnNode && happyucNode.isGhuc && !happyucNode.isDevNetwork) {
+  if (happyUCNode.isOwnNode && happyUCNode.isGhuc && !happyUCNode.isDevNetwork) {
     devToolsMenu.push({
       label  : "Sync with Light client (beta)",
       enabled: true,
-      checked: happyucNode.isLightMode,
+      checked: happyUCNode.isLightMode,
       type   : "checkbox",
       click() {
-        restartNode("ghuc", null, happyucNode.isLightMode ? "fast" : "light");
+        restartNode("ghuc", null, happyUCNode.isLightMode ? "fast" : "light");
       }
     });
   }
 
   // Enables mining menu: only in Solo mode and Ropsten network (testnet)
-  if (happyucNode.isOwnNode && (happyucNode.isTestNetwork || happyucNode.isDevNetwork)) {
+  if (happyUCNode.isOwnNode && (happyUCNode.isTestNetwork || happyUCNode.isDevNetwork)) {
     let stopMiningStr  = "mist.applicationMenu.develop.stopMining";
     let startMiningStr = "mist.applicationMenu.develop.startMining";
     devToolsMenu.push({
@@ -516,15 +516,15 @@ let menuTempl = function(webviews) {
   }
   helpMenu.push({
     label: i18n.t("mist.applicationMenu.help.mistWiki"), click() {
-      shell.openExternal("https://github.com/happyuc/mist/wiki");
+      shell.openExternal("https://github.com/happyUC/mist/wiki");
     }
   }, {
     label: i18n.t("mist.applicationMenu.help.gitter"), click() {
-      shell.openExternal("https://gitter.im/happyuc/mist");
+      shell.openExternal("https://gitter.im/happyUC/mist");
     }
   }, {
     label: i18n.t("mist.applicationMenu.help.reportBug"), click() {
-      shell.openExternal("https://github.com/happyuc/mist/issues");
+      shell.openExternal("https://github.com/happyUC/mist/issues");
     }
   });
 

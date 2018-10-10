@@ -499,9 +499,8 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-webu@latest:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/webu/-/webu-1.0.1.tgz#3d869c314807383e865df2534d4efb58ce4c2b4d"
+webu@../../webu.js/:
+  version "1.0.0"
   dependencies:
     bignumber.js "git+https://github.com/frozeman/bignumber.js-nolookahead.git"
     crypto-js "^3.1.4"

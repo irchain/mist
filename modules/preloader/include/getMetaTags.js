@@ -1,5 +1,5 @@
 /**
- Gest the meta[name="happyuc-dapp-url-bar-style"] meta tag
+ Gest the meta[name="happyUC-dapp-url-bar-style"] meta tag
 
  @module getMetaTags
  */
@@ -11,7 +11,7 @@ module.export = (function() {
 
   function DOMContentLoaded(event) {
     const appBar = document.querySelector(
-      'meta[name="happyuc-dapp-url-bar-style"]',
+      'meta[name="happyUC-dapp-url-bar-style"]',
     );
 
     if (appBar) {

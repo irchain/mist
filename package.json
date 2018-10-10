@@ -2,23 +2,25 @@
   "name": "Mist",
   "version": "0.0.0",
   "license": "GPL-3.0",
-  "author": "Happyuc Mist Team <mist@happyuc.org>",
+  "author": "HappyUC Mist Team <mist@happyuc.org>",
   "repository": {
     "type": "git",
     "url": "https://github.com/happyuc-project/mist.git"
   },
   "scripts": {
     "postinstall": "electron-builder install-app-deps; cd interface && yarn",
+    "dev:meteor": "cd interface && meteor",
     "dev:electron": "electron -r babel-register main.js",
-    "dev:meteor": "cd interface && meteor --no-release-check",
     "dev:tools": "open http://remotedev.io/local/",
     "test:basic": "gulp test --test=basic",
     "test:unit": "mocha --compilers babel-register tests/unit/**/* --watch",
-    "test:unit:once": "mocha --compilers babel-register tests/unit/**/*"
+    "test:unit:once": "mocha --compilers babel-register tests/unit/**/*",
+    "linux:build": "gulp --linux --x64",
+    "linux:wallet": "./dist_wallet/dist/linux-unpacked/happyucwallet --rpc ~/blockchain/hucdev/data2/ghuc.ipc"
   },
   "main": "main.js",
   "dependencies": {
-    "bignumber.js": "^6.0.0",
+    "bignumber.js": "^4.0.2",
     "bluebird": "^3.5.1",
     "chai-as-promised": "^7.1.1",
     "chai-string": "^1.4.0",
@@ -29,8 +31,8 @@
     "ethereumjs-util": "^5.1.5",
     "fs-promise": "^2.0.3",
     "got": "^8.3.0",
-    "happyuc-client-binaries": ">=1.0.4",
-    "happyuc-keyfile-recognizer": "latest",
+    "happyuc-client-binaries": "^1.0.7",
+    "happyuc-keyfile-recognizer": "^1.0.0",
     "i18next": "^10.6.0",
     "lodash": "^4.17.5",
     "log-rotate": "^0.2.7",
@@ -50,7 +52,7 @@
     "underscore": "^1.8.3",
     "underscore-deep-extend": "^1.1.5",
     "uuid": "^3.2.1",
-    "webu": "^latest",
+    "webu": "../webu.js/",
     "yargs": "^11.0.0"
   },
   "devDependencies": {

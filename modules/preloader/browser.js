@@ -54,11 +54,11 @@ window.addEventListener('message', function message(event) {
     return;
   }
 
-  // HappyucProvider: connect
+  // HappyUCProvider: connect
   if (data.type === 'create') {
     ipcRenderer.send('ipcProvider-create');
 
-    // HappyucProvider: write
+    // HappyUCProvider: write
   } else if (data.type === 'write') {
     let messageIsArray = _.isArray(data.message);
 
@@ -132,15 +132,15 @@ const postMessage = function(payload) {
   });
 });
 
-// load happyucProvider
+// load happyUCProvider
 const bignumber = fs.readFileSync(
   path.join(__dirname, '/injected/BigNumber.js')).toString();
 const eventEmitter3 = fs.readFileSync(
   path.join(__dirname, '/injected/EventEmitter3.js')).toString();
 let mistAPI = fs.readFileSync(path.join(__dirname, '/injected/mistAPI.js')).
   toString();
-const happyucProvider = fs.readFileSync(
-  path.join(__dirname, '/injected/HappyucProvider.js')).toString();
+const happyUCProvider = fs.readFileSync(
+  path.join(__dirname, '/injected/HappyUCProvider.js')).toString();
 
 mistAPI = mistAPI.replace('__version__', packageJson.version).
   replace('__license__', packageJson.license).
@@ -151,7 +151,7 @@ mistAPI = mistAPI.replace('__version__', packageJson.version).
   );
 
 webFrame.executeJavaScript(
-  mistAPI + bignumber + eventEmitter3 + happyucProvider,
+  mistAPI + bignumber + eventEmitter3 + happyUCProvider,
 );
 
 // notifiy the tab to store the webview id

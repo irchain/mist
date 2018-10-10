@@ -13,28 +13,28 @@ exports.setup = function(options) {
 
   const config = {
     appenders: {
-      out: {type: 'console'},
-      all: {
+      out        : {type: 'console'},
+      all        : {
         type: 'file',
         filename: `${logFolder}/all.log`,
       },
-      main: {
+      main       : {
         type: 'file',
         filename: `${logFolder}/category/main.log`,
       },
-      HappyucNode: {
+      HappyUCNode: {
         type: 'file',
         filename: `${logFolder}/category/happyuc_node.log`,
       },
-      swarm: {
+      swarm      : {
         type: 'file',
         filename: `${logFolder}/category/swarm.log`,
       },
     },
     categories: {
-      default: {appenders: ['out', 'all', 'main'], level},
-      HappyucNode: {appenders: ['out', 'all', 'HappyucNode'], level},
-      swarm: {appenders: ['out', 'all', 'swarm'], level},
+      default    : {appenders: ['out', 'all', 'main'], level},
+      HappyUCNode: {appenders: ['out', 'all', 'HappyUCNode'], level},
+      swarm      : {appenders: ['out', 'all', 'swarm'], level},
     },
   };
 

@@ -13,7 +13,7 @@ Please note that this repository is the Electron host for the Meteor based walle
 
 ## Help and troubleshooting
 
-In order to get help regarding Mist or Happyuc Wallet, please follow:
+In order to get help regarding Mist or HappyUC Wallet, please follow:
 
 1.  Please check the [Mist troubleshooting guide](https://github.com/happyuc-project/mist/wiki).
 1.  Go to the [Gitter Channel](https://gitter.im/happyuc-project/mist) to connect with the community for instant help.
@@ -94,16 +94,15 @@ $ yarn
 ### Run Mist
 
 For development we start the interface with a Meteor server for autoreload etc.
-_Start the interface in a separate terminal window:_
+_Start the interface in a separate terminal window on mist directory:_
 
 ```bash
-$ cd mist/interface && meteor --no-release-check
+$ yarn dev:meteor
 ```
 
 In the original window you can then start Mist with:
 
 ```bash
-$ cd mist
 $ yarn dev:electron
 ```
 
@@ -116,13 +115,14 @@ _NOTE: use `--help` to display available options, e.g. `--loglevel debug` (or `t
 Start the wallet app for development, _in a separate terminal window:_
 
 ```bash
-$ cd mist/interface && meteor --no-release-check
+$ yarn dev:meteor
 ```
 
 In another terminal:
 
 ```bash
-$ cd my/path/meteor-dapp-wallet/app && meteor --port 3050
+$ cd my/path/meteor-dapp-wallet/app
+$ meteor --port 3050
 ```
 
 In the original window you can then start Mist using wallet mode:
@@ -174,7 +174,7 @@ To run a private network you will need to set the IPC path, network id and data
 folder:
 
 ```bash
-$ yarn dev:electron --rpc ~/Library/Happyuc/ghuc.happyuc-project--node-networkid 1234 --node-datadir ~/Library/Happyuc/privatenet
+$ yarn dev:electron --rpc ~/Library/HappyUC/ghuc.happyuc-project--node-networkid 1234 --node-datadir ~/Library/HappyUC/privatenet
 ```
 
 _NOTE: since `ipcpath` is also a Mist option you do not need to also include a
@@ -217,7 +217,7 @@ To generate the binaries for Mist run:
 $ gulp
 ```
 
-To generate the Happyuc Wallet (this will pack the one Ðapp from https://github.com/happyuc-project/meteor-dapp-wallet):
+To generate the HappyUC Wallet (this will pack the one Ðapp from https://github.com/happyuc-project/meteor-dapp-wallet):
 
 ```bash
 $ gulp --wallet

@@ -89,7 +89,7 @@ class Settings {
   }
 
   get appName() {
-    return this.uiMode === "mist" ? "Mist" : "Happyuc Wallet";
+    return this.uiMode === "mist" ? "Mist" : "HappyUC Wallet";
   }
 
   get appLicense() {
@@ -157,9 +157,9 @@ class Settings {
     ipcPath = this.userHomePath;
 
     if (process.platform === "darwin") {
-      ipcPath += "/Library/Happyuc/ghuc.ipc";
+      ipcPath += "/Library/HappyUC/ghuc.ipc";
     } else if (process.platform === "freebsd" || process.platform === "linux" || process.platform === "sunos") {
-      ipcPath += "/.happyuc/ghuc.ipc";
+      ipcPath += "/.happyUC/ghuc.ipc";
     } else if (process.platform === "win32") {
       ipcPath = "\\\\.\\pipe\\ghuc.ipc";
     }

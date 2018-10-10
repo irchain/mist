@@ -798,9 +798,9 @@ beeper@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/beeper/-/beeper-1.1.1.tgz#e6d5ea8c5dad001304a70b22638447f69cb2f809"
 
-bignumber.js@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-6.0.0.tgz#bbfa047644609a5af093e9cbd83b0461fa3f6002"
+bignumber.js@^4.0.2:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-4.1.0.tgz#db6f14067c140bd46624815a7916c92d9b6c24b1"
 
 "bignumber.js@git+https://github.com/frozeman/bignumber.js-nolookahead.git":
   version "2.0.7"
@@ -3408,9 +3408,9 @@ gulplog@^1.0.0:
   dependencies:
     glogg "^1.0.0"
 
-happyuc-client-binaries@>=1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/happyuc-client-binaries/-/happyuc-client-binaries-1.0.4.tgz#0c0402cd2deef21642a3946fdbd210924b0475ae"
+happyuc-client-binaries@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/happyUC-client-binaries/-/happyUC-client-binaries-1.0.7.tgz#7953147615d6a1b7c77b1948aee10d3ebc6dc306"
   dependencies:
     buffered-spawn "^3.3.2"
     crypto "^1.0.1"
@@ -3424,9 +3424,9 @@ happyuc-client-binaries@>=1.0.4:
     path "^0.12.7"
     tmp "^0.0.33"
 
-happyuc-keyfile-recognizer@latest:
+happyuc-keyfile-recognizer@^1.0.0:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/happyuc-keyfile-recognizer/-/happyuc-keyfile-recognizer-1.0.0.tgz#c78f1ab59b7de32d7291a3129b8c1eef0642952e"
+  resolved "https://registry.yarnpkg.com/happyUC-keyfile-recognizer/-/happyUC-keyfile-recognizer-1.0.0.tgz#c78f1ab59b7de32d7291a3129b8c1eef0642952e"
   dependencies:
     json-structure-diff "^0.0.2"
     underscore "^1.8.3"
@@ -7531,9 +7531,8 @@ webdriverio@^4.8.0:
     wdio-dot-reporter "~0.0.8"
     wgxpath "~1.0.0"
 
-webu@^latest:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/webu/-/webu-1.0.1.tgz#3d869c314807383e865df2534d4efb58ce4c2b4d"
+webu@../webu.js/:
+  version "1.0.0"
   dependencies:
     bignumber.js "git+https://github.com/frozeman/bignumber.js-nolookahead.git"
     crypto-js "^3.1.4"
@@ -7542,8 +7541,8 @@ webu@^latest:
     xmlhttprequest "*"
 
 "webu@git+https://github.com/happyuc-project/webu.js.git":
-  version "1.0.1"
-  resolved "git+https://github.com/happyuc-project/webu.js.git#f18a772493da95f4555be19b0b46eb06bc0e21ef"
+  version "1.0.5"
+  resolved "git+https://github.com/happyuc-project/webu.js.git#9378fcf81af42c411a3d861ff72f42eaca32ca15"
   dependencies:
     bignumber.js "git+https://github.com/frozeman/bignumber.js-nolookahead.git"
     crypto-js "^3.1.4"

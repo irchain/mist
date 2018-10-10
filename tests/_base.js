@@ -92,7 +92,7 @@ exports.mocha = (_module, options) => {
 
       this.geth = yield startGhuc();
 
-      const appFileName  = options.app === "wallet" ? "Happyuc Wallet" : "Mist";
+      const appFileName  = options.app === "wallet" ? "HappyUC Wallet" : "Mist";
       const platformArch = `${process.platform}-${process.arch}`;
       console.info(`${appFileName} :: ${platformArch}`);
 
@@ -208,8 +208,8 @@ exports.mocha = (_module, options) => {
         });
         Tabs.upsert({ _id: "wallet" }, {
           $set: {
-            url        : "https://wallet.happyuc.org",
-            redirect   : "https://wallet.happyuc.org",
+            url        : "https://wallet.happyUC.org",
+            redirect   : "https://wallet.happyUC.org",
             position   : 1,
             permissions: { admin: true }
           }

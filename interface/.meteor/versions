@@ -39,11 +39,11 @@ frozeman:reactive-timer@0.1.7
 frozeman:storage@0.1.9
 frozeman:template-var@1.3.0
 geojson-utils@1.0.10
-happyuc:accounts@1.0.5
-happyuc:blocks@1.0.9
-happyuc:elements@1.1.2
-happyuc:tools@1.0.1
-happyuc:webu@1.0.0
+happyuc:accounts@1.1.6
+happyuc:blocks@1.1.4
+happyuc:elements@1.2.3
+happyuc:tools@1.1.6
+happyuc:webu@1.0.9
 hot-code-push@1.0.4
 html-tools@1.0.11
 htmljs@1.0.11

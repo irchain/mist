@@ -11,7 +11,7 @@ const Windows = require('./windows');
 const logger = require('./utils/logger');
 const appMenu = require('./menuItems');
 const Settings = require('./settings');
-const happyucNode = require('./happyucNode.js');
+const happyUCNode = require('./happyUCNode.js');
 const keyfileRecognizer = require('happyuc-keyfile-recognizer');
 
 import {getLanguage} from './core/settings/actions';
@@ -128,7 +128,7 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
       const keyfile = JSON.parse(data);
       const result = keyfileRecognizer(keyfile);
       /** result
-       *  [ 'hucersale', undefined ]   Hucersale keyfile
+       *  [ 'hucsale', undefined ]   Hucsale keyfile
        *               [ 'webu', 3 ]   webu (v3) keyfile
        *                        null   no valid  keyfile
        */
@@ -137,14 +137,14 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
 
       log.debug(`Importing ${type} account...`);
 
-      if (type === 'hucersale') {
+      if (type === 'hucsale') {
         e.sender.send('uiAction_checkedWalletFile', null, 'presale');
       } else if (type === 'webu') {
         e.sender.send('uiAction_checkedWalletFile', null, 'webu');
 
         let keystorePath = Settings.userHomePath;
         // huc
-        if (happyucNode.isHuc) {
+        if (happyUCNode.isHuc) {
           if (process.platform === 'win32') {
             keystorePath = `${Settings.appDataPath}\\Webu\\keys`;
           } else {
@@ -153,17 +153,17 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
           // ghuc
         } else {
           if (process.platform === 'darwin')
-            keystorePath += '/Library/Happyuc/keystore';
+            keystorePath += '/Library/HappyUC/keystore';
 
           if (
             process.platform === 'freebsd' ||
             process.platform === 'linux' ||
             process.platform === 'sunos'
           )
-            keystorePath += '/.happyuc/keystore';
+            keystorePath += '/.happyUC/keystore';
 
           if (process.platform === 'win32')
-            keystorePath = `${Settings.appDataPath}\\Happyuc\\keystore`;
+            keystorePath = `${Settings.appDataPath}\\HappyUC\\keystore`;
         }
 
         if (!/^[0-9a-fA-F]{40}$/.test(keyfile.address)) {

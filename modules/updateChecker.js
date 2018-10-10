@@ -46,7 +46,7 @@ const check = exports.check = () => {
       break;
   }
 
-  return got("https://api.github.com/repos/happyuc-project/mist/releases", { timeout: 3000, json: true })
+  return got("https://api.github.com/repos/happyUC-project/mist/releases", { timeout: 3000, json: true })
     .then(res => {
       const releases = _.filter(res.body, release => !_
         .get(release, "draft") && _

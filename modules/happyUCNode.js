@@ -13,7 +13,7 @@ const ClientBinaryManager = require("./clientBinaryManager");
 
 import logger from "./utils/logger";
 
-const happyucNodeLog = logger.create("HappyucNode");
+const happyUCNodeLog = logger.create("HappyUCNode");
 
 const DEFAULT_NODE_TYPE = "ghuc";
 const DEFAULT_NETWORK   = "main";
@@ -32,9 +32,9 @@ const STATES = {
 };
 
 /**
- * Happyuc nodes manager.
+ * HappyUC nodes manager.
  */
-class HappyucNode extends EventEmitter {
+class HappyUCNode extends EventEmitter {
   constructor() {
     super();
 
@@ -154,16 +154,16 @@ class HappyucNode extends EventEmitter {
         this.emit("runningNodeFound");
       })
       .catch(() => {
-        happyucNodeLog.warn("Failed to connect to node. Maybe it's not running so let's start our own...");
-        happyucNodeLog.info(`Node type: ${this.defaultNodeType}`);
-        happyucNodeLog.info(`Network: ${this.defaultNetwork}`);
-        happyucNodeLog.info(`SyncMode: ${this.defaultSyncMode}`);
+        happyUCNodeLog.warn("Failed to connect to node. Maybe it's not running so let's start our own...");
+        happyUCNodeLog.info(`Node type: ${this.defaultNodeType}`);
+        happyUCNodeLog.info(`Network: ${this.defaultNetwork}`);
+        happyUCNodeLog.info(`SyncMode: ${this.defaultSyncMode}`);
 
         // if not, start node yourself
         return this
           ._start(this.defaultNodeType, this.defaultNetwork, this.defaultSyncMode)
           .catch(err => {
-            happyucNodeLog.error("Failed to start node", err);
+            happyUCNodeLog.error("Failed to start node", err);
             throw err;
           });
       });
@@ -173,14 +173,14 @@ class HappyucNode extends EventEmitter {
     return Q.try(() => {
       if (!this.isOwnNode) throw new Error("Cannot restart node since it was started externally");
 
-      happyucNodeLog.info("Restart node", newType, newNetwork);
+      happyUCNodeLog.info("Restart node", newType, newNetwork);
       return this
         .stop()
         .then(() => Windows.loading.show())
         .then(() => this._start(newType || this.type, newNetwork || this.network, syncMode || this.syncMode))
         .then(() => Windows.loading.hide())
         .catch(err => {
-          happyucNodeLog.error("Error restarting node", err);
+          happyUCNodeLog.error("Error restarting node", err);
           throw err;
         });
     });
@@ -193,7 +193,7 @@ class HappyucNode extends EventEmitter {
    */
   stop() {
     if (this._stopPromise) {
-      happyucNodeLog.debug("Disconnection already in progress, returning Promise.");
+      happyUCNodeLog.debug("Disconnection already in progress, returning Promise.");
       return this._stopPromise;
     } else {
       return new Q(resolve => {
@@ -201,7 +201,7 @@ class HappyucNode extends EventEmitter {
 
         this.state = STATES.STOPPING;
 
-        happyucNodeLog.info(`Stopping existing node: ${this._type} ${this._network}`);
+        happyUCNodeLog.info(`Stopping existing node: ${this._type} ${this._network}`);
 
         this._node.stderr.removeAllListeners("data");
         this._node.stdout.removeAllListeners("data");
@@ -241,25 +241,25 @@ class HappyucNode extends EventEmitter {
   }
 
   /**
-   * Start an happyuc node.
+   * Start an happyUC node.
    * @param  {String} nodeType ghuc, huc, etc
    * @param  {String} network  network id
    * @return {Promise}
    */
   _start(nodeType, network, syncMode) {
-    happyucNodeLog.info(`Start node: ${nodeType} ${network} ${syncMode}`);
+    happyUCNodeLog.info(`Start node: ${nodeType} ${network} ${syncMode}`);
 
     const isTestNet = network === "test";
 
     if (isTestNet) {
-      happyucNodeLog.debug("Node will connect to the test network");
+      happyUCNodeLog.debug("Node will connect to the test network");
     }
 
     return this
       .stop()
       .then(() => {
         return this.__startNode(nodeType, network, syncMode).catch(err => {
-          happyucNodeLog.error("Failed to start node", err);
+          happyUCNodeLog.error("Failed to start node", err);
 
           this._showNodeErrorDialog(nodeType, network);
 
@@ -267,7 +267,7 @@ class HappyucNode extends EventEmitter {
         });
       })
       .then(proc => {
-        happyucNodeLog.info(`Started node successfully: ${nodeType} ${network} ${syncMode}`);
+        happyUCNodeLog.info(`Started node successfully: ${nodeType} ${network} ${syncMode}`);
 
         this._node = proc;
         this.state = STATES.STARTED;
@@ -285,7 +285,7 @@ class HappyucNode extends EventEmitter {
             this.state = STATES.CONNECTED;
           })
           .catch(err => {
-            happyucNodeLog.error("Failed to connect to node", err);
+            happyUCNodeLog.error("Failed to connect to node", err);
 
             if (err.toString().indexOf("timeout") >= 0) {
               this.emit("nodeConnectionTimeout");
@@ -330,7 +330,7 @@ class HappyucNode extends EventEmitter {
       throw new Error(`Node "${nodeType}" binPath is not available.`);
     }
 
-    happyucNodeLog.info(`Start node using ${binPath}`);
+    happyUCNodeLog.info(`Start node using ${binPath}`);
 
     return new Q((resolve, reject) => {
       this.__startProcess(nodeType, network, binPath, syncMode).then(resolve, reject);
@@ -347,18 +347,18 @@ class HappyucNode extends EventEmitter {
     }
 
     return new Q((resolve, reject) => {
-      happyucNodeLog.trace("Rotate log file");
+      happyUCNodeLog.trace("Rotate log file");
 
       logRotate(path.join(Settings.userDataPath, "logs", "all.log"), { count: 5 }, error => {
         if (error) {
-          happyucNodeLog.error("Log rotation problems", error);
+          happyUCNodeLog.error("Log rotation problems", error);
           return reject(error);
         }
       });
 
       logRotate(path.join(Settings.userDataPath, "logs", "category", "happyuc_node.log"), { count: 5 }, error => {
         if (error) {
-          happyucNodeLog.error("Log rotation problems", error);
+          happyUCNodeLog.error("Log rotation problems", error);
           return reject(error);
         }
       });
@@ -393,12 +393,12 @@ class HappyucNode extends EventEmitter {
       const nodeOptions = Settings.nodeOptions;
 
       if (nodeOptions && nodeOptions.length) {
-        happyucNodeLog.debug("Custom node options", nodeOptions);
+        happyUCNodeLog.debug("Custom node options", nodeOptions);
 
         args = args.concat(nodeOptions);
       }
 
-      happyucNodeLog.trace("Spawn", binPath, args);
+      happyUCNodeLog.trace("Spawn", binPath, args);
 
       const proc = spawn(binPath, args);
 
@@ -406,7 +406,7 @@ class HappyucNode extends EventEmitter {
         if (this.state === STATES.STARTING) {
           this.state = STATES.ERROR;
 
-          happyucNodeLog.info("Node startup error");
+          happyUCNodeLog.info("Node startup error");
 
           // TODO: detect this properly
           // this.emit('nodeBinaryNotFound');
@@ -416,13 +416,13 @@ class HappyucNode extends EventEmitter {
       });
 
       proc.stdout.on("data", data => {
-        happyucNodeLog.trace("Got stdout data", data.toString());
+        happyUCNodeLog.trace("Got stdout data", data.toString());
         this.emit("data", data);
       });
 
       proc.stderr.on("data", data => {
-        happyucNodeLog.trace("Got stderr data", data.toString());
-        happyucNodeLog.info(data.toString()); // TODO: This should be happyucNodeLog.error(), but not sure why regular
+        happyUCNodeLog.trace("Got stderr data", data.toString());
+        happyUCNodeLog.info(data.toString()); // TODO: This should be happyUCNodeLog.error(), but not sure why regular
                                               // stdout data is coming in through stderror
         this.emit("data", data);
       });
@@ -436,7 +436,7 @@ class HappyucNode extends EventEmitter {
          */
         setTimeout(() => {
           if (STATES.STARTING === this.state) {
-            happyucNodeLog.info(`${NODE_START_WAIT_MS}ms elapsed, assuming node started up successfully`);
+            happyUCNodeLog.info(`${NODE_START_WAIT_MS}ms elapsed, assuming node started up successfully`);
             resolve(proc);
           }
         }, NODE_START_WAIT_MS);
@@ -465,7 +465,7 @@ class HappyucNode extends EventEmitter {
     const cleanData = data.toString().replace(/[\r\n]+/, "");
     const nodeType  = (this.type || "node").toUpperCase();
 
-    happyucNodeLog.trace(`${nodeType}: ${cleanData}`);
+    happyUCNodeLog.trace(`${nodeType}: ${cleanData}`);
 
     if (!/^-*$/.test(cleanData) && !_.isEmpty(cleanData)) {
       this.emit("nodeLog", cleanData);
@@ -482,7 +482,7 @@ class HappyucNode extends EventEmitter {
             error.tag = UNABLE_TO_BIND_PORT_ERROR;
           }
 
-          happyucNodeLog.error(error);
+          happyUCNodeLog.error(error);
           return reject(error);
         }
       }
@@ -490,19 +490,19 @@ class HappyucNode extends EventEmitter {
   }
 
   _loadDefaults() {
-    happyucNodeLog.trace("Load defaults");
+    happyUCNodeLog.trace("Load defaults");
 
     this.defaultNodeType = Settings.nodeType || Settings.loadUserData("node") || DEFAULT_NODE_TYPE;
     this.defaultNetwork  = Settings.network || Settings.loadUserData("network") || DEFAULT_NETWORK;
     this.defaultSyncMode = Settings.syncmode || Settings.loadUserData("syncmode") || DEFAULT_SYNCMODE;
 
-    happyucNodeLog.info(Settings.syncmode, Settings.loadUserData("syncmode"), DEFAULT_SYNCMODE);
-    happyucNodeLog.info(`Defaults loaded: ${this.defaultNodeType} ${this.defaultNetwork} ${
+    happyUCNodeLog.info(Settings.syncmode, Settings.loadUserData("syncmode"), DEFAULT_SYNCMODE);
+    happyUCNodeLog.info(`Defaults loaded: ${this.defaultNodeType} ${this.defaultNetwork} ${
       this.defaultSyncMode
       }`);
   }
 }
 
-HappyucNode.STARTING = 0;
+HappyUCNode.STARTING = 0;
 
-module.exports = new HappyucNode();
+module.exports = new HappyUCNode();

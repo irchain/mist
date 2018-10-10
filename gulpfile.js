@@ -10,20 +10,20 @@ const minimist = require("minimist");
 const runSeq   = require("run-sequence");
 
 // available crossplatform builds
-let platforms = ["linux"];
-// if (process.platform === 'darwin') {
-//   platforms = ['mac', 'linux', 'win'];
-// } else if (process.platform === 'win32') {
-//   platforms = ['win'];
-// } else {
-//   platforms = ['linux', 'win'];
-// }
+let platforms; //= ["linux"];
+if (process.platform === 'darwin') {
+  platforms = ['mac', 'linux', 'win'];
+} else if (process.platform === 'win32') {
+  platforms = ['win'];
+} else {
+  platforms = ['linux', 'win'];
+}
 
 // parse commandline arguments
 const args    = process.argv.slice(2);
 const options = minimist(args, {
   string: ["walletSource", "test", "skipTasks"], boolean: _.flatten(["wallet", platforms]), default: {
-    wallet: false, walletSource: "local", test: "basic", skipTasks: ""
+    wallet: true, walletSource: "local", test: "basic", skipTasks: ""
   }
 });
 

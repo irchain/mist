@@ -16,7 +16,7 @@
 
  @method (debug)
  **/
-Template.registerHelper('debug', function(object) {
+Template.registerHelper("debug", function(object) {
   console.log(object);
 });
 
@@ -25,7 +25,7 @@ Template.registerHelper('debug', function(object) {
 
  @method (CurrentBlock)
  **/
-Template.registerHelper('CurrentBlock', function() {
+Template.registerHelper("CurrentBlock", function() {
   return HucBlocks.latest;
 });
 
@@ -34,7 +34,7 @@ Template.registerHelper('CurrentBlock', function() {
 
  @method (dirname)
  **/
-Template.registerHelper('dirname', function() {
+Template.registerHelper("dirname", function() {
   return window.dirname;
 });
 
@@ -43,7 +43,7 @@ Template.registerHelper('dirname', function() {
 
  @method (mist)
  **/
-Template.registerHelper('mist', function() {
+Template.registerHelper("mist", function() {
   return window.mist;
 });
 
@@ -52,7 +52,7 @@ Template.registerHelper('mist', function() {
 
  @method (mode)
  **/
-Template.registerHelper('mode', function() {
+Template.registerHelper("mode", function() {
   return window.mistMode;
 });
 
@@ -61,8 +61,8 @@ Template.registerHelper('mode', function() {
 
  @method (appName)
  **/
-Template.registerHelper('appName', function() {
-  return window.mistMode === 'mist' ? 'Mist' : 'Happyuc Wallet';
+Template.registerHelper("appName", function() {
+  return window.mistMode === "mist" ? "Mist" : "HappyUC Wallet";
 });
 
 /**
@@ -70,9 +70,9 @@ Template.registerHelper('appName', function() {
 
  @method (iconPath)
  **/
-Template.registerHelper('appIconPath', function() {
+Template.registerHelper("appIconPath", function() {
   return (
-    'file://' + window.dirname + '/icons/' + window.mistMode + '/icon2x.png'
+    "file://" + window.dirname + "/icons/" + window.mistMode + "/icon2x.png"
   );
 });
 
@@ -81,8 +81,8 @@ Template.registerHelper('appIconPath', function() {
 
  @method (accounts)
  **/
-Template.registerHelper('accounts', function(identity) {
-  return HucAccounts.find({}, {sort: {name: 1}});
+Template.registerHelper("accounts", function(identity) {
+  return HucAccounts.find({}, { sort: { name: 1 } });
 });
 
 /**
@@ -91,24 +91,24 @@ Template.registerHelper('accounts', function(identity) {
  @method (isWatchOnly)
  @param {String} id the id of the wallet to check
  **/
-Template.registerHelper('isWatchOnly', Helpers.isWatchOnly);
+Template.registerHelper("isWatchOnly", Helpers.isWatchOnly);
 
 /**
  Return the right wallet icon
 
  @method (walletIcon)
  **/
-Template.registerHelper('walletIcon', function() {
-  var icon = '';
+Template.registerHelper("walletIcon", function() {
+  var icon = "";
 
-  if (this.type === 'wallet') {
+  if (this.type === "wallet") {
     if (Helpers.isWatchOnly(this._id)) {
-      icon = '<i class="icon-eye" title="Watch only"></i>';
+      icon = "<i class=\"icon-eye\" title=\"Watch only\"></i>";
     } else {
-      icon = '<i class="icon-wallet" title="Wallet"></i>';
+      icon = "<i class=\"icon-wallet\" title=\"Wallet\"></i>";
     }
-  } else if (this.type === 'account') {
-    icon = '<i class="icon-key" title="Account"></i>';
+  } else if (this.type === "account") {
+    icon = "<i class=\"icon-key\" title=\"Account\"></i>";
   }
 
   return new Spacebars.SafeString(icon);
@@ -120,8 +120,8 @@ Template.registerHelper('walletIcon', function() {
  @method (accountNameOrAddress)
  @param {String} address
  */
-Template.registerHelper('accountNameOrAddress', function(address) {
-  var account = HucAccounts.findOne({address: address});
+Template.registerHelper("accountNameOrAddress", function(address) {
+  var account = HucAccounts.findOne({ address: address });
   if (account) {
     return account.name;
   } else {
@@ -140,7 +140,7 @@ Template.registerHelper('accountNameOrAddress', function(address) {
  //@param {Boolean} realTime    Whether or not this helper should re-run every 10s
  @return {String} The formated time
  **/
-Template.registerHelper('formatTime', Helpers.formatTime);
+Template.registerHelper("formatTime", Helpers.formatTime);
 
 /**
  Formats a number.
@@ -152,7 +152,7 @@ Template.registerHelper('formatTime', Helpers.formatTime);
  @param {String} format       the format string
  @return {String} The formatted number
  **/
-Template.registerHelper('formatNumber', Helpers.formatNumber);
+Template.registerHelper("formatNumber", Helpers.formatNumber);
 
 /**
  Formats a number.
@@ -164,4 +164,4 @@ Template.registerHelper('formatNumber', Helpers.formatNumber);
  @param {String} format       the format string
  @return {String} The formatted number
  **/
-Template.registerHelper('formatBalance', Helpers.formatBalance);
+Template.registerHelper("formatBalance", Helpers.formatBalance);
