@@ -52,7 +52,7 @@
     "underscore": "^1.8.3",
     "underscore-deep-extend": "^1.1.5",
     "uuid": "^3.2.1",
-    "webu": "^1.0.5",
+    "webu": "../webu.js/",
     "yargs": "^11.0.0"
   },
   "devDependencies": {

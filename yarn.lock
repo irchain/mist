@@ -7531,9 +7531,8 @@ webdriverio@^4.8.0:
     wdio-dot-reporter "~0.0.8"
     wgxpath "~1.0.0"
 
-webu@^1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/webu/-/webu-1.0.5.tgz#fc46ddee866dbd39a8a687d5891be766bff7c295"
+webu@../webu.js/:
+  version "1.0.0"
   dependencies:
     bignumber.js "git+https://github.com/frozeman/bignumber.js-nolookahead.git"
     crypto-js "^3.1.4"
@@ -7541,9 +7540,9 @@ webu@^1.0.5:
     xhr2 "*"
     xmlhttprequest "*"
 
-"webu@git+https://github.com/happyUC-project/webu.js.git":
+"webu@git+https://github.com/happyuc-project/webu.js.git":
   version "1.0.5"
-  resolved "git+https://github.com/happyUC-project/webu.js.git#9378fcf81af42c411a3d861ff72f42eaca32ca15"
+  resolved "git+https://github.com/happyuc-project/webu.js.git#9378fcf81af42c411a3d861ff72f42eaca32ca15"
   dependencies:
     bignumber.js "git+https://github.com/frozeman/bignumber.js-nolookahead.git"
     crypto-js "^3.1.4"

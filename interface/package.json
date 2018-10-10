@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.18.0",
-    "webu": "^1.0.5",
+    "webu": "../../webu.js/",
     "meteor-node-stubs": "^0.3.3"
   }
 }
